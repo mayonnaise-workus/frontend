@@ -1,7 +1,7 @@
 import React from 'react';
 import CheckBox from '@react-native-community/checkbox';
-import {termList} from '../../data';
-import COLORS from '../../../packages/colors';
+import {termList} from '../../../data';
+import COLORS from '../../../../packages/colors';
 import {Container, List, ListWrapper, Text, Wrapper} from './style';
 
 function ConditionsList({requiredCheck, setRequiredCheck}) {
