@@ -1,6 +1,6 @@
 import React, {Dispatch, SetStateAction, useEffect, useState} from 'react';
-import styled from 'styled-components';
 import COLORS from '../../../../packages/colors';
+import {Icon, PressableWrapper, Text} from './style';
 
 interface IProps {
   title: string;
