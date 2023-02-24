@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView, Alert} from 'react-native';
 import Button from '../../components/login/LoginButton/Button';
-import HeaderBackButton from '../../components/login/HeaderBackButton';
-import Title from '../../components/login/Title';
+import HeaderBackButton from '../../components/login/HeaderBackbutton/HeaderBackButton';
+import Title from '../../components/login/Title/Title';
 import COLORS from '../../../packages/colors';
-import ConditionsList from '../../components/login/ConditionsList';
+import ConditionsList from '../../components/login/ConditionsList/ConditionsList';
 import {ButtonView} from './style';
 
 interface IProps {

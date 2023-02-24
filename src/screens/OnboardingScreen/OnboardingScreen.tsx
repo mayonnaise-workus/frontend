@@ -1,6 +1,6 @@
 import React from 'react';
 import {SafeAreaView, Image} from 'react-native';
-import Button from '../../components/login/Button';
+import Button from '../../components/login/LoginButton/Button';
 import COLORS from '../../../packages/colors';
 import {ButtonBlock, LogoBlock} from './style';
 
