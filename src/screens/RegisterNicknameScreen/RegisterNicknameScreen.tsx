@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {SafeAreaView} from 'react-native';
 import HeaderBackButton from '../../components/login/HeaderBackbutton/HeaderBackButton';
 import Title from '../../components/login/Title/Title';
@@ -7,6 +7,8 @@ import COLORS from '../../../packages/colors';
 import Button from '../../components/login/LoginButton/Button';
 import AlertMessage from '../../components/login/AlertMessage/AlertMessage';
 import {ButtonView, TextInput} from './style';
+import {PostNickNameApi} from '../../redux/service/PostNicknameApi';
+import {useDispatch, useSelector} from 'react-redux';
 
 interface IProps {
   navigation: undefined;
@@ -18,6 +20,9 @@ interface FormData {
 
 function RegisterNicknameScreen(props: IProps) {
   const {navigation} = props;
+  const dispatch = useDispatch();
+  const {loading, error, data} = useSelector((state: any) => state.nickname);
+
   const {
     control,
     handleSubmit,
@@ -27,9 +32,19 @@ function RegisterNicknameScreen(props: IProps) {
 
   const nickname = watch('nickname');
 
-  const handleSaveNickname = (data: FormData) => {
-    navigation.navigate('RegisterRegion');
+  const postData = {
+    name: nickname,
   };
+
+  const handleSaveNickname = async () => {
+    dispatch(PostNickNameApi(postData));
+  };
+
+  useEffect(() => {
+    {
+      data && navigation.navigate('RegisterRegion');
+    }
+  }, [data]);
 
   return (
     <SafeAreaView>
