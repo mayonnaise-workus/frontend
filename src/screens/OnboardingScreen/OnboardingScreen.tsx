@@ -4,16 +4,27 @@ import Button from '../../components/login/LoginButton/Button';
 import COLORS from '../../../packages/colors';
 import {ButtonBlock, LogoBlock} from './style';
 import {login} from '@react-native-seoul/kakao-login';
+import {useDispatch} from 'react-redux';
+import {LoginApi} from '../../redux/service/LoginApi';
 
 interface IProps {
   navigation: undefined;
 }
 
 function OnboardingScreen(props: IProps) {
+  const dispatch = useDispatch();
   const {navigation} = props;
 
   const handleKakaoLogin = async () => {
     const result = await login();
+
+    const postData = {
+      access_token: result.accessToken,
+      refresh_token: result.refreshToken,
+      expires_int:
+        new Date(Date.parse(result.refreshTokenExpiresAt)).getTime() / 1000,
+    };
+    dispatch(LoginApi(postData));
   };
 
   return (
