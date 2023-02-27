@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {SafeAreaView, View} from 'react-native';
 import COLORS from '../../../packages/colors';
 import Button from '../../components/login/LoginButton/Button';
@@ -7,6 +7,8 @@ import RegisterButton from '../../components/login/RegisterButton/RegisterButton
 import Title from '../../components/login/Title/Title';
 import {purpose} from '../../data';
 import {ButtonView, FilterList} from './style';
+import {useDispatch, useSelector} from 'react-redux';
+import {PostPurposeApi} from '../../redux/service/PostPurposeApi';
 interface IProps {
   navigation: undefined;
 }
@@ -18,8 +20,20 @@ interface Data {
 
 function RegisterPurposeScreen(props: IProps) {
   const {navigation} = props;
-  const [data, setData] = useState<Data[]>([]);
-  const check = data.length >= 1;
+  const [checkList, setCheckList] = useState<Data[]>([]);
+  const check = checkList.length >= 1;
+  const dispatch = useDispatch();
+  const {loading, error, data} = useSelector((state: any) => state.purpose);
+
+  const handleSubmit = async () => {
+    dispatch(PostPurposeApi(checkList));
+  };
+
+  useEffect(() => {
+    {
+      data === '200' && navigation.navigate('RegisterWorkSpace');
+    }
+  }, [data]);
 
   return (
     <SafeAreaView>
@@ -36,8 +50,8 @@ function RegisterPurposeScreen(props: IProps) {
                 height={162}
                 top={6}
                 icon={item.icon}
-                data={data}
-                setData={setData}
+                checkList={checkList}
+                setCheckList={setCheckList}
               />
             </View>
           );
@@ -48,7 +62,7 @@ function RegisterPurposeScreen(props: IProps) {
           text="다음"
           backgroundColor={check ? COLORS.TWO : COLORS.GRAY_7}
           textColor={check ? COLORS.GRAY_2 : COLORS.GRAY_8}
-          onPress={() => navigation.navigate('RegisterWorkSpace')}
+          onPress={handleSubmit}
         />
       </ButtonView>
     </SafeAreaView>

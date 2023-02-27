@@ -1,39 +1,52 @@
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, Alert} from 'react-native';
+import {Alert, SafeAreaView} from 'react-native';
 import Button from '../../components/login/LoginButton/Button';
 import HeaderBackButton from '../../components/login/HeaderBackbutton/HeaderBackButton';
 import Title from '../../components/login/Title/Title';
 import COLORS from '../../../packages/colors';
 import ConditionsList from '../../components/login/ConditionsList/ConditionsList';
 import {ButtonView} from './style';
+import {useDispatch, useSelector} from 'react-redux';
+import {ServiceTermApi} from '../../redux/service/ServiceTermApi';
 
 interface IProps {
   navigation: undefined;
 }
 
-const data = ['check1', 'check2', 'check3', 'check4', 'check5'];
-
 function ServiceTermScreen(props: IProps) {
+  const dispatch = useDispatch();
   const {navigation} = props;
+  const check = ['check1', 'check2', 'check3', 'check4', 'check5'];
   const [requiredCheck, setRequiredCheck] = useState([]);
   const [option1, setOption1] = useState('');
   const [option2, setOption2] = useState('');
-  const result = requiredCheck.filter(x => data.includes(x));
+  const result = requiredCheck.filter(x => check.includes(x));
   const isAllChecked = result.length === 5;
-  console.log(result);
-
+  const {loading, error, data} = useSelector((state: any) => state.serviceterm);
+  console.log('data', data);
   useEffect(() => {
     requiredCheck.includes('personal') ? setOption1(true) : setOption1(false);
     requiredCheck.includes('marketing') ? setOption2(true) : setOption2(false);
   }, [requiredCheck]);
 
-  console.log(option1, option2);
+  const postData = {
+    marketing_agreement: option1,
+    personal_information_agreement: option2,
+  };
 
-  function onSubmit() {
-    isAllChecked
-      ? navigation.navigate('RegisterNickName')
-      : Alert.alert('필수 약관을 동의해주세요');
-  }
+  const handleSubmit = async () => {
+    {
+      isAllChecked
+        ? dispatch(ServiceTermApi(postData))
+        : Alert.alert('필수 약관을 체크해주세요!');
+    }
+  };
+
+  useEffect(() => {
+    {
+      data && navigation.navigate('RegisterNickName');
+    }
+  }, [data]);
 
   return (
     <SafeAreaView>
@@ -48,7 +61,7 @@ function ServiceTermScreen(props: IProps) {
           text="동의하고 가입하기"
           backgroundColor={isAllChecked ? COLORS.TWO : COLORS.GRAY_7}
           textColor={isAllChecked ? COLORS.GRAY_1 : COLORS.GRAY_8}
-          onPress={onSubmit}
+          onPress={handleSubmit}
         />
       </ButtonView>
     </SafeAreaView>

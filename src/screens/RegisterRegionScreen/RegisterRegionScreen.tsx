@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {SafeAreaView, View} from 'react-native';
 import Description from '../../components/login/Description/Description';
 import HeaderBackButton from '../../components/login/HeaderBackbutton/HeaderBackButton';
@@ -8,6 +8,8 @@ import RegisterButton from '../../components/login/RegisterButton/RegisterButton
 import Button from '../../components/login/LoginButton/Button';
 import COLORS from '../../../packages/colors';
 import {ButtonView, FilterList} from './style';
+import {useDispatch, useSelector} from 'react-redux';
+import {PostRegionApi} from '../../redux/service/PostRegionApi';
 
 interface IProps {
   navigation: undefined;
@@ -20,8 +22,20 @@ interface Data {
 
 function RegisterRegionScreen(props: IProps) {
   const {navigation} = props;
-  const [data, setData] = useState<Data[]>([]);
-  const check = data.length >= 1;
+  const [checkList, setCheckList] = useState<Data[]>([]);
+  const check = checkList.length >= 1;
+  const dispatch = useDispatch();
+  const {loading, error, data} = useSelector((state: any) => state.region);
+
+  const handleSubmit = async () => {
+    dispatch(PostRegionApi(checkList));
+  };
+
+  useEffect(() => {
+    {
+      data === '200' && navigation.navigate('RegisterPurpose');
+    }
+  }, [data]);
 
   return (
     <SafeAreaView>
@@ -43,8 +57,8 @@ function RegisterRegionScreen(props: IProps) {
                 width={350}
                 height={54}
                 top={12}
-                data={data}
-                setData={setData}
+                checkList={checkList}
+                setCheckList={setCheckList}
               />
             </View>
           );
@@ -55,7 +69,7 @@ function RegisterRegionScreen(props: IProps) {
           text="다음"
           backgroundColor={check ? COLORS.TWO : COLORS.GRAY_7}
           textColor={check ? COLORS.GRAY_2 : COLORS.GRAY_8}
-          onPress={() => navigation.navigate('RegisterPurpose')}
+          onPress={handleSubmit}
         />
       </ButtonView>
     </SafeAreaView>

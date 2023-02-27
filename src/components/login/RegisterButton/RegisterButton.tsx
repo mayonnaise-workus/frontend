@@ -9,25 +9,23 @@ interface IProps {
   height: number;
   top: number;
   icon: string;
-  data: string[];
-  setData: Dispatch<SetStateAction<string[]>>;
+  checkList: string[];
+  setCheckList: Dispatch<SetStateAction<string[]>>;
 }
 
 function RegisterButton(props: IProps) {
-  const {title, id, width, height, top, icon, data, setData} = props;
+  const {title, id, width, height, top, icon, checkList, setCheckList} = props;
   const [press, setPress] = useState<boolean>(false);
-  console.log(data);
+
   function handlePress() {
     setPress(!press);
   }
 
   useEffect(() => {
     press
-      ? setData([...data, {id: id, title: title}])
-      : setData(data.filter(item => item.id !== id));
+      ? setCheckList([...checkList, id])
+      : setCheckList(checkList.filter(item => item !== id));
   }, [press]);
-
-  console.log('data', data);
 
   return (
     <PressableWrapper

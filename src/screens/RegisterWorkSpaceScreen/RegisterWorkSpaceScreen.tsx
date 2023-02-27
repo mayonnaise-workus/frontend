@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {SafeAreaView, View, Alert} from 'react-native';
 import HeaderBackButton from '../../components/login/HeaderBackbutton/HeaderBackButton';
 import Title from '../../components/login/Title/Title';
@@ -8,6 +8,8 @@ import {workspace} from '../../data';
 import RegisterButton from '../../components/login/RegisterButton/RegisterButton';
 import Button from '../../components/login/LoginButton/Button';
 import {ButtonView, FilterList} from './style';
+import {useDispatch, useSelector} from 'react-redux';
+import {PostWorkSpaceApi} from '../../redux/service/PostWorkSpaceApi';
 
 interface IProps {
   navigation: undefined;
@@ -18,14 +20,25 @@ interface Data {
 }
 function RegisterWorkSpaceScreen(props: IProps) {
   const {navigation} = props;
-  const [data, setData] = useState<Data[]>([]);
-  const check = data.length >= 1 && data.length <= 3;
+  const [checkList, setCheckList] = useState<Data[]>([]);
+  const check = checkList.length >= 1 && checkList.length <= 3;
+  const dispatch = useDispatch();
+  const {loading, error, data} = useSelector((state: any) => state.workspace);
 
-  function onSubmit() {
-    check
-      ? navigation.navigate('Main')
-      : Alert.alert('최대 3개까지 선택할 수 있습니다.');
-  }
+  const handleSubmit = async () => {
+    {
+      check
+        ? dispatch(PostWorkSpaceApi(checkList))
+        : Alert.alert('최대 3개까지 선택할 수 있습니다');
+    }
+  };
+
+  useEffect(() => {
+    {
+      data === '200' && navigation.navigate('Main');
+    }
+  }, [data]);
+
   return (
     <SafeAreaView>
       <HeaderBackButton onPress={() => navigation.pop()} />
@@ -41,8 +54,8 @@ function RegisterWorkSpaceScreen(props: IProps) {
                 width={350}
                 height={54}
                 top={12}
-                data={data}
-                setData={setData}
+                checkList={checkList}
+                setCheckList={setCheckList}
               />
             </View>
           );
@@ -53,7 +66,7 @@ function RegisterWorkSpaceScreen(props: IProps) {
           text="시작하기"
           backgroundColor={check ? COLORS.TWO : COLORS.GRAY_7}
           textColor={check ? COLORS.GRAY_2 : COLORS.GRAY_8}
-          onPress={onSubmit}
+          onPress={handleSubmit}
         />
       </ButtonView>
     </SafeAreaView>
