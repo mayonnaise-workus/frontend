@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {SafeAreaView, Image} from 'react-native';
 import Button from '../../components/login/LoginButton/Button';
 import COLORS from '../../../packages/colors';
 import {ButtonBlock, LogoBlock} from './style';
 import {login} from '@react-native-seoul/kakao-login';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {LoginApi} from '../../redux/service/LoginApi';
 
 interface IProps {
@@ -14,6 +14,7 @@ interface IProps {
 function OnboardingScreen(props: IProps) {
   const dispatch = useDispatch();
   const {navigation} = props;
+  const {loading, error, data} = useSelector((state: any) => state.login);
 
   const handleKakaoLogin = async () => {
     const result = await login();
@@ -26,6 +27,10 @@ function OnboardingScreen(props: IProps) {
     };
     dispatch(LoginApi(postData));
   };
+
+  useEffect(() => {
+    data && navigation.navigate('ServiceTerm');
+  }, [data]);
 
   return (
     <SafeAreaView>
