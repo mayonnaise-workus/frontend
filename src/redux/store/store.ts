@@ -4,6 +4,7 @@ import ServiceTermReducer from '../slice/ServiceTermSlice';
 import PostNickNameReducer from '../slice/PostNicknameSlice';
 import PostRegionReducer from '../slice/PostRegionSlice';
 import PostPurposeReducer from '../slice/PostPurposeSlice';
+import PostWorkSpaceReducer from '../slice/PostWorkSpaceslice';
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export const store = configureStore({
     nickname: PostNickNameReducer,
     region: PostRegionReducer,
     purpose: PostPurposeReducer,
+    workspace: PostWorkSpaceReducer,
   },
 });
