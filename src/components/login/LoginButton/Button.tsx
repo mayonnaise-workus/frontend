@@ -4,16 +4,14 @@ import {PressableBlock, TextBlock} from './style';
 export interface IProps {
   text: string;
   onPress: () => void;
-  textColor: string;
-  backgroundColor: string;
 }
 
 function Button(props: IProps) {
-  const {text, onPress, backgroundColor, textColor} = props;
+  const {text, onPress} = props;
 
   return (
-    <PressableBlock backgroundColor={backgroundColor} onPress={onPress}>
-      <TextBlock textColor={textColor}>{text}</TextBlock>
+    <PressableBlock onPress={onPress}>
+      <TextBlock>{text}</TextBlock>
     </PressableBlock>
   );
 }
