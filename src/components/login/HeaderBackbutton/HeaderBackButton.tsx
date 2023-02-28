@@ -1,5 +1,6 @@
 import React from 'react';
 import {SafeAreaView} from 'react-native';
+import images from '../../../../assets/images';
 import {ImageBlock, PressableBlock} from './style';
 
 interface IProps {
@@ -12,9 +13,7 @@ function HeaderBackButton(props: IProps) {
   return (
     <SafeAreaView>
       <PressableBlock onPress={onPress}>
-        <ImageBlock
-          source={require('/Users/sein/Desktop/frontend/assets/CaretLeft.png')}
-        />
+        <ImageBlock source={images.LEFT_ICON} />
       </PressableBlock>
     </SafeAreaView>
   );

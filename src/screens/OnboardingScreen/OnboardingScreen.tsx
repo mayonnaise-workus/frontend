@@ -5,6 +5,7 @@ import {ButtonBlock, LogoBlock} from './style';
 import {login} from '@react-native-seoul/kakao-login';
 import {useDispatch, useSelector} from 'react-redux';
 import {LoginApi} from '../../redux/service/LoginApi';
+import images from '../../../assets/images';
 
 interface IProps {
   navigation: undefined;
@@ -34,9 +35,7 @@ function OnboardingScreen(props: IProps) {
   return (
     <SafeAreaView>
       <LogoBlock>
-        <Image
-          source={require('/Users/sein/Documents/frontend/assets/logo_black.png')}
-        />
+        <Image source={images.LOGO_BLACK} />
       </LogoBlock>
       <ButtonBlock>
         <Button

@@ -2,6 +2,7 @@ import React from 'react';
 import {Image} from 'react-native';
 import COLORS from '../../../../packages/colors';
 import {Alert, AlertView} from './style';
+import images from '../../../../assets/images';
 
 interface IProps {
   message: string;
@@ -18,7 +19,7 @@ function AlertMessage(props: IProps) {
           width: 19.5,
           height: 19.5,
         }}
-        source={require('/Users/sein/Desktop/frontend/assets/WarningCircle.png')}
+        source={images.WARNING_CIRCLE}
       />
       <Alert color={COLORS.ALERT_2}>{message}</Alert>
     </AlertView>
