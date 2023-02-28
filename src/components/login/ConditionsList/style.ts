@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const List = styled.View`
   flex-direction: row;
@@ -16,7 +16,7 @@ export const Wrapper = styled.View`
 export const Text = styled.Text`
   margin-left: 6.25px;
   font-weight: ${({fontWeight}) => fontWeight};
-  font-size: ${({fontSize}) => fontSize};
+  font-size: ${({fontSize}) => fontSize}px;
   color: ${({color}) => color};
 `;
 
