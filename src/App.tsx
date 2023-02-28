@@ -8,38 +8,45 @@ import RegisterPurposeScreen from './screens/RegisterPurposeScreen/RegisterPurpo
 import RegisterWorkSpaceScreen from './screens/RegisterWorkSpaceScreen/RegisterWorkSpaceScreen';
 import MainScreen from './screens/MainScreen';
 import RegisterNicknameScreen from './screens/RegisterNicknameScreen/RegisterNicknameScreen';
+import {Provider} from 'react-redux';
+import {store} from './redux/store/store';
 
 const Stack = createNativeStackNavigator();
 
 function App(props) {
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Onboarding"
-        screenOptions={{
-          headerShown: false,
-          contentStyle: {
-            backgroundColor: '#FFFFFF',
-          },
-        }}>
-        <Stack.Screen name="Onboarding" component={OnboardingScreen} />
-        <Stack.Screen name="ServiceTerm" component={ServiceTermScreen} />
-        <Stack.Screen
-          name="RegisterNickName"
-          component={RegisterNicknameScreen}
-        />
-        <Stack.Screen name="RegisterRegion" component={RegisterRegionScreen} />
-        <Stack.Screen
-          name="RegisterPurpose"
-          component={RegisterPurposeScreen}
-        />
-        <Stack.Screen
-          name="RegisterWorkSpace"
-          component={RegisterWorkSpaceScreen}
-        />
-        <Stack.Screen name="Main" component={MainScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="Onboarding"
+          screenOptions={{
+            headerShown: false,
+            contentStyle: {
+              backgroundColor: '#FFFFFF',
+            },
+          }}>
+          <Stack.Screen name="Onboarding" component={OnboardingScreen} />
+          <Stack.Screen name="ServiceTerm" component={ServiceTermScreen} />
+          <Stack.Screen
+            name="RegisterNickName"
+            component={RegisterNicknameScreen}
+          />
+          <Stack.Screen
+            name="RegisterRegion"
+            component={RegisterRegionScreen}
+          />
+          <Stack.Screen
+            name="RegisterPurpose"
+            component={RegisterPurposeScreen}
+          />
+          <Stack.Screen
+            name="RegisterWorkSpace"
+            component={RegisterWorkSpaceScreen}
+          />
+          <Stack.Screen name="Main" component={MainScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 export default App;
