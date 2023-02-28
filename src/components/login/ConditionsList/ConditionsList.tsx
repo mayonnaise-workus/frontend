@@ -49,7 +49,7 @@ function ConditionsList({requiredCheck, setRequiredCheck}) {
       </Wrapper>
       <ListWrapper>
         {termList.map(item => (
-          <List>
+          <List key={item.id}>
             <CheckBox
               style={{
                 width: 19.5,
