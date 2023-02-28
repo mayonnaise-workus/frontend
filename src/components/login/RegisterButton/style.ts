@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const PressableWrapper = styled.Pressable`
   background-color: ${({press}) => (press ? '#FFF9E8' : '#F4F5F7')};
@@ -13,7 +13,7 @@ export const PressableWrapper = styled.Pressable`
 
 export const Icon = styled.Text`
   text-align: center;
-  bottom: 7;
+  bottom: 7px;
 `;
 export const Text = styled.Text`
   font-size: 16px;
