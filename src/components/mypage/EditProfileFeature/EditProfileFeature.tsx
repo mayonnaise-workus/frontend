@@ -2,6 +2,8 @@ import React from 'react';
 import {Alert} from 'react-native';
 import COLORS from '../../../../packages/colors';
 import {Block, Pressable, Text} from './style';
+import {useDispatch} from 'react-redux';
+import {Logout} from '../../../redux/service/Logout';
 
 interface IProps {
   navigation: undefined;
@@ -9,6 +11,7 @@ interface IProps {
 
 function EditProfileFeature(props: IProps) {
   const {navigation} = props;
+  const dispatch = useDispatch();
 
   const handleMember = async () => {
     Alert.alert(
@@ -31,7 +34,27 @@ function EditProfileFeature(props: IProps) {
     );
   };
 
-  const handleLogout = async () => {};
+  const handleLogout = async () => {
+    Alert.alert(
+      '',
+      '로그아웃하시겠습니까?',
+      [
+        {
+          text: '예',
+          onPress: () => {
+            dispatch(Logout());
+            navigation.navigate('Onboarding');
+          },
+          style: 'destructive',
+        },
+        {text: '아니오', onPress: () => {}, style: 'cancel'},
+      ],
+      {
+        cancelable: true,
+        onDismiss: () => {},
+      },
+    );
+  };
   return (
     <Block>
       <Pressable onPress={handleLogout}>
