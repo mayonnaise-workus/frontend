@@ -14,6 +14,7 @@ import MyPageScreen from './screens/MyPageScreen/MyPageScreen';
 import MemberCancellationScreen from './screens/MemberCancellationScreen/MemberCancellationScreen';
 import MemberCancellationCompleteScreen from './screens/MemberCancellationCompleteScreen/MemberCancellationCompleteScreen';
 import EditProfileScreen from './screens/EditProfileScreen/EditProfileScreen';
+import ScrapScreen from './screens/ScrapScreen/ScrapScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -58,6 +59,7 @@ function App(props) {
             name="MemberCancellationComplete"
             component={MemberCancellationCompleteScreen}
           />
+          <Stack.Screen name="Scrap" component={ScrapScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
