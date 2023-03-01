@@ -16,6 +16,7 @@ import {
 } from './style';
 import {useSelector, useDispatch} from 'react-redux';
 import {MemberApi} from '../../redux/service/MemberApi';
+import {EditNicknameApi} from '../../redux/service/EditNicknameApi';
 
 interface IProps {
   navigation: undefined;
@@ -24,8 +25,6 @@ interface IProps {
 interface EditName {
   editname: string;
 }
-
-async function handlePostEditName() {}
 
 function EditProfileScreen(props: IProps) {
   const {navigation} = props;
@@ -42,6 +41,16 @@ function EditProfileScreen(props: IProps) {
   useEffect(() => {
     dispatch(MemberApi());
   }, [dispatch]);
+
+  const editname = watch('editname');
+
+  const postData = {
+    name: editname,
+  };
+
+  async function handlePostEditName() {
+    dispatch(EditNicknameApi(postData));
+  }
 
   return (
     <SafeAreaView>
