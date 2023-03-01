@@ -65,3 +65,26 @@ export const termList = [
     value: 'marketing',
   },
 ];
+
+export const memberCancellation = [
+  {
+    id: 1,
+    text: '더 이상 앱을 사용하지 않습니다.',
+  },
+  {
+    id: 2,
+    text: '추천 장소가 부족합니다.',
+  },
+  {
+    id: 3,
+    text: '흥미를 유발하는 콘텐츠가 부족합니다.',
+  },
+  {
+    id: 4,
+    text: '앱 사용이 불편합니다.',
+  },
+  {
+    id: 5,
+    text: '기타',
+  },
+];
