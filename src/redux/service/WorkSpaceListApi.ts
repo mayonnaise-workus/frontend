@@ -8,8 +8,6 @@ export const WorkSpaceListApi = () => {
   return async (dispatch: Dispatch) => {
     dispatch(setLoading(true));
     const header = await authHeader();
-    console.log(header);
-
     try {
       const response = await axios.get(
         `${WORKSPACE.WORKSPACE_LIST}?region=1,2`,
@@ -17,10 +15,9 @@ export const WorkSpaceListApi = () => {
           headers: {Authorization: `Bearer ${header}`},
         },
       );
-      dispatch(setData(JSON.stringify(response.data)));
+      dispatch(setData(response.data));
       dispatch(setError(null));
     } catch (error) {
-      console.log(error);
       dispatch(setError('An error occurred'));
     }
 
