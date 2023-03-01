@@ -10,6 +10,7 @@ const images = {
   LOGO: require('./img/logo.png'),
   X: require('./img/X.png'),
   DOTSTHREEOUTLINEVERTICAL: require('./img/DotsThreeOutlineVertical.png'),
+  BOOKMARK_GRAY: require('./img/BookmarkGray.png'),
 };
 
 export default images;
