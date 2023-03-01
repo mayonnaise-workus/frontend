@@ -9,6 +9,7 @@ const images = {
   PROFILE_GRAY: require('./img/ProfileImg2.png'),
   LOGO: require('./img/logo.png'),
   X: require('./img/X.png'),
+  DOTSTHREEOUTLINEVERTICAL: require('./img/DotsThreeOutlineVertical.png'),
 };
 
 export default images;
