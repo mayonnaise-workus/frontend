@@ -23,7 +23,7 @@ export const Wrapper = styled.View`
 export const Profile = styled.Image`
   width: 106px;
   margin-top: 16px;
-  height: 106;
+  height: 106px;
 `;
 
 export const Title = styled.Text`
