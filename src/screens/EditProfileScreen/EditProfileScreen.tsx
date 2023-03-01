@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {SafeAreaView} from 'react-native';
 import {Controller, useForm} from 'react-hook-form';
 import Header from '../../components/mypage/Header/Header';
@@ -14,6 +14,8 @@ import {
   Title,
   Wrapper,
 } from './style';
+import {useSelector, useDispatch} from 'react-redux';
+import {MemberApi} from '../../redux/service/MemberApi';
 
 interface IProps {
   navigation: undefined;
@@ -27,6 +29,7 @@ async function handlePostEditName() {}
 
 function EditProfileScreen(props: IProps) {
   const {navigation} = props;
+  const dispatch = useDispatch();
   const {
     control,
     handleSubmit,
@@ -34,7 +37,11 @@ function EditProfileScreen(props: IProps) {
     watch,
   } = useForm<EditName>();
 
-  console.log(typeof errors);
+  const {loading, error, data} = useSelector((state: any) => state.member);
+
+  useEffect(() => {
+    dispatch(MemberApi());
+  }, [dispatch]);
 
   return (
     <SafeAreaView>
