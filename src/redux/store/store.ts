@@ -21,6 +21,6 @@ export const store = configureStore({
     member: MemberReducer,
     editNickname: EditNicknameReducer,
     logout: LogoutReducer,
-    workspaceList: WorkSpaceListReducer,
+    workspacelist: WorkSpaceListReducer,
   },
 });
