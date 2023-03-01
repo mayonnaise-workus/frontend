@@ -1,8 +1,8 @@
 import React from 'react';
 import {SafeAreaView} from 'react-native';
-import Button from '../../components/login/mypage/Button/Button';
-import NickName from '../../components/login/mypage/Nickname/NickName';
-import ScrapButton from '../../components/login/mypage/ScrapButton/ScrapButton';
+import Button from '../../components/mypage/Button/Button';
+import NickName from '../../components/mypage/Nickname/NickName';
+import ScrapButton from '../../components/mypage/ScrapButton/ScrapButton';
 import {Wrapper} from './style';
 
 interface IProps {
