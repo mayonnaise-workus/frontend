@@ -7,6 +7,8 @@ const images = {
   PENCIL_ICON: require('./img/pencil.png'),
   PROFILE_WHITE: require('./img/profileImg.png'),
   PROFILE_GRAY: require('./img/ProfileImg2.png'),
+  LOGO: require('./img/logo.png'),
+  X: require('./img/X.png'),
 };
 
 export default images;
