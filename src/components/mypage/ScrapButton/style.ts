@@ -6,7 +6,7 @@ const Logo = styled.Image`
   width: 13.5px;
   height: 18.75px;
   top: 15px;
-  left: 144}px;
+  left: 144px;
 `;
 
 const Text = styled.Text`
