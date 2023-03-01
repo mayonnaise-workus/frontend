@@ -6,6 +6,7 @@ import PostRegionReducer from '../slice/PostRegionSlice';
 import PostPurposeReducer from '../slice/PostPurposeSlice';
 import PostWorkSpaceReducer from '../slice/PostWorkSpaceslice';
 import MemberReducer from '../slice/MemberSlice';
+import EditNicknameReducer from '../slice/EditNicknameSlice';
 
 export const store = configureStore({
   reducer: {
@@ -16,5 +17,6 @@ export const store = configureStore({
     purpose: PostPurposeReducer,
     workspace: PostWorkSpaceReducer,
     member: MemberReducer,
+    editNickname: EditNicknameReducer,
   },
 });
