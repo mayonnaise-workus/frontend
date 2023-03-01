@@ -1,12 +1,19 @@
 import React from 'react';
-import {SafeAreaView, TextInput} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import {Controller, useForm} from 'react-hook-form';
 import Header from '../../components/mypage/Header/Header';
 import images from '../../../assets/images';
 import COLORS from '../../../packages/colors';
 import Button from '../../components/login/LoginButton/Button';
 import EditProfileFeature from '../../components/mypage/EditProfileFeature/EditProfileFeature';
-import {ButtonView, Container, Profile, Title, Wrapper} from './style';
+import {
+  TextInput,
+  ButtonView,
+  Container,
+  Profile,
+  Title,
+  Wrapper,
+} from './style';
 
 interface IProps {
   navigation: undefined;
