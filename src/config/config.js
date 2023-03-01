@@ -14,3 +14,7 @@ export const MEMBER = {
 export const LOGIN = {
   KAKAO_LOGIN: `${BASE_URL}/login/kakao`,
 };
+
+export const WORKSPACE = {
+  WORKSPACE_LIST: `${BASE_URL}/workspace/list`,
+};
