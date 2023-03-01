@@ -9,7 +9,7 @@ function ScrapButton(props: IProps) {
   const {navigation} = props;
 
   return (
-    <Wrapper>
+    <Wrapper onPress={() => navigation.navigate('Scrap')}>
       <Logo source={images.BOOKMARK_ICON} />
       <Text>스크랩</Text>
     </Wrapper>

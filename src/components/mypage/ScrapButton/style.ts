@@ -19,7 +19,7 @@ const Text = styled.Text`
   left: 167px;
 `;
 
-const Wrapper = styled.View`
+const Wrapper = styled.Pressable`
   flex-direction: row;
   position: absolute;
   width: 350px;
