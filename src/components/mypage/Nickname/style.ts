@@ -12,12 +12,12 @@ const EditProfile = styled.Image`
   left: 85px;
   margin-top: 18.56px;
   width: 18.43px;
-  height: 18.44;
+  height: 18.44px;
 `;
 const Profile = styled.Image`
   width: 106px;
   margin-top: 16px;
-  height: 106;
+  height: 106px;
 `;
 const Text = styled.Text`
   align-items: center;
