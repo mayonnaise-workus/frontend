@@ -23,7 +23,7 @@ function OnboardingScreen(props: IProps) {
     const postData = {
       access_token: result.accessToken,
       refresh_token: result.refreshToken,
-      expires_int:
+      expires_in:
         new Date(Date.parse(`${result.refreshTokenExpiresAt}`)).getTime() /
         1000,
     };
