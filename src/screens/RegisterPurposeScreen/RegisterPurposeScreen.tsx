@@ -27,7 +27,7 @@ function RegisterPurposeScreen(props: IProps) {
   const {data} = useSelector((state: RootState) => state.purpose);
 
   const handleSubmit = async () => {
-    dispatch(PostPurposeApi(checkList));
+    PostPurposeApi(checkList)(dispatch);
   };
 
   useEffect(() => {

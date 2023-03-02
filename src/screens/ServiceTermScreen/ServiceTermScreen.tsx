@@ -37,7 +37,7 @@ function ServiceTermScreen(props: IProps) {
 
   const handleSubmit = async () => {
     isAllChecked
-      ? dispatch(ServiceTermApi(postData))
+      ? ServiceTermApi(postData)(dispatch)
       : Alert.alert('필수 약관을 체크해주세요!');
   };
 

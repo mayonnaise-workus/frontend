@@ -15,7 +15,7 @@ function ScrapScreen(props: IProps) {
   const {data} = useSelector((state: RootState) => state.workspacelist);
 
   useEffect(() => {
-    dispatch(WorkSpaceListApi());
+    WorkSpaceListApi()(dispatch);
   }, [dispatch]);
 
   return (

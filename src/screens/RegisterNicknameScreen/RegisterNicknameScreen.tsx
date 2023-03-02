@@ -38,7 +38,7 @@ function RegisterNicknameScreen(props: IProps) {
   };
 
   const handleSaveNickname = async () => {
-    dispatch(PostNickNameApi(postData));
+    PostNickNameApi(postData)(dispatch);
   };
 
   useEffect(() => {

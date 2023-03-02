@@ -40,7 +40,7 @@ function EditProfileScreen(props: IProps) {
   const {data} = useSelector((state: RootState) => state.member);
 
   useEffect(() => {
-    dispatch(MemberApi());
+    MemberApi()(dispatch);
   }, [dispatch]);
 
   const editname = watch('editname');
@@ -50,7 +50,7 @@ function EditProfileScreen(props: IProps) {
   };
 
   async function handlePostEditName() {
-    dispatch(EditNicknameApi(postData));
+    EditNicknameApi(postData)(dispatch);
   }
 
   return (

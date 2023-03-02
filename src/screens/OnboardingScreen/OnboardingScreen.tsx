@@ -26,7 +26,7 @@ function OnboardingScreen(props: IProps) {
       expires_int:
         new Date(Date.parse(result.refreshTokenExpiresAt)).getTime() / 1000,
     };
-    dispatch(LoginApi(postData));
+    LoginApi(postData)(dispatch);
   };
 
   useEffect(() => {

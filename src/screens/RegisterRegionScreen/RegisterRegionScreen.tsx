@@ -29,7 +29,7 @@ function RegisterRegionScreen(props: IProps) {
   const {data} = useSelector((state: RootState) => state.region);
 
   const handleSubmit = async () => {
-    dispatch(PostRegionApi(checkList));
+    PostRegionApi(checkList)(dispatch);
   };
 
   useEffect(() => {

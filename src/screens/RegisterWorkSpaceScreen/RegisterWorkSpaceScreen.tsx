@@ -28,7 +28,7 @@ function RegisterWorkSpaceScreen(props: IProps) {
 
   const handleSubmit = async () => {
     check
-      ? dispatch(PostWorkSpaceApi(checkList))
+      ? PostWorkSpaceApi(checkList)(dispatch)
       : Alert.alert('최대 3개까지 선택할 수 있습니다');
   };
 
