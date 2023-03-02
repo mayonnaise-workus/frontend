@@ -17,8 +17,6 @@ interface Ipros {
 function WorkSpaceList(props: Ipros) {
   const {list} = props;
 
-  console.log(list);
-
   return (
     <Wrapper>
       <ImageBlock

@@ -9,16 +9,13 @@ export const LoginApi = (data: any) => {
     dispatch(setLoading(true));
     try {
       const response = await axios.post(LOGIN.KAKAO_LOGIN, data);
-      console.log(data);
       const jsonValue = JSON.stringify(response.data);
-      console.log(jsonValue);
       dispatch(setData(jsonValue));
       if (response.data) {
         AsyncStorage.setItem('user', jsonValue);
       }
       dispatch(setError(null));
     } catch (error) {
-      console.log(error);
       dispatch(setError('An error occurred'));
     }
 

@@ -19,8 +19,6 @@ function ScrapScreen(props: IProps) {
     dispatch(WorkSpaceListApi());
   }, [dispatch]);
 
-  console.log('list', typeof data);
-
   return (
     <SafeAreaView>
       <ScrapHeader navigation={navigation} />

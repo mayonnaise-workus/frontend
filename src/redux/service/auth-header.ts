@@ -6,6 +6,5 @@ export const authHeader = async () => {
     const value = JSON.parse(user);
     return value.access_token;
   } catch (e) {
-    console.log('error', e);
   }
 };

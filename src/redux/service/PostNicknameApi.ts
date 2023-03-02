@@ -13,11 +13,9 @@ export const PostNickNameApi = (data: any) => {
         headers: {Authorization: `Bearer ${header}`},
       });
       const jsonValue = JSON.stringify(response.data);
-      console.log(jsonValue);
       dispatch(setData(jsonValue));
       dispatch(setError(null));
     } catch (error) {
-      console.log(error);
       dispatch(setError('An error occurred'));
     }
     dispatch(setLoading(false));

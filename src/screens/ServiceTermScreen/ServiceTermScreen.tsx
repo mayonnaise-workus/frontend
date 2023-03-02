@@ -23,7 +23,7 @@ function ServiceTermScreen(props: IProps) {
   const result = requiredCheck.filter(x => check.includes(x));
   const isAllChecked = result.length === 5;
   const {loading, error, data} = useSelector((state: any) => state.serviceterm);
-  console.log('data', data);
+
   useEffect(() => {
     requiredCheck.includes('personal') ? setOption1(true) : setOption1(false);
     requiredCheck.includes('marketing') ? setOption2(true) : setOption2(false);
