@@ -24,9 +24,7 @@ function RegisterPurposeScreen(props: IProps) {
   const [checkList, setCheckList] = useState<Data[]>([]);
   const check = checkList.length >= 1;
   const dispatch = useDispatch();
-  const {loading, error, data} = useSelector(
-    (state: RootState) => state.purpose,
-  );
+  const {data} = useSelector((state: RootState) => state.purpose);
 
   const handleSubmit = async () => {
     dispatch(PostPurposeApi(checkList));

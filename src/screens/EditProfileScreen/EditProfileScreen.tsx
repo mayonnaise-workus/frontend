@@ -37,9 +37,7 @@ function EditProfileScreen(props: IProps) {
     watch,
   } = useForm<EditName>();
 
-  const {loading, error, data} = useSelector(
-    (state: RootState) => state.member,
-  );
+  const {data} = useSelector((state: RootState) => state.member);
 
   useEffect(() => {
     dispatch(MemberApi());

@@ -22,9 +22,7 @@ interface FormData {
 function RegisterNicknameScreen(props: IProps) {
   const {navigation} = props;
   const dispatch = useDispatch();
-  const {loading, error, data} = useSelector(
-    (state: RootState) => state.nickname,
-  );
+  const {data} = useSelector((state: RootState) => state.nickname);
 
   const {
     control,

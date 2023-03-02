@@ -26,9 +26,7 @@ function RegisterRegionScreen(props: IProps) {
   const [checkList, setCheckList] = useState<Data[]>([]);
   const check = checkList.length >= 1;
   const dispatch = useDispatch();
-  const {loading, error, data} = useSelector(
-    (state: RootState) => state.region,
-  );
+  const {data} = useSelector((state: RootState) => state.region);
 
   const handleSubmit = async () => {
     dispatch(PostRegionApi(checkList));

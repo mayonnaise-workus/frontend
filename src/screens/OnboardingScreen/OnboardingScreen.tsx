@@ -15,7 +15,7 @@ interface IProps {
 function OnboardingScreen(props: IProps) {
   const dispatch = useDispatch();
   const {navigation} = props;
-  const {loading, error, data} = useSelector((state: RootState) => state.login);
+  const {data} = useSelector((state: RootState) => state.login);
 
   const handleKakaoLogin = async () => {
     const result = await login();

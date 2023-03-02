@@ -12,9 +12,7 @@ interface IProps {
 function ScrapScreen(props: IProps) {
   const {navigation} = props;
   const dispatch = useDispatch();
-  const {loading, error, data} = useSelector(
-    (state: RootState) => state.workspacelist,
-  );
+  const {data} = useSelector((state: RootState) => state.workspacelist);
 
   useEffect(() => {
     dispatch(WorkSpaceListApi());

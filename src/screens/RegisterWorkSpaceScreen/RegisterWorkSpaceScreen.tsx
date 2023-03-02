@@ -24,9 +24,7 @@ function RegisterWorkSpaceScreen(props: IProps) {
   const [checkList, setCheckList] = useState<Data[]>([]);
   const check = checkList.length >= 1 && checkList.length <= 3;
   const dispatch = useDispatch();
-  const {loading, error, data} = useSelector(
-    (state: RootState) => state.workspace,
-  );
+  const {data} = useSelector((state: RootState) => state.workspace);
 
   const handleSubmit = async () => {
     check
