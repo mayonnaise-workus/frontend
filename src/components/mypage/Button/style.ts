@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import COLORS from '../../../../../packages/colors';
+import COLORS from '../../../../packages/colors';
 
 const Logo = styled.Image`
   position: absolute;

@@ -7,6 +7,10 @@ const images = {
   PENCIL_ICON: require('./img/pencil.png'),
   PROFILE_WHITE: require('./img/profileImg.png'),
   PROFILE_GRAY: require('./img/ProfileImg2.png'),
+  LOGO: require('./img/logo.png'),
+  X: require('./img/X.png'),
+  DOTSTHREEOUTLINEVERTICAL: require('./img/DotsThreeOutlineVertical.png'),
+  BOOKMARK_GRAY: require('./img/BookmarkGray.png'),
 };
 
 export default images;

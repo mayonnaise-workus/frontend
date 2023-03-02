@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import COLORS from '../../../../../packages/colors';
+import COLORS from '../../../../packages/colors';
 
 const Logo = styled.Image`
   position: absolute;
   width: 13.5px;
   height: 18.75px;
   top: 15px;
-  left: 144}px;
+  left: 144px;
 `;
 
 const Text = styled.Text`
@@ -19,7 +19,7 @@ const Text = styled.Text`
   left: 167px;
 `;
 
-const Wrapper = styled.View`
+const Wrapper = styled.Pressable`
   flex-direction: row;
   position: absolute;
   width: 350px;

@@ -10,6 +10,11 @@ import MainScreen from './screens/MainScreen';
 import RegisterNicknameScreen from './screens/RegisterNicknameScreen/RegisterNicknameScreen';
 import {Provider} from 'react-redux';
 import {store} from './redux/store/store';
+import MyPageScreen from './screens/MyPageScreen/MyPageScreen';
+import MemberCancellationScreen from './screens/MemberCancellationScreen/MemberCancellationScreen';
+import MemberCancellationCompleteScreen from './screens/MemberCancellationCompleteScreen/MemberCancellationCompleteScreen';
+import EditProfileScreen from './screens/EditProfileScreen/EditProfileScreen';
+import ScrapScreen from './screens/ScrapScreen/ScrapScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -44,6 +49,17 @@ function App(props) {
             component={RegisterWorkSpaceScreen}
           />
           <Stack.Screen name="Main" component={MainScreen} />
+          <Stack.Screen name="MyPage" component={MyPageScreen} />
+          <Stack.Screen name="EditProfile" component={EditProfileScreen} />
+          <Stack.Screen
+            name="MemberCancellation"
+            component={MemberCancellationScreen}
+          />
+          <Stack.Screen
+            name="MemberCancellationComplete"
+            component={MemberCancellationCompleteScreen}
+          />
+          <Stack.Screen name="Scrap" component={ScrapScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
