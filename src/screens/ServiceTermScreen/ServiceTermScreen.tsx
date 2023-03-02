@@ -18,9 +18,9 @@ function ServiceTermScreen(props: IProps) {
   const dispatch = useDispatch();
   const {navigation} = props;
   const check = ['check1', 'check2', 'check3', 'check4', 'check5'];
-  const [requiredCheck, setRequiredCheck] = useState([]);
-  const [option1, setOption1] = useState('');
-  const [option2, setOption2] = useState('');
+  const [requiredCheck, setRequiredCheck] = useState<string[]>([]);
+  const [option1, setOption1] = useState<boolean>(false);
+  const [option2, setOption2] = useState<boolean>(false);
   const result = requiredCheck.filter(x => check.includes(x));
   const isAllChecked = result.length === 5;
   const {data} = useSelector((state: RootState) => state.serviceterm);
