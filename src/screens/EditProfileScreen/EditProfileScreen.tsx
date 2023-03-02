@@ -17,6 +17,7 @@ import {
 import {useSelector, useDispatch} from 'react-redux';
 import {MemberApi} from '../../redux/service/MemberApi';
 import {EditNicknameApi} from '../../redux/service/EditNicknameApi';
+import {RootState} from '../../redux/store/store';
 
 interface IProps {
   navigation: undefined;
@@ -36,7 +37,9 @@ function EditProfileScreen(props: IProps) {
     watch,
   } = useForm<EditName>();
 
-  const {loading, error, data} = useSelector((state: any) => state.member);
+  const {loading, error, data} = useSelector(
+    (state: RootState) => state.member,
+  );
 
   useEffect(() => {
     dispatch(MemberApi());

@@ -8,6 +8,7 @@ import ConditionsList from '../../components/login/ConditionsList/ConditionsList
 import {ButtonView} from './style';
 import {useDispatch, useSelector} from 'react-redux';
 import {ServiceTermApi} from '../../redux/service/ServiceTermApi';
+import {RootState} from '../../redux/store/store';
 
 interface IProps {
   navigation: undefined;
@@ -22,7 +23,9 @@ function ServiceTermScreen(props: IProps) {
   const [option2, setOption2] = useState('');
   const result = requiredCheck.filter(x => check.includes(x));
   const isAllChecked = result.length === 5;
-  const {loading, error, data} = useSelector((state: any) => state.serviceterm);
+  const {loading, error, data} = useSelector(
+    (state: RootState) => state.serviceterm,
+  );
 
   useEffect(() => {
     requiredCheck.includes('personal') ? setOption1(true) : setOption1(false);

@@ -10,6 +10,7 @@ import Button from '../../components/login/LoginButton/Button';
 import {ButtonView, FilterList} from './style';
 import {useDispatch, useSelector} from 'react-redux';
 import {PostWorkSpaceApi} from '../../redux/service/PostWorkSpaceApi';
+import {RootState} from '../../redux/store/store';
 
 interface IProps {
   navigation: undefined;
@@ -23,7 +24,9 @@ function RegisterWorkSpaceScreen(props: IProps) {
   const [checkList, setCheckList] = useState<Data[]>([]);
   const check = checkList.length >= 1 && checkList.length <= 3;
   const dispatch = useDispatch();
-  const {loading, error, data} = useSelector((state: any) => state.workspace);
+  const {loading, error, data} = useSelector(
+    (state: RootState) => state.workspace,
+  );
 
   const handleSubmit = async () => {
     check

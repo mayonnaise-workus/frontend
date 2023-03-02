@@ -10,6 +10,7 @@ import COLORS from '../../../packages/colors';
 import {ButtonView, FilterList} from './style';
 import {useDispatch, useSelector} from 'react-redux';
 import {PostRegionApi} from '../../redux/service/PostRegionApi';
+import {RootState} from '../../redux/store/store';
 
 interface IProps {
   navigation: undefined;
@@ -25,7 +26,9 @@ function RegisterRegionScreen(props: IProps) {
   const [checkList, setCheckList] = useState<Data[]>([]);
   const check = checkList.length >= 1;
   const dispatch = useDispatch();
-  const {loading, error, data} = useSelector((state: any) => state.region);
+  const {loading, error, data} = useSelector(
+    (state: RootState) => state.region,
+  );
 
   const handleSubmit = async () => {
     dispatch(PostRegionApi(checkList));

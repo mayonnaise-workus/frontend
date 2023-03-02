@@ -4,6 +4,7 @@ import ScrapHeader from '../../components/mypage/ScrapHeader/ScrapHeader';
 import WorkSpaceList from '../../components/mypage/WorkSpaceList/WorkSpaceList';
 import {useDispatch, useSelector} from 'react-redux';
 import {WorkSpaceListApi} from '../../redux/service/WorkSpaceListApi';
+import {RootState} from '../../redux/store/store';
 
 interface IProps {
   navigation: undefined;
@@ -12,7 +13,7 @@ function ScrapScreen(props: IProps) {
   const {navigation} = props;
   const dispatch = useDispatch();
   const {loading, error, data} = useSelector(
-    (state: any) => state.workspacelist,
+    (state: RootState) => state.workspacelist,
   );
 
   useEffect(() => {

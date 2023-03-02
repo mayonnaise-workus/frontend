@@ -6,6 +6,7 @@ import {login} from '@react-native-seoul/kakao-login';
 import {useDispatch, useSelector} from 'react-redux';
 import {LoginApi} from '../../redux/service/LoginApi';
 import images from '../../../assets/images';
+import {RootState} from '../../redux/store/store';
 
 interface IProps {
   navigation: undefined;
@@ -14,7 +15,7 @@ interface IProps {
 function OnboardingScreen(props: IProps) {
   const dispatch = useDispatch();
   const {navigation} = props;
-  const {loading, error, data} = useSelector((state: any) => state.login);
+  const {loading, error, data} = useSelector((state: RootState) => state.login);
 
   const handleKakaoLogin = async () => {
     const result = await login();
