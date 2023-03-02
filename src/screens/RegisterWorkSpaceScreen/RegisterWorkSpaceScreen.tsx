@@ -26,17 +26,13 @@ function RegisterWorkSpaceScreen(props: IProps) {
   const {loading, error, data} = useSelector((state: any) => state.workspace);
 
   const handleSubmit = async () => {
-    {
-      check
-        ? dispatch(PostWorkSpaceApi(checkList))
-        : Alert.alert('최대 3개까지 선택할 수 있습니다');
-    }
+    check
+      ? dispatch(PostWorkSpaceApi(checkList))
+      : Alert.alert('최대 3개까지 선택할 수 있습니다');
   };
 
   useEffect(() => {
-    {
-      data === '200' && navigation.navigate('Main');
-    }
+    data === '200' && navigation.navigate('Main');
   }, [data]);
 
   return (

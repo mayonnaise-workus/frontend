@@ -32,9 +32,7 @@ function RegisterRegionScreen(props: IProps) {
   };
 
   useEffect(() => {
-    {
-      data === '200' && navigation.navigate('RegisterPurpose');
-    }
+    data === '200' && navigation.navigate('RegisterPurpose');
   }, [data]);
 
   return (

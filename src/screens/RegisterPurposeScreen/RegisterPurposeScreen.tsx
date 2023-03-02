@@ -30,9 +30,7 @@ function RegisterPurposeScreen(props: IProps) {
   };
 
   useEffect(() => {
-    {
-      data === '200' && navigation.navigate('RegisterWorkSpace');
-    }
+    data === '200' && navigation.navigate('RegisterWorkSpace');
   }, [data]);
 
   return (

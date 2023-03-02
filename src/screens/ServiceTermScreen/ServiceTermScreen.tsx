@@ -35,17 +35,13 @@ function ServiceTermScreen(props: IProps) {
   };
 
   const handleSubmit = async () => {
-    {
-      isAllChecked
-        ? dispatch(ServiceTermApi(postData))
-        : Alert.alert('필수 약관을 체크해주세요!');
-    }
+    isAllChecked
+      ? dispatch(ServiceTermApi(postData))
+      : Alert.alert('필수 약관을 체크해주세요!');
   };
 
   useEffect(() => {
-    {
-      data && navigation.navigate('RegisterNickName');
-    }
+    data && navigation.navigate('RegisterNickName');
   }, [data]);
 
   return (

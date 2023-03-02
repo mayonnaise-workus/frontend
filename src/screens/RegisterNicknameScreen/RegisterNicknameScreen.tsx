@@ -41,9 +41,7 @@ function RegisterNicknameScreen(props: IProps) {
   };
 
   useEffect(() => {
-    {
-      data && navigation.navigate('RegisterRegion');
-    }
+    data && navigation.navigate('RegisterRegion');
   }, [data]);
 
   return (
