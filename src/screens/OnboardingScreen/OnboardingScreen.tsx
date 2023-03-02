@@ -30,7 +30,7 @@ function OnboardingScreen(props: IProps) {
 
   useEffect(() => {
     data && navigation.navigate('ServiceTerm');
-  }, [data]);
+  }, [data, navigation]);
 
   return (
     <SafeAreaView>

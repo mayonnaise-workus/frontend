@@ -33,7 +33,7 @@ function RegisterRegionScreen(props: IProps) {
 
   useEffect(() => {
     data === '200' && navigation.navigate('RegisterPurpose');
-  }, [data]);
+  }, [data, navigation]);
 
   return (
     <SafeAreaView>

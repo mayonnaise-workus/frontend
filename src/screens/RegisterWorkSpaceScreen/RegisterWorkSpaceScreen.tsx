@@ -33,7 +33,7 @@ function RegisterWorkSpaceScreen(props: IProps) {
 
   useEffect(() => {
     data === '200' && navigation.navigate('Main');
-  }, [data]);
+  }, [data, navigation]);
 
   return (
     <SafeAreaView>

@@ -42,7 +42,7 @@ function RegisterNicknameScreen(props: IProps) {
 
   useEffect(() => {
     data && navigation.navigate('RegisterRegion');
-  }, [data]);
+  }, [data, navigation]);
 
   return (
     <SafeAreaView>

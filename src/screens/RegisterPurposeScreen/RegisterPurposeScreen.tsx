@@ -31,7 +31,7 @@ function RegisterPurposeScreen(props: IProps) {
 
   useEffect(() => {
     data === '200' && navigation.navigate('RegisterWorkSpace');
-  }, [data]);
+  }, [data, navigation]);
 
   return (
     <SafeAreaView>

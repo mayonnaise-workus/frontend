@@ -42,7 +42,7 @@ function ServiceTermScreen(props: IProps) {
 
   useEffect(() => {
     data && navigation.navigate('RegisterNickName');
-  }, [data]);
+  }, [data, navigation]);
 
   return (
     <SafeAreaView>
