@@ -19,7 +19,7 @@ const EditNicknameSlice = createSlice({
     setUserLoading: (state, action: PayloadAction<boolean>) => {
       state.userLoading = action.payload;
     },
-    setUserError: (state, action: PayloadAction<string>) => {
+    setUserError: (state, action: PayloadAction<string | null>) => {
       state.userError = action.payload;
     },
     setUser: (state, action: PayloadAction<any>) => {
