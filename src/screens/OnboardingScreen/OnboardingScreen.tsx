@@ -24,7 +24,8 @@ function OnboardingScreen(props: IProps) {
       access_token: result.accessToken,
       refresh_token: result.refreshToken,
       expires_int:
-        new Date(Date.parse(result.refreshTokenExpiresAt)).getTime() / 1000,
+        new Date(Date.parse(`${result.refreshTokenExpiresAt}`)).getTime() /
+        1000,
     };
     LoginApi(postData)(dispatch);
   };
