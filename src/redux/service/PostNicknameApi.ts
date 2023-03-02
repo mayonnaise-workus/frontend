@@ -4,7 +4,11 @@ import {setLoading, setError, setData} from '../slice/PostNicknameSlice';
 import {MEMBER} from '../../config/config';
 import {authHeader} from './auth-header';
 
-export const PostNickNameApi = (data: any) => {
+interface IPostNickNameProps {
+  name: string;
+}
+
+export const PostNickNameApi = (data: IPostNickNameProps) => {
   return async (dispatch: Dispatch) => {
     dispatch(setLoading(true));
     const header = await authHeader();

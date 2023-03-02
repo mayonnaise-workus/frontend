@@ -4,7 +4,12 @@ import {Dispatch} from 'redux';
 import {setLoading, setError, setData} from '../slice/LoginSlice';
 import {LOGIN} from '../../config/config';
 
-export const LoginApi = (data: any) => {
+interface ILoginProps {
+  access_token: string;
+  refresh_token: string;
+  expires_in: number;
+}
+export const LoginApi = (data: ILoginProps) => {
   return async (dispatch: Dispatch) => {
     dispatch(setLoading(true));
     try {
