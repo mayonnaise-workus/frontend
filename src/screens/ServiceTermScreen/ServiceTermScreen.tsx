@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {Alert, SafeAreaView} from 'react-native';
-import Button from '../../components/login/LoginButton/Button';
 import HeaderBackButton from '../../components/login/HeaderBackbutton/HeaderBackButton';
 import Title from '../../components/login/Title/Title';
 import COLORS from '../../../packages/colors';
@@ -9,6 +8,7 @@ import {ButtonView} from './style';
 import {useDispatch, useSelector} from 'react-redux';
 import {ServiceTermApi} from '../../redux/service/ServiceTermApi';
 import {RootState} from '../../redux/store/store';
+import Button from '../../components/login/NextButton/NextButton';
 
 interface IProps {
   navigation: undefined;
@@ -56,8 +56,8 @@ function ServiceTermScreen(props: IProps) {
       <ButtonView>
         <Button
           text="동의하고 가입하기"
-          backgroundColor={isAllChecked ? COLORS.TWO : COLORS.GRAY_7}
-          textColor={isAllChecked ? COLORS.GRAY_1 : COLORS.GRAY_8}
+          backgroundColor={isAllChecked ? `${COLORS.TWO}` : `${COLORS.GRAY_7}`}
+          textColor={isAllChecked ? `${COLORS.GRAY_1}` : `${COLORS.GRAY_8}`}
           onPress={handleSubmit}
         />
       </ButtonView>

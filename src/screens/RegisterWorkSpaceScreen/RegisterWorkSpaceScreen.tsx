@@ -6,11 +6,11 @@ import Description from '../../components/login/Description/Description';
 import COLORS from '../../../packages/colors';
 import {workspace} from '../../data';
 import RegisterButton from '../../components/login/RegisterButton/RegisterButton';
-import Button from '../../components/login/LoginButton/Button';
 import {ButtonView, FilterList} from './style';
 import {useDispatch, useSelector} from 'react-redux';
 import {PostWorkSpaceApi} from '../../redux/service/PostWorkSpaceApi';
 import {RootState} from '../../redux/store/store';
+import Button from '../../components/login/NextButton/NextButton';
 
 interface IProps {
   navigation: undefined;
@@ -61,8 +61,8 @@ function RegisterWorkSpaceScreen(props: IProps) {
       <ButtonView>
         <Button
           text="시작하기"
-          backgroundColor={check ? COLORS.TWO : COLORS.GRAY_7}
-          textColor={check ? COLORS.GRAY_2 : COLORS.GRAY_8}
+          backgroundColor={check ? `${COLORS.TWO}` : `${COLORS.GRAY_7}`}
+          textColor={check ? `${COLORS.GRAY_1}` : `${COLORS.GRAY_8}`}
           onPress={handleSubmit}
         />
       </ButtonView>

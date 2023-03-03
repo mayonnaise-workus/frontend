@@ -4,12 +4,12 @@ import HeaderBackButton from '../../components/login/HeaderBackbutton/HeaderBack
 import Title from '../../components/login/Title/Title';
 import {Controller, useForm} from 'react-hook-form';
 import COLORS from '../../../packages/colors';
-import Button from '../../components/login/LoginButton/Button';
 import AlertMessage from '../../components/login/AlertMessage/AlertMessage';
 import {ButtonView, TextInput} from './style';
 import {PostNickNameApi} from '../../redux/service/PostNicknameApi';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../redux/store/store';
+import Button from '../../components/login/NextButton/NextButton';
 
 interface IProps {
   navigation: undefined;
@@ -79,8 +79,8 @@ function RegisterNicknameScreen(props: IProps) {
       <ButtonView>
         <Button
           text="다음"
-          backgroundColor={nickname ? COLORS.TWO : COLORS.GRAY_7}
-          textColor={nickname ? COLORS.GRAY_2 : COLORS.GRAY_8}
+          backgroundColor={nickname ? `${COLORS.TWO}` : `${COLORS.GRAY_7}`}
+          textColor={nickname ? `${COLORS.GRAY_1}` : `${COLORS.GRAY_8}`}
           onPress={handleSubmit(handleSaveNickname)}
         />
       </ButtonView>
