@@ -9,6 +9,7 @@ import {purpose} from '../../data';
 import {ButtonView, FilterList} from './style';
 import {useDispatch, useSelector} from 'react-redux';
 import {PostPurposeApi} from '../../redux/service/PostPurposeApi';
+import {RootState} from '../../redux/store/store';
 interface IProps {
   navigation: undefined;
 }
@@ -23,17 +24,15 @@ function RegisterPurposeScreen(props: IProps) {
   const [checkList, setCheckList] = useState<Data[]>([]);
   const check = checkList.length >= 1;
   const dispatch = useDispatch();
-  const {loading, error, data} = useSelector((state: any) => state.purpose);
+  const {data} = useSelector((state: RootState) => state.purpose);
 
   const handleSubmit = async () => {
-    dispatch(PostPurposeApi(checkList));
+    PostPurposeApi(checkList)(dispatch);
   };
 
   useEffect(() => {
-    {
-      data === '200' && navigation.navigate('RegisterWorkSpace');
-    }
-  }, [data]);
+    data === '200' && navigation.navigate('RegisterWorkSpace');
+  }, [data, navigation]);
 
   return (
     <SafeAreaView>

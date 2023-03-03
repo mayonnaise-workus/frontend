@@ -9,7 +9,11 @@ import {MEMBER} from '../../config/config';
 import {authHeader} from './auth-header';
 import {Alert} from 'react-native';
 
-export const EditNicknameApi = (data: any) => {
+interface IEditNickNamProps {
+  name: string;
+}
+
+export const EditNicknameApi = (data: IEditNickNamProps) => {
   return async (dispatch: Dispatch) => {
     dispatch(setUserLoading(true));
     const header = await authHeader();

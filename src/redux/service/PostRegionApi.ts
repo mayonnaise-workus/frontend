@@ -22,7 +22,6 @@ export const PostRegionApi = (data: any) => {
       dispatch(setData(jsonValue));
       dispatch(setError(null));
     } catch (error) {
-      console.log(error);
       dispatch(setError('An error occurred'));
     }
     dispatch(setLoading(false));

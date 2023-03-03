@@ -4,6 +4,7 @@ import ScrapHeader from '../../components/mypage/ScrapHeader/ScrapHeader';
 import WorkSpaceList from '../../components/mypage/WorkSpaceList/WorkSpaceList';
 import {useDispatch, useSelector} from 'react-redux';
 import {WorkSpaceListApi} from '../../redux/service/WorkSpaceListApi';
+import {RootState} from '../../redux/store/store';
 
 interface IProps {
   navigation: undefined;
@@ -11,15 +12,11 @@ interface IProps {
 function ScrapScreen(props: IProps) {
   const {navigation} = props;
   const dispatch = useDispatch();
-  const {loading, error, data} = useSelector(
-    (state: any) => state.workspacelist,
-  );
+  const {data} = useSelector((state: RootState) => state.workspacelist);
 
   useEffect(() => {
-    dispatch(WorkSpaceListApi());
+    WorkSpaceListApi()(dispatch);
   }, [dispatch]);
-
-  console.log('list', typeof data);
 
   return (
     <SafeAreaView>

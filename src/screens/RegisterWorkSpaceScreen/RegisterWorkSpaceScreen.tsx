@@ -10,6 +10,7 @@ import Button from '../../components/login/LoginButton/Button';
 import {ButtonView, FilterList} from './style';
 import {useDispatch, useSelector} from 'react-redux';
 import {PostWorkSpaceApi} from '../../redux/service/PostWorkSpaceApi';
+import {RootState} from '../../redux/store/store';
 
 interface IProps {
   navigation: undefined;
@@ -23,21 +24,17 @@ function RegisterWorkSpaceScreen(props: IProps) {
   const [checkList, setCheckList] = useState<Data[]>([]);
   const check = checkList.length >= 1 && checkList.length <= 3;
   const dispatch = useDispatch();
-  const {loading, error, data} = useSelector((state: any) => state.workspace);
+  const {data} = useSelector((state: RootState) => state.workspace);
 
   const handleSubmit = async () => {
-    {
-      check
-        ? dispatch(PostWorkSpaceApi(checkList))
-        : Alert.alert('최대 3개까지 선택할 수 있습니다');
-    }
+    check
+      ? PostWorkSpaceApi(checkList)(dispatch)
+      : Alert.alert('최대 3개까지 선택할 수 있습니다');
   };
 
   useEffect(() => {
-    {
-      data === '200' && navigation.navigate('Main');
-    }
-  }, [data]);
+    data === '200' && navigation.navigate('Main');
+  }, [data, navigation]);
 
   return (
     <SafeAreaView>

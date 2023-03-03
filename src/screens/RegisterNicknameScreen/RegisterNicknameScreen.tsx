@@ -9,6 +9,7 @@ import AlertMessage from '../../components/login/AlertMessage/AlertMessage';
 import {ButtonView, TextInput} from './style';
 import {PostNickNameApi} from '../../redux/service/PostNicknameApi';
 import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../../redux/store/store';
 
 interface IProps {
   navigation: undefined;
@@ -21,7 +22,7 @@ interface FormData {
 function RegisterNicknameScreen(props: IProps) {
   const {navigation} = props;
   const dispatch = useDispatch();
-  const {loading, error, data} = useSelector((state: any) => state.nickname);
+  const {data} = useSelector((state: RootState) => state.nickname);
 
   const {
     control,
@@ -37,14 +38,12 @@ function RegisterNicknameScreen(props: IProps) {
   };
 
   const handleSaveNickname = async () => {
-    dispatch(PostNickNameApi(postData));
+    PostNickNameApi(postData)(dispatch);
   };
 
   useEffect(() => {
-    {
-      data && navigation.navigate('RegisterRegion');
-    }
-  }, [data]);
+    data && navigation.navigate('RegisterRegion');
+  }, [data, navigation]);
 
   return (
     <SafeAreaView>
