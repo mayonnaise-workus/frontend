@@ -1,4 +1,7 @@
 const images = {
+  LOGO_HOME: require('./img/HomeIcon.png'),
+  LOGO_MAGAZINE: require('./img/MagazineIcon.png'),
+  LOGO_MY: require('./img/MyIcon.png'),
   LOGO_BLACK: require('./img/logo_black.png'),
   WARNING_CIRCLE: require('./img/WarningCircle.png'),
   LEFT_ICON: require('./img/CaretLeft.png'),

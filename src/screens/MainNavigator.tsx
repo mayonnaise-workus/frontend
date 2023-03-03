@@ -5,29 +5,32 @@ import HomeScreen from './HomeScreen/HomeScreen';
 import MagazineScreen from './MagazineScreen/MagazineScreen';
 import MyPageScreen from './MyPageScreen/MyPageScreen';
 import {MainStackParamList} from './mainScreenPropsType';
+import images from '../../assets/images';
+import COLORS from '../../packages/colors';
 
 const Main = createBottomTabNavigator<MainStackParamList>();
 
 function MainNavigator() {
   return (
-    <Main.Navigator initialRouteName="Home">
+    <Main.Navigator
+      initialRouteName="Home"
+      screenOptions={{headerShown: false}}>
       <Main.Screen
         name="Home"
         component={HomeScreen}
         options={{
-          headerShown: false,
           tabBarIcon: ({focused}) => (
             <Image
               style={{
-                tintColor: focused ? '#FFBA07' : '#8B95A1',
+                tintColor: focused ? COLORS.ONE : COLORS.GRAY_5,
               }}
-              source={require('../../assets/img/HomeIcon.png')}
+              source={images.LOGO_HOME}
             />
           ),
           tabBarLabel: ({focused}) => (
             <Text
               style={{
-                color: focused ? 'black' : '#8B95A1',
+                color: focused ? 'black' : COLORS.GRAY_5,
                 fontWeight: focused ? 'bold' : 'normal',
               }}>
               홈
@@ -39,19 +42,18 @@ function MainNavigator() {
         name="Magazine"
         component={MagazineScreen}
         options={{
-          headerShown: false,
           tabBarIcon: ({focused}) => (
             <Image
               style={{
-                tintColor: focused ? '#FFBA07' : '#8B95A1',
+                tintColor: focused ? COLORS.ONE : COLORS.GRAY_5,
               }}
-              source={require('../../assets/img/MagazineIcon.png')}
+              source={images.LOGO_MAGAZINE}
             />
           ),
           tabBarLabel: ({focused}) => (
             <Text
               style={{
-                color: focused ? 'black' : '#8B95A1',
+                color: focused ? 'black' : COLORS.GRAY_5,
                 fontWeight: focused ? 'bold' : 'normal',
               }}>
               매거진
@@ -63,21 +65,20 @@ function MainNavigator() {
         name="My"
         component={MyPageScreen}
         options={{
-          headerShown: false,
           tabBarIcon: ({focused}) => (
             <Image
               style={{
-                tintColor: focused ? '#FFBA07' : '#8B95A1',
+                tintColor: focused ? COLORS.ONE : COLORS.GRAY_5,
                 width: 25,
                 height: 25,
               }}
-              source={require('../../assets/img/MyIcon.png')}
+              source={images.LOGO_MY}
             />
           ),
           tabBarLabel: ({focused}) => (
             <Text
               style={{
-                color: focused ? 'black' : '#8B95A1',
+                color: focused ? 'black' : COLORS.GRAY_5,
                 fontWeight: focused ? 'bold' : 'normal',
               }}>
               MY
