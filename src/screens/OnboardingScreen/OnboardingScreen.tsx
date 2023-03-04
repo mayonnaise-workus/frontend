@@ -7,6 +7,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {LoginApi} from '../../redux/service/LoginApi';
 import images from '../../../assets/images';
 import {RootState} from '../../redux/store/store';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import auth from '@react-native-firebase/auth';
 
 interface IProps {
   navigation: undefined;
@@ -30,6 +32,17 @@ function OnboardingScreen(props: IProps) {
     LoginApi(postData)(dispatch);
   };
 
+  const siginInWithGoogle = async () => {
+    try {
+      const {idToken} = await GoogleSignin.signIn();
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+      await auth().signInWithCredential(googleCredential);
+      navigation.navigate('ServiceTerm');
+    } catch (err) {
+      console.error('login err', err);
+    }
+  };
+
   useEffect(() => {
     data && navigation.navigate('ServiceTerm');
   }, [data, navigation]);
@@ -40,10 +53,7 @@ function OnboardingScreen(props: IProps) {
         <Image source={images.LOGO_BLACK} />
       </LogoBlock>
       <ButtonBlock>
-        <Button
-          onPress={() => navigation.navigate('ServiceTerm')}
-          text="구글로 계속하기"
-        />
+        <Button text="구글로 계속하기" onPress={siginInWithGoogle}  />
         <Button text="카카오로 계속하기" onPress={handleKakaoLogin} />
         <Button text="네이버로 계속하기" />
       </ButtonBlock>
