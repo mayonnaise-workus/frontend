@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView, View} from 'react-native';
 import COLORS from '../../../packages/colors';
-import Button from '../../components/login/LoginButton/Button';
 import HeaderBackButton from '../../components/login/HeaderBackbutton/HeaderBackButton';
 import RegisterButton from '../../components/login/RegisterButton/RegisterButton';
 import Title from '../../components/login/Title/Title';
@@ -10,6 +9,7 @@ import {ButtonView, FilterList} from './style';
 import {useDispatch, useSelector} from 'react-redux';
 import {PostPurposeApi} from '../../redux/service/PostPurposeApi';
 import {RootState} from '../../redux/store/store';
+import Button from '../../components/login/NextButton/NextButton';
 interface IProps {
   navigation: undefined;
 }

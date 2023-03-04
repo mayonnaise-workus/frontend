@@ -5,12 +5,12 @@ import HeaderBackButton from '../../components/login/HeaderBackbutton/HeaderBack
 import Title from '../../components/login/Title/Title';
 import {region} from '../../data';
 import RegisterButton from '../../components/login/RegisterButton/RegisterButton';
-import Button from '../../components/login/LoginButton/Button';
 import COLORS from '../../../packages/colors';
 import {ButtonView, FilterList} from './style';
 import {useDispatch, useSelector} from 'react-redux';
 import {PostRegionApi} from '../../redux/service/PostRegionApi';
 import {RootState} from '../../redux/store/store';
+import Button from '../../components/login/NextButton/NextButton';
 
 interface IProps {
   navigation: undefined;
