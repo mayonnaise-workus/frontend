@@ -15,7 +15,7 @@ interface IProps {
 
 function MemberCancellationScreen(props: IProps) {
   const {navigation} = props;
-  const [checkbox, setCheckbox] = useState([]);
+  const [checkbox, setCheckbox] = useState<string[]>([]);
   const isChecked = checkbox.length >= 1;
 
   function handleSubmit() {

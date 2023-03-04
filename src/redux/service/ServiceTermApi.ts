@@ -4,7 +4,11 @@ import {setLoading, setError, setData} from '../slice/ServiceTermSlice';
 import {MEMBER} from '../../config/config';
 import {authHeader} from './auth-header';
 
-export const ServiceTermApi = (data: any) => {
+interface IServiceTermProps {
+  marketing_agreement: boolean;
+  personal_information_agreement: boolean;
+}
+export const ServiceTermApi = (data: IServiceTermProps) => {
   return async (dispatch: Dispatch) => {
     dispatch(setLoading(true));
     const header = await authHeader();
@@ -16,7 +20,6 @@ export const ServiceTermApi = (data: any) => {
       dispatch(setData(jsonValue));
       dispatch(setError(null));
     } catch (error) {
-      console.log(error);
       dispatch(setError('An error occurred'));
     }
     dispatch(setLoading(false));

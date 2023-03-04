@@ -24,3 +24,5 @@ export const store = configureStore({
     workspacelist: WorkSpaceListReducer,
   },
 });
+
+export type RootState = ReturnType<typeof store.getState>;

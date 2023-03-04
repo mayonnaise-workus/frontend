@@ -6,6 +6,7 @@ import {login} from '@react-native-seoul/kakao-login';
 import {useDispatch, useSelector} from 'react-redux';
 import {LoginApi} from '../../redux/service/LoginApi';
 import images from '../../../assets/images';
+import {RootState} from '../../redux/store/store';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
 
@@ -16,7 +17,7 @@ interface IProps {
 function OnboardingScreen(props: IProps) {
   const dispatch = useDispatch();
   const {navigation} = props;
-  const {loading, error, data} = useSelector((state: any) => state.login);
+  const {data} = useSelector((state: RootState) => state.login);
 
   const handleKakaoLogin = async () => {
     const result = await login();
@@ -24,10 +25,11 @@ function OnboardingScreen(props: IProps) {
     const postData = {
       access_token: result.accessToken,
       refresh_token: result.refreshToken,
-      expires_int:
-        new Date(Date.parse(result.refreshTokenExpiresAt)).getTime() / 1000,
+      expires_in:
+        new Date(Date.parse(`${result.refreshTokenExpiresAt}`)).getTime() /
+        1000,
     };
-    dispatch(LoginApi(postData));
+    LoginApi(postData)(dispatch);
   };
 
   const siginInWithGoogle = async () => {
@@ -43,7 +45,7 @@ function OnboardingScreen(props: IProps) {
 
   useEffect(() => {
     data && navigation.navigate('ServiceTerm');
-  }, [data]);
+  }, [data, navigation]);
 
   return (
     <SafeAreaView>
