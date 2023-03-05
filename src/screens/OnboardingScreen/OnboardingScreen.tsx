@@ -65,7 +65,9 @@ function OnboardingScreen(props: IProps) {
       <ButtonBlock>
         <Button text="구글로 계속하기" onPress={siginInWithGoogle} />
         <Button text="카카오로 계속하기" onPress={handleKakaoLogin} />
-        <Button text="애플로 계속하기" onPress={onAppleButtonPress} />
+        {appleAuth.isSupported && (
+          <Button text="애플로 계속하기" onPress={onAppleButtonPress} />
+        )}
       </ButtonBlock>
     </SafeAreaView>
   );
