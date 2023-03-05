@@ -26,7 +26,7 @@ const App: React.FunctionComponent = () => {
   const googleSigninConfigure = () => {
     GoogleSignin.configure({
       webClientId:
-        '338856065017-ho97q8chva20ol5fcmk6228at381u8ib.apps.googleusercontent.com',
+        '362919940500-h7muvhhlsjeadrr75gl4vi8l5d6730bu.apps.googleusercontent.com',
     });
   };
 
