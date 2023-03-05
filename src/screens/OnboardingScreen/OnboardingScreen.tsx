@@ -9,6 +9,7 @@ import images from '../../../assets/images';
 import {RootState} from '../../redux/store/store';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
+import appleAuth from '@invertase/react-native-apple-authentication';
 
 interface IProps {
   navigation: undefined;
@@ -43,6 +44,15 @@ function OnboardingScreen(props: IProps) {
     }
   };
 
+  async function onAppleButtonPress() {
+    const appleAuthRequestResponse = await appleAuth.performRequest({
+      requestedOperation: appleAuth.Operation.LOGIN,
+      requestedScopes: [appleAuth.Scope.FULL_NAME, appleAuth.Scope.EMAIL],
+    });
+
+    const {identityToken, authorizationCode, user} = appleAuthRequestResponse;
+  }
+
   useEffect(() => {
     data && navigation.navigate('ServiceTerm');
   }, [data, navigation]);
@@ -53,9 +63,11 @@ function OnboardingScreen(props: IProps) {
         <Image source={images.LOGO_BLACK} />
       </LogoBlock>
       <ButtonBlock>
-        <Button text="구글로 계속하기" onPress={siginInWithGoogle}  />
+        <Button text="구글로 계속하기" onPress={siginInWithGoogle} />
         <Button text="카카오로 계속하기" onPress={handleKakaoLogin} />
-        <Button text="네이버로 계속하기" />
+        {appleAuth.isSupported && (
+          <Button text="애플로 계속하기" onPress={onAppleButtonPress} />
+        )}
       </ButtonBlock>
     </SafeAreaView>
   );
