@@ -1,19 +1,25 @@
-import styled from 'styled-components';
+import styled from 'styled-components/native';
+import COLORS from '../../../../packages/colors';
 
-export const PressableWrapper = styled.Pressable`
-  background-color: ${({press}) => (press ? '#FFF9E8' : '#F4F5F7')};
+interface IPressableWrapperProps {
+  press: boolean;
+  width: number;
+  height: number;
+  margin?: number;
+}
+
+export const PressableWrapper = styled.Pressable<IPressableWrapperProps>`
+  background-color: ${({press}) => (press ? COLORS.FIVE : COLORS.GRAY_8)};
   width: ${({width}) => `${width}px`};
   height: ${({height}) => `${height}px`};
-  margin-bottom: ${({top}) => `${top}px`};
-  margin-right: ${({top}) => `${top}px`};
-  border-color: ${({press}) => (press ? '#FFCF54' : null)};
+  border-width: 1px;
+  border-color: ${({press}) => (press ? COLORS.TWO : COLORS.GRAY_8)};
   border-radius: 10px;
   justify-content: center;
 `;
 
 export const Icon = styled.Text`
   text-align: center;
-  bottom: 7px;
 `;
 export const Text = styled.Text`
   font-size: 16px;

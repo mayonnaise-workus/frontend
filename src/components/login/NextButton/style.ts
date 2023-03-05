@@ -1,19 +1,27 @@
+import {Dimensions} from 'react-native';
 import styled from 'styled-components/native';
 
+export const ButtonContainer = styled.View`
+  flex: 1;
+  align-items: center;
+`;
+
 export const PressableBlock = styled.Pressable`
-  width: 350px;
+  width: ${Dimensions.get('window').width - 40}px;
   height: 60px;
-  left: 20px;
-  margin-bottom: 12px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
   background-color: ${(props: {backgroundColor: string}) =>
     props.backgroundColor};
-  border-radius: 10px;
-  justify-content: center;
 `;
 
 export const TextBlock = styled.Text`
-  text-align: center;
-  font-weight: 600;
-  font-size: 17px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 50px;
+  padding-right: 50px;
+  font-size: 15px;
+  font-weight: bold;
   color: ${(props: {textColor: string}) => props.textColor};
 `;

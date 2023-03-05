@@ -1,13 +1,15 @@
-import styled from "styled-components";
+import styled from 'styled-components/native';
 
 export const AlertView = styled.View`
-  position: absolute;
+  margin-top: 10px;
   flex-direction: row;
-  height: 20px;
-  left: 20px;
-  top: 233px;
 `;
-export const Alert = styled.Text`
+
+interface IAlertProps {
+  color: string;
+}
+
+export const Alert = styled.Text<IAlertProps>`
   color: ${({color}) => color};
   font-weight: 400;
   font-size: 14px;

@@ -1,14 +1,5 @@
-import styled from "styled-components";
+import styled from 'styled-components/native';
 
-export const FilterList = styled.View`
-  position: absolute;
-  left: 20px;
-  top: 196px;
-`;
-
-export const ButtonView = styled.View`
-  position: absolute;
-  width: 350px;
-  height: 60px;
-  top: 750px;
+export const ScrollView = styled.ScrollView`
+  flex: 6;
 `;

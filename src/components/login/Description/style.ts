@@ -1,14 +1,14 @@
-import styled from "styled-components";
+import styled from 'styled-components/native';
 
 export const ViewBlock = styled.View`
-  position: absolute;
-  width: 350px;
-  height: 84px;
-  left: 20px;
-  top: 143px;
+  flex: 1.2;
 `;
 
-export const Text = styled.Text`
+interface ITextProps {
+  color: string;
+}
+
+export const Text = styled.Text<ITextProps>`
   font-weight: 500;
   font-size: 15px;
   line-height: 18px;

@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "338856065017",
-    "project_id": "mayonnaise-workus",
-    "storage_bucket": "mayonnaise-workus.appspot.com"
+    "project_number": "362919940500",
+    "project_id": "workus-d26ad",
+    "storage_bucket": "workus-d26ad.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:338856065017:android:9f28cb70007684bb4faf28",
+        "mobilesdk_app_id": "1:362919940500:android:b1d1472d3c4d2e1452ff81",
         "android_client_info": {
           "package_name": "com.frontend"
         }
       },
       "oauth_client": [
         {
-          "client_id": "338856065017-7bu4d7a164kl6f8lp2b58hfcsqmqhfvk.apps.googleusercontent.com",
+          "client_id": "362919940500-m7boft9upc183ifvm9upe8e16qb9eg0i.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.frontend",
-            "certificate_hash": "33125fe33ec0551e21fce1c6417b28ea41e3708f"
+            "certificate_hash": "4a09aca8bae7dc29f1d01303ddd65f43e34448a3"
           }
         },
         {
-          "client_id": "338856065017-5kbrocsprm3fd5cjnt7oglr8oevl1pr7.apps.googleusercontent.com",
+          "client_id": "362919940500-h7muvhhlsjeadrr75gl4vi8l5d6730bu.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC2SDlSSMBtZF1tdRcH1zVs36b5HQUVyN0"
+          "current_key": "AIzaSyBKo6jbzjV0ynNZNColQPXOhPMtGXfFIzc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "338856065017-5kbrocsprm3fd5cjnt7oglr8oevl1pr7.apps.googleusercontent.com",
+              "client_id": "362919940500-h7muvhhlsjeadrr75gl4vi8l5d6730bu.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
