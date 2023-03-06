@@ -1,9 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
-
-const WholeContainer = styled.SafeAreaView`
-  flex: 1;
-`;
+import {StatusBar, View} from 'react-native';
+import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const WrapperContainer = styled.View`
   flex: 1;
@@ -15,10 +13,14 @@ const WrapperContainer = styled.View`
 `;
 
 function Wrapper({children}: React.PropsWithChildren) {
+  const {top} = useSafeAreaInsets();
+
   return (
-    <WholeContainer>
+    <SafeAreaView style={{flex: 1}} edges={['bottom']}>
+      <View style={{backgroundColor: 'white', height: top}} />
+      <StatusBar backgroundColor="white" barStyle="dark-content" />
       <WrapperContainer>{children}</WrapperContainer>
-    </WholeContainer>
+    </SafeAreaView>
   );
 }
 

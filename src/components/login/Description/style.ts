@@ -2,6 +2,7 @@ import styled from 'styled-components/native';
 
 export const ViewBlock = styled.View`
   flex: 1.2;
+  padding-bottom: 15px;
 `;
 
 interface ITextProps {

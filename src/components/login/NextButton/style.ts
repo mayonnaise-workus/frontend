@@ -4,6 +4,7 @@ import styled from 'styled-components/native';
 export const ButtonContainer = styled.View`
   flex: 1;
   align-items: center;
+  justify-content: flex-end;
 `;
 
 export const PressableBlock = styled.Pressable`

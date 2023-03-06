@@ -5,7 +5,7 @@ import Description from '../../components/login/Description/Description';
 import COLORS from '../../../packages/colors';
 import {workspace} from '../../data';
 import RegisterButton from '../../components/login/RegisterButton/RegisterButton';
-import {ScrollView} from './style';
+import {EmptyView, ScrollView} from './style';
 import {useDispatch, useSelector} from 'react-redux';
 import {PostWorkSpaceApi} from '../../redux/service/PostWorkSpaceApi';
 import {RootState} from '../../redux/store/store';
@@ -46,7 +46,7 @@ function RegisterWorkSpaceScreen({navigation}: IProps) {
       />
       <Description description="최대 3개까지 선택할 수 있습니다." />
       <ScrollView
-        contentContainerStyle={{alignItems: 'center', gap: 10}}
+        contentContainerStyle={{alignItems: 'center', gap: 12}}
         showsVerticalScrollIndicator>
         {workspace.map(item => {
           return (
@@ -61,6 +61,7 @@ function RegisterWorkSpaceScreen({navigation}: IProps) {
             />
           );
         })}
+        <EmptyView />
         <Button
           text="시작하기"
           backgroundColor={check ? COLORS.TWO : COLORS.GRAY_7}

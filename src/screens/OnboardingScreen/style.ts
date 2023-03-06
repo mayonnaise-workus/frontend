@@ -8,8 +8,8 @@ export const LogoContainer = styled.View`
 `;
 
 export const Logo = styled.Image`
-  width: ${Dimensions.get('window').width * 0.66}px;
-  height: ${Dimensions.get('window').height * 0.14}px;
+  width: 264px;
+  height: 92.15px;
 `;
 
 export const LoginContainer = styled.View`

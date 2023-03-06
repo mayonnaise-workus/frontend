@@ -1,11 +1,7 @@
 import styled from 'styled-components/native';
 
-export const KeyboardAvoidingView = styled.View`
-  flex: 1;
-`;
-
 export const TextInputContainer = styled.View`
-  flex: 4.8;
+  flex: 5;
 `;
 
 export const TextInput = styled.TextInput`
