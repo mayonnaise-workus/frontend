@@ -7,7 +7,6 @@ import {LoginApi} from '../../redux/service/LoginApi';
 import images from '../../../assets/images';
 import {RootState} from '../../redux/store/store';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import auth from '@react-native-firebase/auth';
 import {
   IntroStackNavigationProps,
   IntroStackParamList,
@@ -40,8 +39,6 @@ function OnboardingScreen({navigation}: IProps) {
   const handleGoogleLogin = async () => {
     try {
       const {idToken} = await GoogleSignin.signIn();
-      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-      await auth().signInWithCredential(googleCredential);
       navigation.navigate('ServiceTerm');
     } catch (err) {
       console.error('login err', err);
