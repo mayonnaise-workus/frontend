@@ -14,6 +14,13 @@ const images = {
   X: require('./img/X.png'),
   DOTSTHREEOUTLINEVERTICAL: require('./img/DotsThreeOutlineVertical.png'),
   BOOKMARK_GRAY: require('./img/BookmarkGray.png'),
+  HEADER_LOGO: require('./img/HeaderLogo.png'),
+  BELL: require('./img/Bell.png'),
+  CONTACT_FREE_MEETING: require('./img/contact_free_meeting.png'),
+  CONTACT_MEETING: require('./img/contact_meeting.png'),
+  LAPTOP_WORK: require('./img/laptop_work.png'),
+  PERSONAL_STUDY: require('./img/personal_study.png'),
+  SAMPLE_PLACE_IMAGE: require('./img/sample_place_image.png'),
 };
 
 export default images;

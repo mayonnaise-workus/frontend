@@ -1,9 +1,44 @@
 export const region = [
-  {id: 1, title: '강남역', enTitle: 'gannam'},
-  {id: 2, title: '선릉역', enTitle: 'seolleung'},
-  {id: 3, title: '삼성역', enTitle: 'samsung'},
-  {id: 4, title: '역삼역', enTitle: 'yeoksam'},
-  {id: 5, title: '논현역', enTitle: 'nonhyeon'},
+  {
+    id: 1,
+    value: 'Gangnam',
+    title: '강남역',
+    enTitle: 'gannam',
+    latitude: 37.498617,
+    longitude: 127.0279213,
+  },
+  {
+    id: 2,
+    value: 'Seolleung',
+    title: '선릉역',
+    enTitle: 'seolleung',
+    latitude: 37.5044577,
+    longitude: 127.0490046,
+  },
+  {
+    id: 3,
+    value: 'Samsung',
+    title: '삼성역',
+    enTitle: 'samsung',
+    latitude: 37.5114831,
+    longitude: 127.0603371,
+  },
+  {
+    id: 4,
+    value: 'Yeoksam',
+    title: '역삼역',
+    enTitle: 'yeoksam',
+    latitude: 37.5012427,
+    longitude: 127.027775,
+  },
+  {
+    id: 5,
+    value: 'Nonhyeon',
+    title: '논현역',
+    enTitle: 'nonhyeon',
+    latitude: 37.5111305,
+    longitude: 127.0215847,
+  },
 ];
 
 export const purpose = [
@@ -21,6 +56,15 @@ export const workspace = [
   {id: 5, title: '도서관'},
   {id: 6, title: '북카페'},
   {id: 7, title: '라운지'},
+];
+
+export const capacity = [
+  {id: 0, title: '전체'},
+  {id: 1, title: '1인'},
+  {id: 2, title: '2 ~ 4인'},
+  {id: 3, title: '5 ~ 9인'},
+  {id: 4, title: '10인 이상'},
+  {id: 5, title: '기타'},
 ];
 
 export const obligations = [
