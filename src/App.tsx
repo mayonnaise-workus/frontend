@@ -9,6 +9,7 @@ import MainNavigator from './screens/MainNavigator';
 import {Provider} from 'react-redux';
 import {store} from './redux/store/store';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 export type RootStackParamList = {
   default: undefined;
@@ -36,20 +37,22 @@ const App: React.FunctionComponent = () => {
 
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="IntroNavigator"
-            component={IntroNavigator}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen
-            name="MainNavigator"
-            component={MainNavigator}
-            options={{headerShown: false}}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="IntroNavigator"
+              component={IntroNavigator}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="MainNavigator"
+              component={MainNavigator}
+              options={{headerShown: false}}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaProvider>
     </Provider>
   );
 };

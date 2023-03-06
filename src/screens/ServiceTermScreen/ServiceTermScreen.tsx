@@ -1,38 +1,37 @@
 import React, {useEffect, useState} from 'react';
-import {Alert, SafeAreaView} from 'react-native';
-import HeaderBackButton from '../../components/login/HeaderBackbutton/HeaderBackButton';
-import Title from '../../components/login/Title/Title';
-import COLORS from '../../../packages/colors';
-import ConditionsList from '../../components/login/ConditionsList/ConditionsList';
-import {ButtonView} from './style';
+import {RouteProp} from '@react-navigation/native';
+import {Alert} from 'react-native';
+import {ServiceTermContainer} from './style';
 import {useDispatch, useSelector} from 'react-redux';
 import {ServiceTermApi} from '../../redux/service/ServiceTermApi';
 import {RootState} from '../../redux/store/store';
 import Button from '../../components/login/NextButton/NextButton';
+import {
+  IntroStackNavigationProps,
+  IntroStackParamList,
+} from '../introScreenPropsType';
+import Wrapper from '../../components/common/Wrapper';
+import OnboardingHeader from '../../components/common/OnboardingHeader';
+import ServiceTerm from './ServiceTerm';
+import COLORS from '../../../packages/colors';
 
 interface IProps {
-  navigation: undefined;
+  navigation: IntroStackNavigationProps<'ServiceTerm'>;
+  route: RouteProp<IntroStackParamList, 'ServiceTerm'>;
 }
 
-function ServiceTermScreen(props: IProps) {
+function ServiceTermScreen({navigation}: IProps) {
   const dispatch = useDispatch();
-  const {navigation} = props;
-  const check = ['check1', 'check2', 'check3', 'check4', 'check5'];
-  const [requiredCheck, setRequiredCheck] = useState<string[]>([]);
-  const [option1, setOption1] = useState<boolean>(false);
-  const [option2, setOption2] = useState<boolean>(false);
-  const result = requiredCheck.filter(x => check.includes(x));
-  const isAllChecked = result.length === 5;
+  const [agreementCheck, setAgreementCheck] = useState<string[]>([]);
+  const [obligationCheck, setObligationCheck] = useState<string[]>([]);
+  const [optionCheck, setOptionCheck] = useState<string[]>([]);
+  const isAllChecked = obligationCheck.length === 5;
+
   const {data} = useSelector((state: RootState) => state.serviceterm);
 
-  useEffect(() => {
-    requiredCheck.includes('personal') ? setOption1(true) : setOption1(false);
-    requiredCheck.includes('marketing') ? setOption2(true) : setOption2(false);
-  }, [requiredCheck]);
-
   const postData = {
-    marketing_agreement: option1,
-    personal_information_agreement: option2,
+    marketing_agreement: optionCheck.includes('option1'),
+    personal_information_agreement: optionCheck.includes('option2'),
   };
 
   const handleSubmit = async () => {
@@ -42,26 +41,30 @@ function ServiceTermScreen(props: IProps) {
   };
 
   useEffect(() => {
-    data && navigation.navigate('RegisterNickName');
+    data && navigation.navigate('RegisterNickname');
   }, [data, navigation]);
 
   return (
-    <SafeAreaView>
-      <HeaderBackButton onPress={() => navigation.pop()} />
-      <Title title="서비스 이용약관 동의" />
-      <ConditionsList
-        requiredCheck={requiredCheck}
-        setRequiredCheck={setRequiredCheck}
-      />
-      <ButtonView>
-        <Button
-          text="동의하고 가입하기"
-          backgroundColor={isAllChecked ? COLORS.TWO : COLORS.GRAY_7}
-          textColor={isAllChecked ? COLORS.GRAY_1 : COLORS.GRAY_8}
-          onPress={handleSubmit}
+    <Wrapper>
+      <OnboardingHeader text="서비스 이용 약관" goback={navigation.goBack} />
+      <ServiceTermContainer>
+        <ServiceTerm
+          agreementCheck={agreementCheck}
+          setAgreementCheck={setAgreementCheck}
+          obligationCheck={obligationCheck}
+          setObligationCheck={setObligationCheck}
+          optionCheck={optionCheck}
+          setOptionCheck={setOptionCheck}
+          navigate={navigation.navigate}
         />
-      </ButtonView>
-    </SafeAreaView>
+      </ServiceTermContainer>
+      <Button
+        text="동의하고 가입하기"
+        backgroundColor={isAllChecked ? COLORS.TWO : COLORS.GRAY_7}
+        textColor={isAllChecked ? COLORS.GRAY_1 : COLORS.GRAY_8}
+        onPress={handleSubmit}
+      />
+    </Wrapper>
   );
 }
 

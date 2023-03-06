@@ -1,17 +1,13 @@
-import styled from "styled-components";
+import styled from 'styled-components/native';
+
+export const TextInputContainer = styled.View`
+  flex: 5;
+`;
 
 export const TextInput = styled.TextInput`
-  position: absolute;
-  width: 350px;
-  height: 52px;
-  left: 20px;
-  top: 167px;
+  border-width: 1px;
+  border-color: black;
+  height: 50px;
+  padding: 10px;
   border-radius: 10px;
-  padding-left: 18px;
-`;
-export const ButtonView = styled.View`
-  position: absolute;
-  width: 350px;
-  height: 60px;
-  top: 750px;
 `;

@@ -1,41 +1,41 @@
-import React, {Dispatch, SetStateAction, useEffect, useState} from 'react';
-import COLORS from '../../../../packages/colors';
+import React, {useState} from 'react';
 import {Icon, PressableWrapper, Text} from './style';
 
-interface IProps {
+interface IRegisterButtonProps {
   title: string;
   id: number;
   width: number;
   height: number;
-  top: number;
-  icon: string;
-  checkList: string[];
-  setCheckList: Dispatch<SetStateAction<string[]>>;
+  icon?: string;
+  margin?: boolean;
+  checkList: number[];
+  setCheckList: React.Dispatch<React.SetStateAction<number[]>>;
 }
 
-function RegisterButton(props: IProps) {
-  const {title, id, width, height, top, icon, checkList, setCheckList} = props;
+function RegisterButton(props: IRegisterButtonProps) {
+  const {title, id, width, height, icon, margin, checkList, setCheckList} =
+    props;
   const [press, setPress] = useState<boolean>(false);
 
   function handlePress() {
-    setPress(!press);
+    if (!press) {
+      setPress(() => true);
+      setCheckList([...checkList, id]);
+    } else {
+      setPress(() => false);
+      setCheckList(checkList.filter(item => item !== id));
+    }
   }
-
-  useEffect(() => {
-    press
-      ? setCheckList([...checkList, id])
-      : setCheckList(checkList.filter(item => item !== id));
-  }, [press]);
 
   return (
     <PressableWrapper
-      onPress={handlePress}
+      onPress={() => {
+        handlePress();
+      }}
       press={press}
-      backgroundColor={COLORS.GRAY_8}
-      pressColor={COLORS.TWO}
       width={width}
       height={height}
-      top={top}>
+      margin={margin ? 10 : 0}>
       {icon && <Icon>{icon}</Icon>}
       <Text>{title}</Text>
     </PressableWrapper>

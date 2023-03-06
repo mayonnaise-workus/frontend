@@ -1,26 +1,30 @@
 import React, {useEffect} from 'react';
-import {SafeAreaView} from 'react-native';
-import HeaderBackButton from '../../components/login/HeaderBackbutton/HeaderBackButton';
-import Title from '../../components/login/Title/Title';
+import {RouteProp} from '@react-navigation/native';
 import {Controller, useForm} from 'react-hook-form';
 import COLORS from '../../../packages/colors';
 import AlertMessage from '../../components/login/AlertMessage/AlertMessage';
-import {ButtonView, TextInput} from './style';
+import {TextInput, TextInputContainer} from './style';
 import {PostNickNameApi} from '../../redux/service/PostNicknameApi';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../redux/store/store';
 import Button from '../../components/login/NextButton/NextButton';
+import {
+  IntroStackNavigationProps,
+  IntroStackParamList,
+} from '../introScreenPropsType';
+import Wrapper from '../../components/common/Wrapper';
+import OnboardingHeader from '../../components/common/OnboardingHeader';
 
 interface IProps {
-  navigation: undefined;
+  navigation: IntroStackNavigationProps<'RegisterNickname'>;
+  route: RouteProp<IntroStackParamList, 'RegisterNickname'>;
 }
 
 interface FormData {
   nickname: string;
 }
 
-function RegisterNicknameScreen(props: IProps) {
-  const {navigation} = props;
+function RegisterNicknameScreen({navigation}: IProps) {
   const dispatch = useDispatch();
   const {data} = useSelector((state: RootState) => state.nickname);
 
@@ -46,45 +50,43 @@ function RegisterNicknameScreen(props: IProps) {
   }, [data, navigation]);
 
   return (
-    <SafeAreaView>
-      <HeaderBackButton onPress={() => navigation.pop()} />
-      <Title title="닉네임 설정" />
-      <Controller
-        control={control}
-        rules={{
-          required: true,
-          maxLength: 10,
-        }}
-        render={({field: {onChange, onBlur, value}}) => (
-          <TextInput
-            placeholder="10자 이내 닉네임 설정"
-            onBlur={onBlur}
-            value={value}
-            onChangeText={onChange}
-            style={{
-              backgroundColor: COLORS.GRAY_8,
-            }}
-            placeholderTextColor={COLORS.GRAY_5}
-          />
-        )}
-        name="nickname"
-      />
-      {errors.nickname?.type === 'required' && (
-        <AlertMessage message="닉네임을 입력해주세요" />
-      )}
-
-      {errors.nickname?.type === 'maxLength' && (
-        <AlertMessage message="10자 이내로 입력해주세요" />
-      )}
-      <ButtonView>
-        <Button
-          text="다음"
-          backgroundColor={nickname ? COLORS.TWO : COLORS.GRAY_7}
-          textColor={nickname ? COLORS.GRAY_2 : COLORS.GRAY_8}
-          onPress={handleSubmit(handleSaveNickname)}
+    <Wrapper>
+      <OnboardingHeader text="닉네임 설정" goback={navigation.goBack} />
+      <TextInputContainer>
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+            maxLength: 10,
+          }}
+          render={({field: {onChange, onBlur, value}}) => (
+            <TextInput
+              placeholder="10자 이내 닉네임 설정"
+              onBlur={onBlur}
+              value={value}
+              onChangeText={onChange}
+              style={{
+                backgroundColor: COLORS.GRAY_8,
+              }}
+              placeholderTextColor={COLORS.GRAY_5}
+            />
+          )}
+          name="nickname"
         />
-      </ButtonView>
-    </SafeAreaView>
+        {errors.nickname?.type === 'required' && (
+          <AlertMessage message="닉네임을 입력해주세요" />
+        )}
+        {errors.nickname?.type === 'maxLength' && (
+          <AlertMessage message="10자 이내로 입력해주세요" />
+        )}
+      </TextInputContainer>
+      <Button
+        text="다음"
+        backgroundColor={nickname ? COLORS.TWO : COLORS.GRAY_7}
+        textColor={nickname ? COLORS.GRAY_2 : COLORS.GRAY_8}
+        onPress={handleSubmit(handleSaveNickname)}
+      />
+    </Wrapper>
   );
 }
 

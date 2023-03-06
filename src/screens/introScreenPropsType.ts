@@ -8,6 +8,11 @@ import {RootStackNavigationProps} from '../App';
 export type IntroStackParamList = {
   OnBoarding: undefined;
   ServiceTerm: undefined;
+  ServiceTermDetail: {
+    property: string;
+    number: number;
+    title: string;
+  };
   RegisterNickname: undefined;
   RegisterRegion: undefined;
   RegisterPurpose: undefined;
@@ -32,6 +37,11 @@ export type OnBoardingProps = NativeStackScreenProps<
 export type ServiceTermProps = NativeStackScreenProps<
   IntroStackParamList,
   'ServiceTerm'
+>;
+
+export type ServiceTermDetailProps = NativeStackScreenProps<
+  IntroStackParamList,
+  'ServiceTermDetail'
 >;
 
 export type RegisterNicknameProps = NativeStackScreenProps<

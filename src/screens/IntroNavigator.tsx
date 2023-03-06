@@ -6,6 +6,7 @@ import RegisterNicknameScreen from './RegisterNicknameScreen/RegisterNicknameScr
 import RegisterRegionScreen from './RegisterRegionScreen/RegisterRegionScreen';
 import RegisterPurposeScreen from './RegisterPurposeScreen/RegisterPurposeScreen';
 import RegisterWorkSpaceScreen from './RegisterWorkSpaceScreen/RegisterWorkSpaceScreen';
+import ServiceTermDetail from './ServiceTermScreen/ServiceTermDetail';
 import {IntroStackParamList} from './introScreenPropsType';
 
 const IntroStack = createNativeStackNavigator<IntroStackParamList>();
@@ -15,6 +16,10 @@ const IntroNavigator = () => {
     <IntroStack.Navigator screenOptions={{headerShown: false}}>
       <IntroStack.Screen name="OnBoarding" component={OnboardingScreen} />
       <IntroStack.Screen name="ServiceTerm" component={ServiceTermScreen} />
+      <IntroStack.Screen
+        name="ServiceTermDetail"
+        component={ServiceTermDetail}
+      />
       <IntroStack.Screen
         name="RegisterNickname"
         component={RegisterNicknameScreen}

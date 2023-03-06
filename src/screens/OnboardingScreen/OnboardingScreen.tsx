@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
-import {SafeAreaView, Image} from 'react-native';
-import Button from '../../components/login/LoginButton/Button';
-import {ButtonBlock, LogoBlock} from './style';
+import {RouteProp} from '@react-navigation/native';
+import {LoginContainer, Logo, LogoContainer, Button, ButtonText} from './style';
 import {login} from '@react-native-seoul/kakao-login';
 import {useDispatch, useSelector} from 'react-redux';
 import {LoginApi} from '../../redux/service/LoginApi';
@@ -9,15 +8,20 @@ import images from '../../../assets/images';
 import {RootState} from '../../redux/store/store';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
+import {
+  IntroStackNavigationProps,
+  IntroStackParamList,
+} from '../introScreenPropsType';
+import Wrapper from '../../components/common/Wrapper';
 import appleAuth from '@invertase/react-native-apple-authentication';
 
 interface IProps {
-  navigation: undefined;
+  navigation: IntroStackNavigationProps<'OnBoarding'>;
+  route: RouteProp<IntroStackParamList, 'OnBoarding'>;
 }
 
-function OnboardingScreen(props: IProps) {
+function OnboardingScreen({navigation}: IProps) {
   const dispatch = useDispatch();
-  const {navigation} = props;
   const {data} = useSelector((state: RootState) => state.login);
 
   const handleKakaoLogin = async () => {
@@ -30,10 +34,10 @@ function OnboardingScreen(props: IProps) {
         new Date(Date.parse(`${result.refreshTokenExpiresAt}`)).getTime() /
         1000,
     };
-    LoginApi(postData)(dispatch);
+    await LoginApi(postData)(dispatch);
   };
 
-  const siginInWithGoogle = async () => {
+  const handleGoogleLogin = async () => {
     try {
       const {idToken} = await GoogleSignin.signIn();
       const googleCredential = auth.GoogleAuthProvider.credential(idToken);
@@ -58,18 +62,25 @@ function OnboardingScreen(props: IProps) {
   }, [data, navigation]);
 
   return (
-    <SafeAreaView>
-      <LogoBlock>
-        <Image source={images.LOGO_BLACK} />
-      </LogoBlock>
-      <ButtonBlock>
-        <Button text="구글로 계속하기" onPress={siginInWithGoogle} />
-        <Button text="카카오로 계속하기" onPress={handleKakaoLogin} />
-        {appleAuth.isSupported && (
-          <Button text="애플로 계속하기" onPress={onAppleButtonPress} />
-        )}
-      </ButtonBlock>
-    </SafeAreaView>
+    <Wrapper>
+      <LogoContainer>
+        <Logo source={images.LOGO_BLACK} />
+      </LogoContainer>
+      <LoginContainer>
+        <Button
+          onPress={() => {
+            handleKakaoLogin();
+          }}>
+          <ButtonText>카카오로 로그인하기</ButtonText>
+        </Button>
+        <Button
+          onPress={() => {
+            handleGoogleLogin();
+          }}>
+          <ButtonText>구글로 로그인하기</ButtonText>
+        </Button>
+      </LoginContainer>
+    </Wrapper>
   );
 }
 
