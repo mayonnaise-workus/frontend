@@ -13,6 +13,7 @@ import {
   IntroStackParamList,
 } from '../introScreenPropsType';
 import Wrapper from '../../components/common/Wrapper';
+import appleAuth from '@invertase/react-native-apple-authentication';
 
 interface IProps {
   navigation: IntroStackNavigationProps<'OnBoarding'>;
@@ -46,6 +47,15 @@ function OnboardingScreen({navigation}: IProps) {
       console.error('login err', err);
     }
   };
+
+  async function onAppleButtonPress() {
+    const appleAuthRequestResponse = await appleAuth.performRequest({
+      requestedOperation: appleAuth.Operation.LOGIN,
+      requestedScopes: [appleAuth.Scope.FULL_NAME, appleAuth.Scope.EMAIL],
+    });
+
+    const {identityToken, authorizationCode, user} = appleAuthRequestResponse;
+  }
 
   useEffect(() => {
     data && navigation.navigate('ServiceTerm');
