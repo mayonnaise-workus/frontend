@@ -46,7 +46,7 @@ function RegisterPurposeScreen({navigation}: IProps) {
         contentContainerStyle={{
           alignItems: 'center',
         }}
-        data={purpose}
+        data={purpose.slice(1)}
         renderItem={({item}) => (
           <RegisterButton
             key={item.id}

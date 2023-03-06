@@ -42,6 +42,7 @@ export const region = [
 ];
 
 export const purpose = [
+  {id: 0, title: '전체'},
   {id: 1, title: '개인 공부', icon: '📚'},
   {id: 2, title: '노트북', icon: '👩‍💻'},
   {id: 3, title: '비대면 회의', icon: '🖥️'},
@@ -49,6 +50,7 @@ export const purpose = [
 ];
 
 export const workspace = [
+  {id: 0, title: '전체'},
   {id: 1, title: '카페'},
   {id: 2, title: '스터디룸'},
   {id: 3, title: '스터디카페'},

@@ -48,7 +48,7 @@ function RegisterWorkSpaceScreen({navigation}: IProps) {
       <ScrollView
         contentContainerStyle={{alignItems: 'center', gap: 12}}
         showsVerticalScrollIndicator>
-        {workspace.map(item => {
+        {workspace.slice(1).map(item => {
           return (
             <RegisterButton
               key={item.id}

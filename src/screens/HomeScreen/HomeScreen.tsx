@@ -28,39 +28,38 @@ import HomeScrollDetail from './HomeScrollDetail';
 import filterFunc from './filter/filterFunc';
 import onClick from './filter/onClick';
 import images from '../../../assets/images';
+import {RegionListApi} from '../../redux/service/RegionListApi';
+import {useDispatch, useSelector} from 'react-redux';
+import {WorkSpaceListByRegionApi} from '../../redux/service/WorkspaceListByRegionApi';
+import {RootState} from '../../redux/store/store';
 
-type DataType = {
-  address: string;
+type RegionType = {
   id: number;
-  latitude: string;
-  longitude: string;
-  name: string;
-  profile_img: string;
-  workspace_capacity: number;
-  workspace_obj: number;
-  workspace_type: number;
+  value: string;
+  title: string;
+  enTitle: string;
+  latitude: number;
+  longitude: number;
 };
 
 const Home = () => {
-  const [sampleData, setSampleData] = useState<DataType[]>([]);
+  const dispatch = useDispatch();
   useEffect(() => {
-    const url =
-      'http://tune-env.eba-s7pcctn4.ap-northeast-2.elasticbeanstalk.com/workspace/list?region=0';
-    const header =
-      'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6OTk5LCJpYXQiOjE2Nzc1NDU5MDIsImV4cCI6MjA3NzU4OTEwMn0.tZVG_d5T0Pg8lV4r1mxdoEe5qa1UchWHqM9UEnzEY0s';
-    const getData = async () => {
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${header}`,
-        },
-      });
-      return response.json();
-    };
-    getData().then(res => setSampleData(res));
-  }, []);
+    RegionListApi()(dispatch);
+  }, [dispatch]);
+  const {data: regionList} = useSelector(
+    (state: RootState) => state.regionlist,
+  );
+  const selectedRegion: RegionType[] = [];
+  regionList.forEach(regionNum => selectedRegion.push(region[regionNum - 1]));
 
-  const [current, setCurrent] = useState(0);
+  useEffect(() => {
+    regionList.length && WorkSpaceListByRegionApi(regionList)(dispatch);
+  }, [dispatch, regionList]);
+  const {data: workspaceList} = useSelector(
+    (state: RootState) => state.workspacebyregionlist,
+  );
+
   const handleCurrentChange = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
     const contentWidth = Dimensions.get('window').width - 72;
     const nextCurrent: number = Math.round(
@@ -69,15 +68,17 @@ const Home = () => {
     if (nextCurrent < 0) {
       return;
     }
-    setCurrent(nextCurrent);
     setCurrentRegion(() => {
-      return [region[nextCurrent].latitude, region[nextCurrent].longitude];
+      return [
+        selectedRegion[nextCurrent].latitude,
+        selectedRegion[nextCurrent].longitude,
+      ];
     });
   };
 
   const [currentRegion, setCurrentRegion] = useState([
-    region[0].latitude,
-    region[0].longitude,
+    selectedRegion[0].latitude,
+    selectedRegion[0].longitude,
   ]);
 
   const [filterObject, setFilterObject] = useState({
@@ -124,12 +125,12 @@ const Home = () => {
                 paddingRight: 28,
                 alignItems: 'center',
               }}>
-              {region.map((current, index) => (
+              {selectedRegion.map((current, index) => (
                 <SliderButton
                   key={index}
                   style={{
                     marginLeft: index === 0 ? 8 : 4,
-                    marginRight: index === region.length - 1 ? 8 : 4,
+                    marginRight: index === selectedRegion.length - 1 ? 8 : 4,
                   }}>
                   <SliderButtonText>{current.title}</SliderButtonText>
                 </SliderButton>
@@ -148,8 +149,8 @@ const Home = () => {
                 latitudeDelta: 0.00922,
                 longitudeDelta: 0.00421,
               }}>
-              {sampleData &&
-                sampleData.map((item, index) => (
+              {workspaceList &&
+                workspaceList.map((item, index) => (
                   <Marker
                     key={index}
                     coordinate={{
@@ -240,6 +241,7 @@ const Home = () => {
                           ? 'white'
                           : 'black',
                       }}>
+                      {item.icon ? `${item.icon}  ` : ''}
                       {item.title}
                     </CategoryText>
                   </Category>
