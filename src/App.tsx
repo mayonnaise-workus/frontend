@@ -10,6 +10,7 @@ import {Provider} from 'react-redux';
 import {store} from './redux/store/store';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {GOOGLE_WEB_CLIENT_ID, GOOGLE_IOS_CLIENT_ID} from '@env';
 
 export type RootStackParamList = {
   default: undefined;
@@ -26,8 +27,9 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const App: React.FunctionComponent = () => {
   const googleSigninConfigure = () => {
     GoogleSignin.configure({
-      webClientId:
-        '362919940500-h7muvhhlsjeadrr75gl4vi8l5d6730bu.apps.googleusercontent.com',
+      iosClientId: `${GOOGLE_IOS_CLIENT_ID}`,
+      webClientId: `${GOOGLE_WEB_CLIENT_ID}`,
+      offlineAccess: true,
     });
   };
 
