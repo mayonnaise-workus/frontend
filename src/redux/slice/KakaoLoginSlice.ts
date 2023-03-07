@@ -3,17 +3,17 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 interface ApiState {
   loading: boolean;
   error: string | null;
-  data: any;
+  kakao: any;
 }
 
 const initialState: ApiState = {
   loading: false,
   error: null,
-  data: null,
+  kakao: null,
 };
 
-const LoginSlice = createSlice({
-  name: 'login',
+const KakaoLoginSlice = createSlice({
+  name: 'kakaologin',
   initialState,
   reducers: {
     setLoading: (state, action: PayloadAction<boolean>) => {
@@ -22,12 +22,12 @@ const LoginSlice = createSlice({
     setError: (state, action: PayloadAction<string | null>) => {
       state.error = action.payload;
     },
-    setData: (state, action: PayloadAction<any>) => {
-      state.data = action.payload;
+    setKakao: (state, action: PayloadAction<any>) => {
+      state.kakao = action.payload;
     },
   },
 });
 
-export const {setLoading, setError, setData} = LoginSlice.actions;
+export const {setLoading, setError, setKakao} = KakaoLoginSlice.actions;
 
-export default LoginSlice.reducer;
+export default KakaoLoginSlice.reducer;
