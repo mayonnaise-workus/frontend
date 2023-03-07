@@ -3,15 +3,13 @@ import images from '../../../../assets/images';
 import {ImageBlock, PressableBlock, Text, Wrapper} from './style';
 
 interface IProps {
-  navigation: undefined;
+  onPress: () => void;
 }
 
-function ScrapHeader(props: IProps) {
-  const {navigation} = props;
-
+function ScrapHeader({onPress}: IProps) {
   return (
     <Wrapper>
-      <PressableBlock onPress={() => navigation.pop()}>
+      <PressableBlock onPress={onPress}>
         <ImageBlock source={images.LEFT_ICON} />
       </PressableBlock>
       <Text>스크랩</Text>

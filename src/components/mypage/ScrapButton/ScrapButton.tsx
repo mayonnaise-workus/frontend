@@ -3,13 +3,11 @@ import images from '../../../../assets/images';
 import {Logo, Text, Wrapper} from './style';
 
 interface IProps {
-  navigation: undefined;
+  onPress: () => void;
 }
-function ScrapButton(props: IProps) {
-  const {navigation} = props;
-
+function ScrapButton({onPress}: IProps) {
   return (
-    <Wrapper onPress={() => navigation.navigate('Scrap')}>
+    <Wrapper onPress={onPress}>
       <Logo source={images.BOOKMARK_ICON} />
       <Text>스크랩</Text>
     </Wrapper>

@@ -6,11 +6,14 @@ import {useDispatch} from 'react-redux';
 import {Logout} from '../../../redux/service/Logout';
 
 interface IProps {
-  navigation: undefined;
+  onPressMemberCancellation: () => void;
+  onPressLogout: () => void;
 }
 
-function EditProfileFeature(props: IProps) {
-  const {navigation} = props;
+function EditProfileFeature({
+  onPressMemberCancellation,
+  onPressLogout,
+}: IProps) {
   const dispatch = useDispatch();
 
   const handleMember = async () => {
@@ -21,7 +24,7 @@ function EditProfileFeature(props: IProps) {
         {
           text: '예',
           onPress: () => {
-            navigation.navigate('MemberCancellation');
+            onPressMemberCancellation();
           },
           style: 'destructive',
         },
@@ -42,8 +45,8 @@ function EditProfileFeature(props: IProps) {
         {
           text: '예',
           onPress: () => {
-            dispatch(Logout());
-            navigation.navigate('Onboarding');
+            Logout()(dispatch);
+            onPressLogout();
           },
           style: 'destructive',
         },

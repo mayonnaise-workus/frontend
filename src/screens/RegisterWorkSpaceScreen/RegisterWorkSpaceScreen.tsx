@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Dimensions, Alert, Platform} from 'react-native';
+import {Dimensions, Alert} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
 import Description from '../../components/login/Description/Description';
 import COLORS from '../../../packages/colors';
@@ -16,7 +16,6 @@ import {
 import Wrapper from '../../components/common/Wrapper';
 import OnboardingHeader from '../../components/common/OnboardingHeader';
 import Button from '../../components/login/NextButton/NextButton';
-import {PERMISSIONS, request, RESULTS} from 'react-native-permissions';
 
 interface IProps {
   navigation: IntroStackNavigationProps<'RegisterWorkspace'>;
@@ -36,28 +35,7 @@ function RegisterWorkSpaceScreen({navigation}: IProps) {
   };
 
   useEffect(() => {
-    const permissionCheck = () => {
-      if (Platform.OS !== 'ios' && Platform.OS !== 'android') {
-        return;
-      }
-      const platformPermissions = PERMISSIONS.ANDROID.POST_NOTIFICATIONS;
-      const requestNotificationPermission = async () => {
-        try {
-          const result = await request(platformPermissions);
-          result === RESULTS.GRANTED
-            ? navigation.navigate('MainNavigator')
-            : Alert.alert('알림 권한을 허용해주세요!');
-        } catch (err) {
-          Alert.alert('Notification permission err');
-          console.warn(err);
-        }
-      };
-      requestNotificationPermission();
-    };
-
-    if (data === '200') {
-      permissionCheck();
-    }
+    data === '200' && navigation.navigate('MainNavigator');
   }, [data, navigation]);
 
   return (

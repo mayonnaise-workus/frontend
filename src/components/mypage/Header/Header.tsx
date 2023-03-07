@@ -3,16 +3,14 @@ import images from '../../../../assets/images';
 import {ImageBlock, PressableBlock, Text, Wrapper} from './style';
 
 interface IProps {
-  navigation: undefined;
+  onPress: () => void;
   title: string;
 }
 
-function Header(props: IProps) {
-  const {navigation, title} = props;
-
+function Header({onPress, title}: IProps) {
   return (
     <Wrapper>
-      <PressableBlock onPress={() => navigation.pop()}>
+      <PressableBlock onPress={onPress}>
         <ImageBlock source={images.LEFT_ICON} />
       </PressableBlock>
       <Text>{title}</Text>
