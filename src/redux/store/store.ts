@@ -9,6 +9,8 @@ import MemberReducer from '../slice/MemberSlice';
 import EditNicknameReducer from '../slice/EditNicknameSlice';
 import LogoutReducer from '../slice/LogoutSlice';
 import WorkSpaceListReducer from '../slice/WorkSpaceListSlice';
+import WorkSpaceByRegionReducer from '../slice/WorkspaceListByRegionSlice';
+import RegionListReducer from '../slice/RegionListSlice';
 
 export const store = configureStore({
   reducer: {
@@ -22,6 +24,8 @@ export const store = configureStore({
     editNickname: EditNicknameReducer,
     logout: LogoutReducer,
     workspacelist: WorkSpaceListReducer,
+    workspacebyregionlist: WorkSpaceByRegionReducer,
+    regionlist: RegionListReducer,
   },
 });
 

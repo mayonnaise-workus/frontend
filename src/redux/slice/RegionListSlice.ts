@@ -12,7 +12,7 @@ const initialState: ApiState = {
   data: [],
 };
 
-const PostRegionSlice = createSlice({
+const RegionListSlice = createSlice({
   name: 'region',
   initialState,
   reducers: {
@@ -28,6 +28,6 @@ const PostRegionSlice = createSlice({
   },
 });
 
-export const {setLoading, setError, setData} = PostRegionSlice.actions;
+export const {setLoading, setError, setData} = RegionListSlice.actions;
 
-export default PostRegionSlice.reducer;
+export default RegionListSlice.reducer;

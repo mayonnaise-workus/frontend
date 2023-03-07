@@ -1,24 +1,25 @@
 import axios from 'axios';
 import {Dispatch} from 'redux';
-import {setLoading, setError, setData} from '../slice/PostRegionSlice';
-import {MEMBER} from '../../config/config';
+import {
+  setLoading,
+  setError,
+  setData,
+} from '../slice/WorkspaceListByRegionSlice';
+import {WORKSPACE} from '../../config/config';
 import {authHeader} from './auth-header';
 
-export const PostRegionApi = (data: number[]) => {
+export const WorkSpaceListByRegionApi = (regionList: number[]) => {
   return async (dispatch: Dispatch) => {
     dispatch(setLoading(true));
     const header = await authHeader();
     try {
-      const response = await axios.post(
-        MEMBER.REGION,
-        {
-          location_ids: data,
-        },
+      const response = await axios.get(
+        `${WORKSPACE.WORKSPACE_LIST}?region=${regionList.join(',')}`,
         {
           headers: {Authorization: `Bearer ${header}`},
         },
       );
-      dispatch(setData(data));
+      dispatch(setData(response.data));
       dispatch(setError(null));
     } catch (error) {
       dispatch(setError('An error occurred'));
