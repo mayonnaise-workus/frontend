@@ -1,5 +1,5 @@
 import {configureStore} from '@reduxjs/toolkit';
-import LoginReducer from '../slice/LoginSlice';
+import KakaoLoginReducer from '../slice/KakaoLoginSlice';
 import ServiceTermReducer from '../slice/ServiceTermSlice';
 import PostNickNameReducer from '../slice/PostNicknameSlice';
 import PostRegionReducer from '../slice/PostRegionSlice';
@@ -11,10 +11,16 @@ import LogoutReducer from '../slice/LogoutSlice';
 import WorkSpaceListReducer from '../slice/WorkSpaceListSlice';
 import WorkSpaceByRegionReducer from '../slice/WorkspaceListByRegionSlice';
 import RegionListReducer from '../slice/RegionListSlice';
+import FavoriteWorkSpacesReducer from '../slice/FavoriteWorkSpacesSlice';
+import DeleteFavoriteWorkSpacesReducer from '../slice/DeleteFavoriteWorkSpacesSlice';
+import GoogleLoginReducer from '../slice/GoogleLoginSlice';
+import AppleLoginReducer from '../slice/AppleLoginSlice';
 
 export const store = configureStore({
   reducer: {
-    login: LoginReducer,
+    kakaologin: KakaoLoginReducer,
+    googlelogin: GoogleLoginReducer,
+    applelogin: AppleLoginReducer,
     serviceterm: ServiceTermReducer,
     nickname: PostNickNameReducer,
     region: PostRegionReducer,
@@ -26,6 +32,8 @@ export const store = configureStore({
     workspacelist: WorkSpaceListReducer,
     workspacebyregionlist: WorkSpaceByRegionReducer,
     regionlist: RegionListReducer,
+    favorieworkspace: FavoriteWorkSpacesReducer,
+    deleteworkspace: DeleteFavoriteWorkSpacesReducer,
   },
 });
 
