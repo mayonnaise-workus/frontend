@@ -3,7 +3,7 @@ import {Image, Text} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from './HomeScreen/HomeScreen';
 import MagazineScreen from './MagazineScreen/MagazineScreen';
-import MyPageScreen from './MyPageScreen/MyPageScreen';
+import MyScreenNavigator from './MyScreenNavigator';
 import {MainStackParamList} from './mainScreenPropsType';
 import images from '../../assets/images';
 import COLORS from '../../packages/colors';
@@ -63,7 +63,7 @@ function MainNavigator() {
       />
       <Main.Screen
         name="My"
-        component={MyPageScreen}
+        component={MyScreenNavigator}
         options={{
           tabBarIcon: ({focused}) => (
             <Image

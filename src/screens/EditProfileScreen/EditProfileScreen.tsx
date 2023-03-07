@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react';
+import {RouteProp} from '@react-navigation/native';
 import {SafeAreaView} from 'react-native';
 import {Controller, useForm} from 'react-hook-form';
 import Header from '../../components/mypage/Header/Header';
@@ -6,29 +7,26 @@ import images from '../../../assets/images';
 import COLORS from '../../../packages/colors';
 import Button from '../../components/login/LoginButton/Button';
 import EditProfileFeature from '../../components/mypage/EditProfileFeature/EditProfileFeature';
-import {
-  TextInput,
-  ButtonView,
-  Container,
-  Profile,
-  Title,
-  Wrapper,
-} from './style';
+import {TextInput, Container, Profile, Title, Wrapper} from './style';
 import {useSelector, useDispatch} from 'react-redux';
 import {MemberApi} from '../../redux/service/MemberApi';
 import {EditNicknameApi} from '../../redux/service/EditNicknameApi';
 import {RootState} from '../../redux/store/store';
+import {
+  MyScreenStackNavigationProps,
+  MyScreenStackParamList,
+} from '../myScreenPropsType';
 
 interface IProps {
-  navigation: undefined;
+  navigation: MyScreenStackNavigationProps<'EditProfile'>;
+  route: RouteProp<MyScreenStackParamList, 'EditProfile'>;
 }
 
 interface EditName {
   editname: string;
 }
 
-function EditProfileScreen(props: IProps) {
-  const {navigation} = props;
+function EditProfileScreen({navigation}: IProps) {
   const dispatch = useDispatch();
   const {
     control,
@@ -49,13 +47,25 @@ function EditProfileScreen(props: IProps) {
     name: editname,
   };
 
+  const onPressGoBack = () => {
+    navigation.goBack();
+  };
+
+  const onPressMemberCancellation = () => {
+    navigation.navigate('MemberCancellation');
+  };
+
+  const onPressLogout = () => {
+    navigation.navigate('IntroNavigator');
+  };
+
   async function handlePostEditName() {
     EditNicknameApi(postData)(dispatch);
   }
 
   return (
     <SafeAreaView>
-      <Header navigation={navigation} title="계정 정보 수정" />
+      <Header onPress={onPressGoBack} title="계정 정보 수정" />
       <Wrapper>
         <Profile source={images.PROFILE_GRAY} />
       </Wrapper>
@@ -81,15 +91,11 @@ function EditProfileScreen(props: IProps) {
           name="editname"
         />
       </Container>
-      <EditProfileFeature navigation={navigation} />
-      <ButtonView>
-        <Button
-          onPress={handleSubmit(handlePostEditName)}
-          text="저장하기"
-          backgroundColor={COLORS.TWO}
-          textColor={COLORS.GRAY_2}
-        />
-      </ButtonView>
+      <EditProfileFeature
+        onPressMemberCancellation={onPressMemberCancellation}
+        onPressLogout={onPressLogout}
+      />
+      <Button onPress={handleSubmit(handlePostEditName)} text="저장하기" />
     </SafeAreaView>
   );
 }

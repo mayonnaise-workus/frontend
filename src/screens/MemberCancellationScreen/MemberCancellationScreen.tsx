@@ -1,4 +1,5 @@
 import CheckBox from '@react-native-community/checkbox';
+import {RouteProp} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native';
 import COLORS from '../../../packages/colors';
@@ -6,15 +7,19 @@ import HeaderBackButton from '../../components/login/HeaderBackbutton/HeaderBack
 import Title from '../../components/login/Title/Title';
 import Description from '../../components/login/Description/Description';
 import {memberCancellation} from '../../data';
-import Button from '../../components/login/LoginButton/Button';
-import {ButtonView, List, Text, TextInput, Wrapper} from './style';
+import {List, Text, TextInput, Wrapper} from './style';
+import NextButton from '../../components/login/NextButton/NextButton';
+import {
+  MyScreenStackNavigationProps,
+  MyScreenStackParamList,
+} from '../myScreenPropsType';
 
 interface IProps {
-  navigation: undefined;
+  navigation: MyScreenStackNavigationProps<'MemberCancellation'>;
+  route: RouteProp<MyScreenStackParamList, 'MemberCancellation'>;
 }
 
-function MemberCancellationScreen(props: IProps) {
-  const {navigation} = props;
+function MemberCancellationScreen({navigation}: IProps) {
   const [checkbox, setCheckbox] = useState<string[]>([]);
   const isChecked = checkbox.length >= 1;
 
@@ -70,14 +75,12 @@ function MemberCancellationScreen(props: IProps) {
         placeholder="탈퇴하시는 이유를 적어주세요"
         placeholderTextColor={COLORS.GRAY_5}
       />
-      <ButtonView>
-        <Button
-          text="다음"
-          backgroundColor={isChecked ? COLORS.TWO : COLORS.GRAY_7}
-          textColor={isChecked ? COLORS.GRAY_1 : COLORS.GRAY_8}
-          onPress={handleSubmit}
-        />
-      </ButtonView>
+      <NextButton
+        text="다음"
+        backgroundColor={isChecked ? COLORS.TWO : COLORS.GRAY_7}
+        textColor={isChecked ? COLORS.GRAY_1 : COLORS.GRAY_8}
+        onPress={handleSubmit}
+      />
     </SafeAreaView>
   );
 }

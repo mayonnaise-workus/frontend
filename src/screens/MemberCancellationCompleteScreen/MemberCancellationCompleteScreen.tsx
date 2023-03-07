@@ -1,17 +1,21 @@
 import React from 'react';
+import {RouteProp} from '@react-navigation/native';
 import {SafeAreaView} from 'react-native';
 import images from '../../../assets/images';
 import {Image, Message, Pressable, Text, X} from './style';
+import {
+  MyScreenStackNavigationProps,
+  MyScreenStackParamList,
+} from '../myScreenPropsType';
 
 interface IProps {
-  navigation: undefined;
+  navigation: MyScreenStackNavigationProps<'MemberCancellationComplete'>;
+  route: RouteProp<MyScreenStackParamList, 'MemberCancellationComplete'>;
 }
 
-function MemberCancellationCompleteScreen(props: IProps) {
-  const {navigation} = props;
-
+function MemberCancellationCompleteScreen({navigation}: IProps) {
   function handlePress() {
-    navigation.navigate('Onboarding');
+    navigation.navigate('IntroNavigator');
   }
 
   return (
