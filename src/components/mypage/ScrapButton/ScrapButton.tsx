@@ -5,6 +5,7 @@ import {Logo, Text, Wrapper} from './style';
 interface IProps {
   onPress: () => void;
 }
+
 function ScrapButton({onPress}: IProps) {
   return (
     <Wrapper onPress={onPress}>
