@@ -3,7 +3,7 @@ import {RouteProp} from '@react-navigation/native';
 import {LoginContainer, Logo, LogoContainer, Button, ButtonText} from './style';
 import {login} from '@react-native-seoul/kakao-login';
 import {useDispatch, useSelector} from 'react-redux';
-import {LoginApi} from '../../redux/service/LoginApi';
+import {KakaoLogin} from '../../redux/service/KakaoLogin';
 import images from '../../../assets/images';
 import {RootState} from '../../redux/store/store';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
@@ -13,6 +13,8 @@ import {
 } from '../introScreenPropsType';
 import Wrapper from '../../components/common/Wrapper';
 import appleAuth from '@invertase/react-native-apple-authentication';
+import {GoogleLogin} from '../../redux/service/GoogleLogin';
+import {AppleLogin} from '../../redux/service/AppleLogin';
 
 interface IProps {
   navigation: IntroStackNavigationProps<'OnBoarding'>;
@@ -21,7 +23,9 @@ interface IProps {
 
 function OnboardingScreen({navigation}: IProps) {
   const dispatch = useDispatch();
-  const {data} = useSelector((state: RootState) => state.login);
+  const {kakao} = useSelector((state: RootState) => state.kakaologin);
+  const {apple} = useSelector((state: RootState) => state.applelogin);
+  const {google} = useSelector((state: RootState) => state.googlelogin);
 
   const handleKakaoLogin = async () => {
     const result = await login();
@@ -33,16 +37,18 @@ function OnboardingScreen({navigation}: IProps) {
         new Date(Date.parse(`${result.refreshTokenExpiresAt}`)).getTime() /
         1000,
     };
-    await LoginApi(postData)(dispatch);
+    await KakaoLogin(postData)(dispatch);
   };
 
   const handleGoogleLogin = async () => {
-    try {
-      const {idToken} = await GoogleSignin.signIn();
-      navigation.navigate('ServiceTerm');
-    } catch (err) {
-      console.error('login err', err);
-    }
+    const res = await GoogleSignin.signIn();
+
+    const postData = {
+      id: res.user.id,
+      serverAuthCode: res.serverAuthCode,
+    };
+
+    await GoogleLogin(postData)(dispatch);
   };
 
   async function onAppleButtonPress() {
@@ -51,12 +57,19 @@ function OnboardingScreen({navigation}: IProps) {
       requestedScopes: [appleAuth.Scope.FULL_NAME, appleAuth.Scope.EMAIL],
     });
 
-    const {identityToken, authorizationCode, user} = appleAuthRequestResponse;
+    const {authorizationCode, user} = appleAuthRequestResponse;
+
+    const postData = {
+      authorizationCode: authorizationCode,
+      user: user,
+    };
+
+    await AppleLogin(postData)(dispatch);
   }
 
   useEffect(() => {
-    data && navigation.navigate('ServiceTerm');
-  }, [data, navigation]);
+    (kakao || apple || google) && navigation.navigate('ServiceTerm');
+  }, [kakao, apple, google, navigation]);
 
   return (
     <Wrapper>
@@ -76,6 +89,14 @@ function OnboardingScreen({navigation}: IProps) {
           }}>
           <ButtonText>구글로 로그인하기</ButtonText>
         </Button>
+        {appleAuth.isSupported && (
+          <Button
+            onPress={() => {
+              onAppleButtonPress();
+            }}>
+            <ButtonText>애플로 로그인하기</ButtonText>
+          </Button>
+        )}
       </LoginContainer>
     </Wrapper>
   );
