@@ -15,6 +15,7 @@ import Wrapper from '../../components/common/Wrapper';
 import appleAuth from '@invertase/react-native-apple-authentication';
 import {GoogleLogin} from '../../redux/service/GoogleLogin';
 import {AppleLogin} from '../../redux/service/AppleLogin';
+import {MemberApi} from '../../redux/service/MemberApi';
 
 interface IProps {
   navigation: IntroStackNavigationProps<'OnBoarding'>;
@@ -23,9 +24,7 @@ interface IProps {
 
 function OnboardingScreen({navigation}: IProps) {
   const dispatch = useDispatch();
-  const {kakao} = useSelector((state: RootState) => state.kakaologin);
-  const {apple} = useSelector((state: RootState) => state.applelogin);
-  const {google} = useSelector((state: RootState) => state.googlelogin);
+  const {member} = useSelector((state: RootState) => state.member);
 
   const handleKakaoLogin = async () => {
     const result = await login();
@@ -38,6 +37,7 @@ function OnboardingScreen({navigation}: IProps) {
         1000,
     };
     await KakaoLogin(postData)(dispatch);
+    navigation.navigate(member ? 'MainNavigator' : 'ServiceTerm');
   };
 
   const handleGoogleLogin = async () => {
@@ -47,8 +47,9 @@ function OnboardingScreen({navigation}: IProps) {
       id: res.user.id,
       serverAuthCode: res.serverAuthCode,
     };
-
     await GoogleLogin(postData)(dispatch);
+
+    navigation.navigate(member ? 'MainNavigator' : 'ServiceTerm');
   };
 
   async function onAppleButtonPress() {
@@ -63,13 +64,14 @@ function OnboardingScreen({navigation}: IProps) {
       authorizationCode: authorizationCode,
       user: user,
     };
-
     await AppleLogin(postData)(dispatch);
+
+    navigation.navigate(member ? 'MainNavigator' : 'ServiceTerm');
   }
 
   useEffect(() => {
-    (kakao || apple || google) && navigation.navigate('ServiceTerm');
-  }, [kakao, apple, google, navigation]);
+    MemberApi()(dispatch);
+  }, [dispatch]);
 
   return (
     <Wrapper>

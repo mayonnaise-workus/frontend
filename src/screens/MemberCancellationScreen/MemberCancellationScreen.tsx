@@ -9,6 +9,9 @@ import Description from '../../components/login/Description/Description';
 import {memberCancellation} from '../../data';
 import {List, Text, TextInput, Wrapper} from './style';
 import NextButton from '../../components/login/NextButton/NextButton';
+import {useDispatch} from 'react-redux';
+import {DeleteMember} from '../../redux/service/DeleteMember';
+
 import {
   MyScreenStackNavigationProps,
   MyScreenStackParamList,
@@ -22,8 +25,10 @@ interface IProps {
 function MemberCancellationScreen({navigation}: IProps) {
   const [checkbox, setCheckbox] = useState<string[]>([]);
   const isChecked = checkbox.length >= 1;
+  const dispatch = useDispatch();
 
   function handleSubmit() {
+    DeleteMember()(dispatch);
     navigation.navigate('MemberCancellationComplete');
   }
 
@@ -53,7 +58,6 @@ function MemberCancellationScreen({navigation}: IProps) {
                 tintColor: COLORS.GRAY_7,
               }}
               disabled={false}
-              value="ㅇㅇ"
               onValueChange={checked => {
                 handleCheckbox(checked, item.id);
               }}
