@@ -1,11 +1,10 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {RouteProp} from '@react-navigation/native';
 import {SafeAreaView} from 'react-native';
-import {Controller, useForm} from 'react-hook-form';
 import Header from '../../components/mypage/Header/Header';
 import images from '../../../assets/images';
-import COLORS from '../../../packages/colors';
 import Button from '../../components/login/LoginButton/Button';
+
 import EditProfileFeature from '../../components/mypage/EditProfileFeature/EditProfileFeature';
 import {TextInput, Container, Profile, Title, Wrapper} from './style';
 import {useSelector, useDispatch} from 'react-redux';
@@ -16,36 +15,19 @@ import {
   MyScreenStackNavigationProps,
   MyScreenStackParamList,
 } from '../myScreenPropsType';
+import AlertMessage from '../../components/login/AlertMessage/AlertMessage';
 
 interface IProps {
   navigation: MyScreenStackNavigationProps<'EditProfile'>;
   route: RouteProp<MyScreenStackParamList, 'EditProfile'>;
 }
 
-interface EditName {
-  editname: string;
-}
-
 function EditProfileScreen({navigation}: IProps) {
   const dispatch = useDispatch();
-  const {
-    control,
-    handleSubmit,
-    formState: {errors},
-    watch,
-  } = useForm<EditName>();
-
-  const {data} = useSelector((state: RootState) => state.member);
-
-  useEffect(() => {
-    MemberApi()(dispatch);
-  }, [dispatch]);
-
-  const editname = watch('editname');
-
-  const postData = {
-    name: editname,
-  };
+  const {member} = useSelector((state: RootState) => state.member);
+  const {userError} = useSelector((state: RootState) => state.editNickname);
+  const [newNickname, setNewNickname] = useState<string>(member.name);
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const onPressGoBack = () => {
     navigation.goBack();
@@ -60,8 +42,23 @@ function EditProfileScreen({navigation}: IProps) {
   };
 
   async function handlePostEditName() {
+    userError && setErrorMessage(userError);
+    const postData = {
+      name: newNickname,
+    };
     EditNicknameApi(postData)(dispatch);
+    MemberApi()(dispatch);
+    setErrorMessage('');
   }
+
+  useEffect(() => {
+    MemberApi()(dispatch);
+    userError && setErrorMessage(userError);
+  }, [dispatch, setNewNickname, userError]);
+
+  useEffect(() => {
+    setErrorMessage('');
+  }, [dispatch, navigation]);
 
   return (
     <SafeAreaView>
@@ -71,31 +68,18 @@ function EditProfileScreen({navigation}: IProps) {
       </Wrapper>
       <Container>
         <Title>닉네임 수정</Title>
-        <Controller
-          control={control}
-          rules={{
-            required: true,
-            maxLength: 10,
-          }}
-          render={({field: {onChange, onBlur, value}}) => (
-            <TextInput
-              onBlur={onBlur}
-              value={value}
-              onChangeText={onChange}
-              style={{
-                backgroundColor: COLORS.GRAY_8,
-              }}
-              placeholderTextColor={COLORS.GRAY_5}
-            />
-          )}
-          name="editname"
+        <TextInput
+          value={newNickname}
+          onChangeText={setNewNickname}
+          placeholder="10자 이내 닉네임을 입력해주세요."
         />
+        {errorMessage ? <AlertMessage message={errorMessage} /> : null}
       </Container>
       <EditProfileFeature
         onPressMemberCancellation={onPressMemberCancellation}
         onPressLogout={onPressLogout}
       />
-      <Button onPress={handleSubmit(handlePostEditName)} text="저장하기" />
+      <Button onPress={handlePostEditName} text="저장하기" />
     </SafeAreaView>
   );
 }

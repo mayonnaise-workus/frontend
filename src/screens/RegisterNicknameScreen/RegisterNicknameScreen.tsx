@@ -1,6 +1,5 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {RouteProp} from '@react-navigation/native';
-import {Controller, useForm} from 'react-hook-form';
 import COLORS from '../../../packages/colors';
 import AlertMessage from '../../components/login/AlertMessage/AlertMessage';
 import {TextInput, TextInputContainer} from './style';
@@ -20,30 +19,28 @@ interface IProps {
   route: RouteProp<IntroStackParamList, 'RegisterNickname'>;
 }
 
-interface FormData {
-  nickname: string;
-}
-
 function RegisterNicknameScreen({navigation}: IProps) {
   const dispatch = useDispatch();
-  const {data} = useSelector((state: RootState) => state.nickname);
-
-  const {
-    control,
-    handleSubmit,
-    formState: {errors},
-    watch,
-  } = useForm<FormData>();
-
-  const nickname = watch('nickname');
-
-  const postData = {
-    name: nickname,
-  };
+  const {data, error} = useSelector((state: RootState) => state.nickname);
+  const [nickname, setNickname] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const handleSaveNickname = async () => {
+    error && setErrorMessage(error);
+    const postData = {
+      name: nickname,
+    };
     PostNickNameApi(postData)(dispatch);
+    setErrorMessage('');
   };
+
+  useEffect(() => {
+    error && setErrorMessage(error);
+  }, [dispatch, setNickname, error]);
+
+  useEffect(() => {
+    setErrorMessage('');
+  }, [dispatch, navigation]);
 
   useEffect(() => {
     data && navigation.navigate('RegisterRegion');
@@ -53,38 +50,18 @@ function RegisterNicknameScreen({navigation}: IProps) {
     <Wrapper>
       <OnboardingHeader text="닉네임 설정" goback={navigation.goBack} />
       <TextInputContainer>
-        <Controller
-          control={control}
-          rules={{
-            required: true,
-            maxLength: 10,
-          }}
-          render={({field: {onChange, onBlur, value}}) => (
-            <TextInput
-              placeholder="10자 이내 닉네임 설정"
-              onBlur={onBlur}
-              value={value}
-              onChangeText={onChange}
-              style={{
-                backgroundColor: COLORS.GRAY_8,
-              }}
-              placeholderTextColor={COLORS.GRAY_5}
-            />
-          )}
-          name="nickname"
+        <TextInput
+          value={nickname}
+          onChangeText={setNickname}
+          placeholder="10자 이내 닉네임을 입력해주세요."
         />
-        {errors.nickname?.type === 'required' && (
-          <AlertMessage message="닉네임을 입력해주세요" />
-        )}
-        {errors.nickname?.type === 'maxLength' && (
-          <AlertMessage message="10자 이내로 입력해주세요" />
-        )}
+        {errorMessage ? <AlertMessage message={errorMessage} /> : null}
       </TextInputContainer>
       <Button
         text="다음"
         backgroundColor={nickname ? COLORS.TWO : COLORS.GRAY_7}
         textColor={nickname ? COLORS.GRAY_2 : COLORS.GRAY_8}
-        onPress={handleSubmit(handleSaveNickname)}
+        onPress={handleSaveNickname}
       />
     </Wrapper>
   );
