@@ -3,13 +3,13 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 interface ApiState {
   loading: boolean;
   error: string | null;
-  data: any;
+  member: any;
 }
 
 const initialState: ApiState = {
   loading: false,
   error: null,
-  data: null,
+  member: null,
 };
 
 const MemberSlice = createSlice({
@@ -22,12 +22,12 @@ const MemberSlice = createSlice({
     setError: (state, action: PayloadAction<string | null>) => {
       state.error = action.payload;
     },
-    setData: (state, action: PayloadAction<any>) => {
-      state.data = action.payload;
+    setMemebr: (state, action: PayloadAction<any>) => {
+      state.member = action.payload;
     },
   },
 });
 
-export const {setLoading, setError, setData} = MemberSlice.actions;
+export const {setLoading, setError, setMemebr} = MemberSlice.actions;
 
 export default MemberSlice.reducer;

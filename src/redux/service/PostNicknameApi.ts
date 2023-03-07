@@ -20,7 +20,7 @@ export const PostNickNameApi = (data: IPostNickNameProps) => {
       dispatch(setData(jsonValue));
       dispatch(setError(null));
     } catch (error) {
-      dispatch(setError('An error occurred'));
+      dispatch(setError(error.response.data.message));
     }
     dispatch(setLoading(false));
   };
