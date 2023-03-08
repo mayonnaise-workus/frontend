@@ -1,6 +1,9 @@
 import React from 'react';
 import images from '../../../../assets/images';
 import {Pressable} from 'react-native';
+import {useDispatch} from 'react-redux';
+import {DeleteFavoriteWorkSpaces} from '../../../redux/service/DeleteFavoriteWorkSpaces';
+
 import {
   Address,
   ImageBlock,
@@ -12,28 +15,41 @@ import {
 } from './style';
 
 interface Ipros {
-  list: object;
+  list: {[key: string]: any};
 }
 function WorkSpaceList(props: Ipros) {
   const {list} = props;
+  const dispatch = useDispatch();
+
+  async function handleData(id: number) {
+    DeleteFavoriteWorkSpaces(id)(dispatch);
+  }
 
   return (
-    <Wrapper>
-      <ImageBlock
-        source={{
-          uri: 'https://pup-review-phinf.pstatic.net/MjAyMjEyMTVfOTgg/MDAxNjcxMDg1NjM0Njk0.acU9aD0p4APxLKC2X6FCRI9oolFdEFfiPvij1VSEBTkg.lFflC0Q5ISTT6lFyRat8DES3W_56IplFZ8I4_5E0jBsg.JPEG/5439730B-765A-456F-99A6-07D2F4A640F0.jpeg',
-        }}
-      />
-      <Information>
-        <Name>{list.name}</Name>
-        <Address>{list.address.slice(0, 7)}</Address>
-      </Information>
-      <LogoBlock>
-        <Pressable>
-          <Logo source={images.BOOKMARK_GRAY} />
-        </Pressable>
-      </LogoBlock>
-    </Wrapper>
+    <>
+      {list && (
+        <Wrapper>
+          <ImageBlock
+            source={{
+              uri: `${list[1].profile_img}`,
+            }}
+          />
+          <Information>
+            <Name numberOfLines={1} ellipsizeMode="tail">
+              {list[1].name}
+            </Name>
+            <Address numberOfLines={1} ellipsizeMode="tail">
+              {list[1].address}
+            </Address>
+          </Information>
+          <LogoBlock>
+            <Pressable onPress={() => handleData(list[1].id)}>
+              <Logo source={images.BOOKMARK_GRAY} />
+            </Pressable>
+          </LogoBlock>
+        </Wrapper>
+      )}
+    </>
   );
 }
 export default WorkSpaceList;
