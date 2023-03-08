@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {Dispatch} from 'redux';
-import {setLoading, setError, setData} from '../slice/MemberSlice';
+import {setLoading, setError, setMemebr} from '../slice/MemberSlice';
 import {MEMBER} from '../../config/config';
 import {authHeader} from './auth-header';
 
@@ -12,7 +12,7 @@ export const MemberApi = () => {
       const response = await axios.get(MEMBER.MEMBER, {
         headers: {Authorization: `Bearer ${header}`},
       });
-      dispatch(setData(response.data));
+      dispatch(setMemebr(response.data));
       dispatch(setError(null));
     } catch (error) {
       dispatch(setError('An error occurred'));
