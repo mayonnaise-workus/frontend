@@ -11,6 +11,8 @@ import {
   MyScreenStackParamList,
 } from '../myScreenPropsType';
 import {DeleteFavoriteWorkSpaces} from '../../redux/service/DeleteFavoriteWorkSpaces';
+import images from '../../../assets/images';
+import {Container, Image, Text} from './style';
 
 interface IProps {
   navigation: MyScreenStackNavigationProps<'Scrap'>;
@@ -52,11 +54,16 @@ function ScrapScreen({navigation}: IProps) {
   return (
     <SafeAreaView>
       <ScrapHeader onPress={onPress} />
-      {workSpaceList
-        ? workSpaceList.map((item: [string, object], index: number) => (
-            <WorkSpaceList key={index} list={item} handleData={handleData} />
-          ))
-        : null}
+      {workSpaceList && workSpaceList.length ? (
+        workSpaceList.map((item: [string, object], index: number) => (
+          <WorkSpaceList key={index} list={item} handleData={handleData} />
+        ))
+      ) : (
+        <Container>
+          <Image source={images.SPARKLE} />
+          <Text>아직 스크랩 중인 공간이 없어요!</Text>
+        </Container>
+      )}
     </SafeAreaView>
   );
 }
