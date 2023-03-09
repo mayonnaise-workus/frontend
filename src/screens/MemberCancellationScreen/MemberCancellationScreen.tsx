@@ -1,21 +1,22 @@
-import CheckBox from '@react-native-community/checkbox';
 import {RouteProp} from '@react-navigation/native';
-import React, {useState} from 'react';
-import {SafeAreaView} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {SafeAreaView, View} from 'react-native';
 import COLORS from '../../../packages/colors';
 import HeaderBackButton from '../../components/login/HeaderBackbutton/HeaderBackButton';
 import Title from '../../components/login/Title/Title';
 import Description from '../../components/login/Description/Description';
 import {memberCancellation} from '../../data';
-import {List, Text, TextInput, Wrapper} from './style';
+import {TextInput, Wrapper} from './style';
 import NextButton from '../../components/login/NextButton/NextButton';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {DeleteMember} from '../../redux/service/DeleteMember';
 
 import {
   MyScreenStackNavigationProps,
   MyScreenStackParamList,
 } from '../myScreenPropsType';
+import RadioGroup from './RadioGroup';
+import {RootState} from '../../redux/store/store';
 
 interface IProps {
   navigation: MyScreenStackNavigationProps<'MemberCancellation'>;
@@ -23,20 +24,24 @@ interface IProps {
 }
 
 function MemberCancellationScreen({navigation}: IProps) {
-  const [checkbox, setCheckbox] = useState<string[]>([]);
-  const isChecked = checkbox.length >= 1;
   const dispatch = useDispatch();
+  const {error} = useSelector((state: RootState) => state.deletemember);
+  const [selectedOption, setSelectedOption] = useState<string>(
+    memberCancellation[0].text,
+  );
+  const [message, setMessage] = useState<string>('');
 
-  function handleSubmit() {
-    DeleteMember()(dispatch);
-    navigation.navigate('MemberCancellationComplete');
-  }
+  const handleOptionChange = option => {
+    setSelectedOption(option);
+  };
 
-  function handleCheckbox(checked, value) {
-    checked
-      ? setCheckbox([...checkbox, value])
-      : setCheckbox(checkbox.filter(button => button !== value));
-  }
+  const handleData = async () => {
+    selectedOption === '기타' && message
+      ? await DeleteMember(message)(dispatch)
+      : await DeleteMember(selectedOption)(dispatch);
+    !error && navigation.navigate('MemberCancellationComplete');
+  };
+
   return (
     <SafeAreaView>
       <HeaderBackButton onPress={() => navigation.pop()} />
@@ -49,41 +54,29 @@ function MemberCancellationScreen({navigation}: IProps) {
 저희 앱이 많은 도움이 되셨기를 바라겠습니다.`}
       />
       <Wrapper>
-        {memberCancellation.map(item => (
-          <List key={item.id}>
-            <CheckBox
-              style={{
-                width: 19.5,
-                height: 19.5,
-                tintColor: COLORS.GRAY_7,
-              }}
-              disabled={false}
-              onValueChange={checked => {
-                handleCheckbox(checked, item.id);
-              }}
-              onAnimationType="bounce"
-              offAnimationType="bounce"
-              onFillColor={COLORS.TWO}
-              tintColor={COLORS.GRAY_2}
-              onCheckColor={COLORS.GRAY_8}
-              onTintColor={COLORS.TWO}
-            />
-            <Text fontWeight={500} fontSize={15} color={COLORS.GRAY_2}>
-              {item.text}
-            </Text>
-          </List>
-        ))}
+        <View>
+          <RadioGroup
+            options={memberCancellation}
+            selectedValue={selectedOption}
+            onChange={handleOptionChange}
+          />
+        </View>
       </Wrapper>
 
-      <TextInput
-        placeholder="탈퇴하시는 이유를 적어주세요"
-        placeholderTextColor={COLORS.GRAY_5}
-      />
+      {selectedOption === '기타' && (
+        <TextInput
+          value={message}
+          onChangeText={setMessage}
+          placeholder="탈퇴하시는 이유를 적어주세요."
+          placeholderTextColor={COLORS.GRAY_5}
+        />
+      )}
+
       <NextButton
         text="다음"
-        backgroundColor={isChecked ? COLORS.TWO : COLORS.GRAY_7}
-        textColor={isChecked ? COLORS.GRAY_1 : COLORS.GRAY_8}
-        onPress={handleSubmit}
+        backgroundColor={selectedOption ? COLORS.TWO : COLORS.GRAY_7}
+        textColor={selectedOption ? COLORS.GRAY_1 : COLORS.GRAY_8}
+        onPress={handleData}
       />
     </SafeAreaView>
   );
