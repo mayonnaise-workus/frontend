@@ -3,7 +3,7 @@ import COLORS from '../../../../packages/colors';
 
 const LogoBlock = styled.View`
   padding-top: 15px;
-  margin-left: 60px;
+  margin-left: 20px;
 `;
 const Logo = styled.Image`
   width: 13.5px;
@@ -13,11 +13,11 @@ const Address = styled.Text`
   margin-top: 5px;
   font-weight: 400;
   font-size: 14px;
+  width: 180px;
 `;
 const Name = styled.Text`
   width: 120px;
   height: 22px;
-  overflow: hidden;
   font-weight: 600;
   font-size: 16px;
   color: ${COLORS.GRAY_1};
