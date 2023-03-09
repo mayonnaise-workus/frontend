@@ -1,10 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {RouteProp} from '@react-navigation/native';
-import {SafeAreaView} from 'react-native';
+import {Button, SafeAreaView} from 'react-native';
 import Header from '../../components/mypage/Header/Header';
 import images from '../../../assets/images';
-import Button from '../../components/login/LoginButton/Button';
-
 import EditProfileFeature from '../../components/mypage/EditProfileFeature/EditProfileFeature';
 import {TextInput, Container, Profile, Title, Wrapper} from './style';
 import {useSelector, useDispatch} from 'react-redux';
@@ -25,8 +23,10 @@ interface IProps {
 function EditProfileScreen({navigation}: IProps) {
   const dispatch = useDispatch();
   const {member} = useSelector((state: RootState) => state.member);
-  const {userError} = useSelector((state: RootState) => state.editNickname);
-  const [newNickname, setNewNickname] = useState<string>(member.name);
+  const {userError, user} = useSelector(
+    (state: RootState) => state.editNickname,
+  );
+  const [newNickname, setNewNickname] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string>('');
 
   const onPressGoBack = () => {
@@ -46,15 +46,30 @@ function EditProfileScreen({navigation}: IProps) {
     const postData = {
       name: newNickname,
     };
-    EditNicknameApi(postData)(dispatch);
-    MemberApi()(dispatch);
-    setErrorMessage('');
+    await EditNicknameApi(postData)(dispatch);
+    const newNickName = await MemberApi()(dispatch);
+    if (newNickName?.name) {
+      setNewNickname(newNickName.name);
+    }
   }
 
   useEffect(() => {
-    MemberApi()(dispatch);
-    userError && setErrorMessage(userError);
-  }, [dispatch, setNewNickname, userError]);
+    if (user) {
+      setErrorMessage('');
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (member) {
+      setNewNickname(member.name);
+    }
+  }, [member]);
+
+  useEffect(() => {
+    if (userError) {
+      setErrorMessage(userError);
+    }
+  }, [userError]);
 
   useEffect(() => {
     setErrorMessage('');
@@ -79,7 +94,7 @@ function EditProfileScreen({navigation}: IProps) {
         onPressMemberCancellation={onPressMemberCancellation}
         onPressLogout={onPressLogout}
       />
-      <Button onPress={handlePostEditName} text="저장하기" />
+      <Button onPress={handlePostEditName} title="저장하기" />
     </SafeAreaView>
   );
 }
