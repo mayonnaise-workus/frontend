@@ -49,13 +49,6 @@ function ScrapScreen({navigation}: IProps) {
     }
   }
 
-  useEffect(() => {
-    async function fetchData() {
-      await WorkSpaceListApi()(dispatch);
-    }
-    fetchData();
-  }, [dispatch]);
-
   return (
     <SafeAreaView>
       <ScrapHeader onPress={onPress} />
