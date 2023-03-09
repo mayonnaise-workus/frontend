@@ -10,6 +10,7 @@ import {
   MyScreenStackNavigationProps,
   MyScreenStackParamList,
 } from '../myScreenPropsType';
+import {DeleteFavoriteWorkSpaces} from '../../redux/service/DeleteFavoriteWorkSpaces';
 
 interface IProps {
   navigation: MyScreenStackNavigationProps<'Scrap'>;
@@ -36,17 +37,31 @@ function ScrapScreen({navigation}: IProps) {
 
   useEffect(() => {
     if (data) {
-      const newArray = Object.entries(data.list) as Array<[string, object]>;
-      setWorkSpaceList(newArray);
+      setWorkSpaceList(data.list);
     }
   }, [data]);
+
+  async function handleData(id: number) {
+    await DeleteFavoriteWorkSpaces(id)(dispatch);
+    const newWorkSpaceList = await WorkSpaceListApi()(dispatch);
+    if (newWorkSpaceList?.data?.list) {
+      setWorkSpaceList(newWorkSpaceList.data.list);
+    }
+  }
+
+  useEffect(() => {
+    async function fetchData() {
+      await WorkSpaceListApi()(dispatch);
+    }
+    fetchData();
+  }, [dispatch]);
 
   return (
     <SafeAreaView>
       <ScrapHeader onPress={onPress} />
-      {workSpaceList.length > 0
+      {workSpaceList
         ? workSpaceList.map((item: [string, object], index: number) => (
-            <WorkSpaceList key={index} list={item} />
+            <WorkSpaceList key={index} list={item} handleData={handleData} />
           ))
         : null}
     </SafeAreaView>
