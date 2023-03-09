@@ -1,35 +1,28 @@
-import styled from 'styled-components';
+import {Dimensions} from 'react-native';
+import styled from 'styled-components/native';
 import COLORS from '../../../../packages/colors';
-
-const Logo = styled.Image`
-  position: absolute;
-  width: 13.5px;
-  height: 18.75px;
-  top: 15px;
-  left: 144px;
-`;
-
-const Text = styled.Text`
-  position: absolute;
-  align-items: center;
-  margin-top: 8px;
-  font-weight: 500;
-  font-size: 17px;
-  color: ${COLORS.GRAY_1};
-  left: 167px;
-`;
 
 const Wrapper = styled.Pressable`
   flex-direction: row;
-  position: absolute;
-  width: 350px;
-  height: 48px;
-  left: 20px;
-  top: 286px;
-  border-radius: 10px;
-  background-color: #f4f5f7;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: ${Dimensions.get('window').width - 40}px;
+  height: 48px;
+  border-radius: 10px;
+  background-color: ${COLORS.GRAY_8};
+  margin-bottom: 24px;
+`;
+
+const Logo = styled.Image`
+  width: 13.5px;
+  height: 18.75px;
+`;
+
+const Text = styled.Text`
+  font-weight: 500;
+  font-size: 17px;
+  color: ${COLORS.GRAY_1};
 `;
 
 export {Logo, Text, Wrapper};

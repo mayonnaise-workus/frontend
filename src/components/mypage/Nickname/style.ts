@@ -1,24 +1,34 @@
-import styled from 'styled-components';
+import {Dimensions} from 'react-native';
+import styled from 'styled-components/native';
 import COLORS from '../../../../packages/colors';
 
-const Block = styled.View`
-  flex-direction: row;
+const Wrapper = styled.View`
+  flex: 3;
+  width: ${Dimensions.get('window').width - 40}px;
+  position: relative;
+  border-radius: 10px;
+  background-color: ${COLORS.GRAY_8};
+  align-items: center;
+  margin-bottom: 12px;
 `;
 
-const Pressable = styled.Pressable``;
-
-const EditProfile = styled.Image`
-  position: absolute;
-  left: 85px;
-  margin-top: 18.56px;
-  width: 18.43px;
-  height: 18.44px;
-`;
 const Profile = styled.Image`
   width: 106px;
   margin-top: 16px;
   height: 106px;
 `;
+
+const EditProfilePressable = styled.Pressable`
+  position: absolute;
+  right: 10px;
+  top: 10px;
+`;
+
+const EditProfile = styled.Image`
+  width: 18.43px;
+  height: 18.44px;
+`;
+
 const Text = styled.Text`
   align-items: center;
   margin-top: 8px;
@@ -27,15 +37,4 @@ const Text = styled.Text`
   color: ${COLORS.GRAY_1};
 `;
 
-const Wrapper = styled.View`
-  position: absolute;
-  width: 350px;
-  height: 171px;
-  left: 20px;
-  top: 103px;
-  border-radius: 10px;
-  background-color: #f4f5f7;
-  align-items: center;
-`;
-
-export {Block, Wrapper, Text, Profile, EditProfile, Pressable};
+export {Wrapper, Text, Profile, EditProfilePressable, EditProfile};
