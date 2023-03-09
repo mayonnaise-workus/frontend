@@ -26,6 +26,13 @@ function OnboardingScreen({navigation}: IProps) {
   const dispatch = useDispatch();
   const {member} = useSelector((state: RootState) => state.member);
 
+  useEffect(() => {
+    async function fetchData() {
+      await MemberApi()(dispatch);
+    }
+    fetchData();
+  }, [dispatch]);
+
   const handleKakaoLogin = async () => {
     const result = await login();
 
@@ -68,10 +75,6 @@ function OnboardingScreen({navigation}: IProps) {
 
     navigation.navigate(member ? 'MainNavigator' : 'ServiceTerm');
   }
-
-  useEffect(() => {
-    MemberApi()(dispatch);
-  }, [dispatch]);
 
   return (
     <Wrapper>
