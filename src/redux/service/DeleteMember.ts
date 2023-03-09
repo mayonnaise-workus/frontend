@@ -5,16 +5,15 @@ import {MEMBER} from '../../config/config';
 import {authHeader} from './auth-header';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const DeleteMember = () => {
+export const DeleteMember = (data: string) => {
   return async (dispatch: Dispatch) => {
     dispatch(setLoading(true));
     const header = await authHeader();
-    console.log(header);
     try {
-      const response = await axios.delete(MEMBER.MEMBER, {
+      await axios.delete(MEMBER.MEMBER, {
         headers: {Authorization: `Bearer ${header}`},
+        params: {data: data},
       });
-      console.log('data', response);
       AsyncStorage.removeItem('user');
       dispatch(setError(null));
     } catch (error) {
