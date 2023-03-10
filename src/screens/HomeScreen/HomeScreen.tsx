@@ -44,9 +44,11 @@ type RegionType = {
 
 const Home = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     PreferenceApi()(dispatch);
   }, [dispatch]);
+
   const {data: preferenceObj} = useSelector(
     (state: RootState) => state.preference,
   );
@@ -64,7 +66,7 @@ const Home = () => {
   }, [preferenceObj]);
 
   useEffect(() => {
-    if (regionList.length) {
+    if (regionList && regionList.length >= 1) {
       setSelectedRegion(() => {
         const newSelectedRegion: RegionType[] = [];
         regionList.forEach(regionNum =>
@@ -85,7 +87,9 @@ const Home = () => {
   }, [isInitialRender, selectedRegion]);
 
   useEffect(() => {
-    regionList.length && WorkSpaceListByRegionApi(regionList)(dispatch);
+    regionList &&
+      regionList.length >= 1 &&
+      WorkSpaceListByRegionApi(regionList)(dispatch);
   }, [dispatch, regionList]);
   const {data: workspaceList} = useSelector(
     (state: RootState) => state.workspacebyregionlist,
