@@ -1,6 +1,8 @@
 import React from 'react';
-import images from '../../../../assets/images';
-import {ImageBlock, PressableBlock, Text, Wrapper} from './style';
+import {Pressable} from 'react-native';
+import {EmptyView, Text, Wrapper} from './style';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faAngleLeft} from '@fortawesome/free-solid-svg-icons';
 
 interface IProps {
   onPress: () => void;
@@ -10,10 +12,11 @@ interface IProps {
 function Header({onPress, title}: IProps) {
   return (
     <Wrapper>
-      <PressableBlock onPress={onPress}>
-        <ImageBlock source={images.LEFT_ICON} />
-      </PressableBlock>
+      <Pressable onPress={onPress}>
+        <FontAwesomeIcon icon={faAngleLeft} size={25} />
+      </Pressable>
       <Text>{title}</Text>
+      <EmptyView />
     </Wrapper>
   );
 }
