@@ -1,38 +1,40 @@
-import styled from 'styled-components';
+import {Dimensions} from 'react-native';
+import styled from 'styled-components/native';
+import COLORS from '../../../packages/colors';
 
-export const ButtonView = styled.View`
-  position: absolute;
-  width: 350px;
-  height: 60px;
-  top: 750px;
-`;
-export const TextInput = styled.TextInput`
-  position: absolute;
-  width: 350px;
-  height: 52px;
-  top: 30px;
-  border-radius: 10px;
-  padding-left: 18px;
+export const Container = styled.SafeAreaView`
+  flex: 1;
+  background-color: white;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-bottom: 30px;
 `;
 
-export const Wrapper = styled.View`
+export const ProfileContainer = styled.View`
+  flex: 3;
   align-items: center;
-  top: 50px;
 `;
 
 export const Profile = styled.Image`
   width: 106px;
-  margin-top: 16px;
   height: 106px;
+`;
+
+export const NicknameChangeContainer = styled.View`
+  flex: 2;
 `;
 
 export const Title = styled.Text`
   font-weight: 600;
   font-size: 16px;
+  color: black;
+  margin-bottom: 12px;
 `;
 
-export const Container = styled.View`
-  position: absolute;
-  left: 20px;
-  top: 249px;
+export const TextInput = styled.TextInput`
+  width: ${Dimensions.get('window').width - 40}px;
+  height: 52px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: ${COLORS.GRAY_8};
 `;

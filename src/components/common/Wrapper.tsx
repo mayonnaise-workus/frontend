@@ -16,7 +16,7 @@ const ViewContainer = styled.View`
 
 function Wrapper({children}: React.PropsWithChildren) {
   return (
-    <WrapperContainer style={{flex: 1}} edges={['bottom']}>
+    <WrapperContainer style={{flex: 1}}>
       <ViewContainer>{children}</ViewContainer>
     </WrapperContainer>
   );

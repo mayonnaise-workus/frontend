@@ -1,7 +1,7 @@
 import React from 'react';
 import {Alert} from 'react-native';
 import COLORS from '../../../../packages/colors';
-import {Block, Pressable, Text} from './style';
+import {Container, Pressable, Text} from './style';
 import {useDispatch} from 'react-redux';
 import {Logout} from '../../../redux/service/Logout';
 
@@ -59,14 +59,14 @@ function EditProfileFeature({
     );
   };
   return (
-    <Block>
+    <Container>
       <Pressable onPress={handleLogout}>
         <Text color={COLORS.GRAY_1}>로그아웃</Text>
       </Pressable>
       <Pressable onPress={handleMember}>
         <Text color={COLORS.ALERT_2}>회원 탈퇴</Text>
       </Pressable>
-    </Block>
+    </Container>
   );
 }
 

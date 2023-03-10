@@ -1,12 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import {RouteProp} from '@react-navigation/native';
-import {SafeAreaView} from 'react-native';
 import Header from '../../components/mypage/Header/Header';
 import images from '../../../assets/images';
-import Button from '../../components/login/LoginButton/Button';
-
+import Button from '../../components/login/NextButton/NextButton';
 import EditProfileFeature from '../../components/mypage/EditProfileFeature/EditProfileFeature';
-import {TextInput, Container, Profile, Title, Wrapper} from './style';
+import {
+  TextInput,
+  Container,
+  Profile,
+  Title,
+  ProfileContainer,
+  NicknameChangeContainer,
+} from './style';
 import {useSelector, useDispatch} from 'react-redux';
 import {MemberApi} from '../../redux/service/MemberApi';
 import {EditNicknameApi} from '../../redux/service/EditNicknameApi';
@@ -16,6 +21,7 @@ import {
   MyScreenStackParamList,
 } from '../myScreenPropsType';
 import AlertMessage from '../../components/login/AlertMessage/AlertMessage';
+import COLORS from '../../../packages/colors';
 
 interface IProps {
   navigation: MyScreenStackNavigationProps<'EditProfile'>;
@@ -61,12 +67,12 @@ function EditProfileScreen({navigation}: IProps) {
   }, [dispatch, navigation]);
 
   return (
-    <SafeAreaView>
+    <Container>
       <Header onPress={onPressGoBack} title="계정 정보 수정" />
-      <Wrapper>
+      <ProfileContainer>
         <Profile source={images.PROFILE_GRAY} />
-      </Wrapper>
-      <Container>
+      </ProfileContainer>
+      <NicknameChangeContainer>
         <Title>닉네임 수정</Title>
         <TextInput
           value={newNickname}
@@ -74,13 +80,18 @@ function EditProfileScreen({navigation}: IProps) {
           placeholder="10자 이내 닉네임을 입력해주세요."
         />
         {errorMessage ? <AlertMessage message={errorMessage} /> : null}
-      </Container>
+      </NicknameChangeContainer>
       <EditProfileFeature
         onPressMemberCancellation={onPressMemberCancellation}
         onPressLogout={onPressLogout}
       />
-      <Button onPress={handlePostEditName} text="저장하기" />
-    </SafeAreaView>
+      <Button
+        text="저장하기"
+        onPress={handlePostEditName}
+        backgroundColor={COLORS.TWO}
+        textColor="black"
+      />
+    </Container>
   );
 }
 
