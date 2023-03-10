@@ -31,8 +31,10 @@ interface IProps {
 function EditProfileScreen({navigation}: IProps) {
   const dispatch = useDispatch();
   const {member} = useSelector((state: RootState) => state.member);
-  const {userError} = useSelector((state: RootState) => state.editNickname);
-  const [newNickname, setNewNickname] = useState<string>(member.name);
+  const {userError, user} = useSelector(
+    (state: RootState) => state.editNickname,
+  );
+  const [newNickname, setNewNickname] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string>('');
 
   const onPressGoBack = () => {
@@ -52,15 +54,30 @@ function EditProfileScreen({navigation}: IProps) {
     const postData = {
       name: newNickname,
     };
-    EditNicknameApi(postData)(dispatch);
-    MemberApi()(dispatch);
-    setErrorMessage('');
+    await EditNicknameApi(postData)(dispatch);
+    const newNickName = await MemberApi()(dispatch);
+    if (newNickName?.name) {
+      setNewNickname(newNickName.name);
+    }
   }
 
   useEffect(() => {
-    MemberApi()(dispatch);
-    userError && setErrorMessage(userError);
-  }, [dispatch, setNewNickname, userError]);
+    if (user) {
+      setErrorMessage('');
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (member) {
+      setNewNickname(member.name);
+    }
+  }, [member]);
+
+  useEffect(() => {
+    if (userError) {
+      setErrorMessage(userError);
+    }
+  }, [userError]);
 
   useEffect(() => {
     setErrorMessage('');

@@ -9,8 +9,8 @@ const LogoContainer = styled.View`
   align-items: center;
   padding-left: 20px;
   padding-right: 20px;
-  padding-top: 30px;
-  margin-bottom: 20px;
+  padding-top: 11px;
+  margin-bottom: 11px;
 `;
 
 const EmptyView = styled.View`

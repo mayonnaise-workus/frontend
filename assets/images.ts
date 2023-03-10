@@ -7,6 +7,7 @@ const images = {
   LEFT_ICON: require('./img/CaretLeft.png'),
   RIGHT_ICON: require('./img/rightIcon.png'),
   BOOKMARK_ICON: require('./img/BookmarkSimple.png'),
+  BOOKMARK_YELLOW_ICON: require('./img/BookmarkYellow.png'),
   PENCIL_ICON: require('./img/pencil.png'),
   PROFILE_WHITE: require('./img/profileImg.png'),
   PROFILE_GRAY: require('./img/ProfileImg2.png'),
@@ -21,6 +22,7 @@ const images = {
   LAPTOP_WORK: require('./img/laptop_work.png'),
   PERSONAL_STUDY: require('./img/personal_study.png'),
   SAMPLE_PLACE_IMAGE: require('./img/sample_place_image.png'),
+  SPARKLE: require('./img/Sparkle.png'),
 };
 
 export default images;

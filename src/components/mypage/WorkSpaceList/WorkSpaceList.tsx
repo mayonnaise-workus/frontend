@@ -1,8 +1,6 @@
 import React from 'react';
 import images from '../../../../assets/images';
 import {Pressable} from 'react-native';
-import {useDispatch} from 'react-redux';
-import {DeleteFavoriteWorkSpaces} from '../../../redux/service/DeleteFavoriteWorkSpaces';
 
 import {
   Address,
@@ -16,14 +14,10 @@ import {
 
 interface Ipros {
   list: {[key: string]: any};
+  handleData: () => void;
 }
 function WorkSpaceList(props: Ipros) {
-  const {list} = props;
-  const dispatch = useDispatch();
-
-  async function handleData(id: number) {
-    DeleteFavoriteWorkSpaces(id)(dispatch);
-  }
+  const {list, handleData} = props;
 
   return (
     <>
@@ -31,20 +25,20 @@ function WorkSpaceList(props: Ipros) {
         <Wrapper>
           <ImageBlock
             source={{
-              uri: `${list[1].profile_img}`,
+              uri: `${list.profile_img}`,
             }}
           />
           <Information>
             <Name numberOfLines={1} ellipsizeMode="tail">
-              {list[1].name}
+              {list.name}
             </Name>
             <Address numberOfLines={1} ellipsizeMode="tail">
-              {list[1].address}
+              {list.address}
             </Address>
           </Information>
           <LogoBlock>
-            <Pressable onPress={() => handleData(list[1].id)}>
-              <Logo source={images.BOOKMARK_GRAY} />
+            <Pressable onPress={() => handleData(list.id)}>
+              <Logo source={images.BOOKMARK_YELLOW_ICON} />
             </Pressable>
           </LogoBlock>
         </Wrapper>

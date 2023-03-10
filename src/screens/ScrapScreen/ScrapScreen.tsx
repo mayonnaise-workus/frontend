@@ -10,6 +10,9 @@ import {
   MyScreenStackNavigationProps,
   MyScreenStackParamList,
 } from '../myScreenPropsType';
+import {DeleteFavoriteWorkSpaces} from '../../redux/service/DeleteFavoriteWorkSpaces';
+import images from '../../../assets/images';
+import {Container, Image, Text} from './style';
 
 interface IProps {
   navigation: MyScreenStackNavigationProps<'Scrap'>;
@@ -36,19 +39,31 @@ function ScrapScreen({navigation}: IProps) {
 
   useEffect(() => {
     if (data) {
-      const newArray = Object.entries(data.list) as Array<[string, object]>;
-      setWorkSpaceList(newArray);
+      setWorkSpaceList(data.list);
     }
   }, [data]);
+
+  async function handleData(id: number) {
+    await DeleteFavoriteWorkSpaces(id)(dispatch);
+    const newWorkSpaceList = await WorkSpaceListApi()(dispatch);
+    if (newWorkSpaceList?.data?.list) {
+      setWorkSpaceList(newWorkSpaceList.data.list);
+    }
+  }
 
   return (
     <SafeAreaView>
       <ScrapHeader onPress={onPress} />
-      {workSpaceList.length > 0
-        ? workSpaceList.map((item: [string, object], index: number) => (
-            <WorkSpaceList key={index} list={item} />
-          ))
-        : null}
+      {workSpaceList && workSpaceList.length ? (
+        workSpaceList.map((item: [string, object], index: number) => (
+          <WorkSpaceList key={index} list={item} handleData={handleData} />
+        ))
+      ) : (
+        <Container>
+          <Image source={images.SPARKLE} />
+          <Text>아직 스크랩 중인 공간이 없어요!</Text>
+        </Container>
+      )}
     </SafeAreaView>
   );
 }
