@@ -1,18 +1,28 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
+interface ObjectType {
+  preference_workspace_purposes: number[];
+  preference_workspace_regions: number[];
+  preference_workspace_types: number[];
+}
+
 interface ApiState {
   loading: boolean;
   error: string | null;
-  data: number[];
+  data: ObjectType;
 }
 
 const initialState: ApiState = {
   loading: false,
   error: null,
-  data: [],
+  data: {
+    preference_workspace_purposes: [],
+    preference_workspace_regions: [],
+    preference_workspace_types: [],
+  },
 };
 
-const RegionListSlice = createSlice({
+const PreferenceSlice = createSlice({
   name: 'region',
   initialState,
   reducers: {
@@ -22,12 +32,12 @@ const RegionListSlice = createSlice({
     setError: (state, action: PayloadAction<string | null>) => {
       state.error = action.payload;
     },
-    setData: (state, action: PayloadAction<number[]>) => {
+    setData: (state, action: PayloadAction<ObjectType>) => {
       state.data = action.payload;
     },
   },
 });
 
-export const {setLoading, setError, setData} = RegionListSlice.actions;
+export const {setLoading, setError, setData} = PreferenceSlice.actions;
 
-export default RegionListSlice.reducer;
+export default PreferenceSlice.reducer;

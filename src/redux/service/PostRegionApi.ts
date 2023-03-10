@@ -18,7 +18,8 @@ export const PostRegionApi = (data: number[]) => {
           headers: {Authorization: `Bearer ${header}`},
         },
       );
-      dispatch(setData(data));
+      const jsonValue = JSON.stringify(response.status);
+      dispatch(setData(jsonValue));
       dispatch(setError(null));
     } catch (error) {
       dispatch(setError('An error occurred'));

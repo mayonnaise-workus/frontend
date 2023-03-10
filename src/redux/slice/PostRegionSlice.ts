@@ -3,13 +3,13 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 interface ApiState {
   loading: boolean;
   error: string | null;
-  data: number[];
+  data: any;
 }
 
 const initialState: ApiState = {
   loading: false,
   error: null,
-  data: [],
+  data: null,
 };
 
 const PostRegionSlice = createSlice({
@@ -22,7 +22,7 @@ const PostRegionSlice = createSlice({
     setError: (state, action: PayloadAction<string | null>) => {
       state.error = action.payload;
     },
-    setData: (state, action: PayloadAction<number[]>) => {
+    setData: (state, action: PayloadAction<any>) => {
       state.data = action.payload;
     },
   },
