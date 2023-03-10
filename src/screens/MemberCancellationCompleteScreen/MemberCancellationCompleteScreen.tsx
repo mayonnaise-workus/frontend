@@ -15,7 +15,7 @@ interface IProps {
 
 function MemberCancellationCompleteScreen({navigation}: IProps) {
   function handlePress() {
-    navigation.navigate('IntroNavigator');
+    navigation.navigate('OnBoarding');
   }
 
   return (

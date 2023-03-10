@@ -28,7 +28,7 @@ import HomeScrollDetail from './HomeScrollDetail';
 import filterFunc from './filter/filterFunc';
 import onClick from './filter/onClick';
 import images from '../../../assets/images';
-import {RegionListApi} from '../../redux/service/RegionListApi';
+import {PreferenceApi} from '../../redux/service/PreferenceApi';
 import {useDispatch, useSelector} from 'react-redux';
 import {WorkSpaceListByRegionApi} from '../../redux/service/WorkspaceListByRegionApi';
 import {RootState} from '../../redux/store/store';
@@ -45,13 +45,44 @@ type RegionType = {
 const Home = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    RegionListApi()(dispatch);
+    PreferenceApi()(dispatch);
   }, [dispatch]);
-  const {data: regionList} = useSelector(
-    (state: RootState) => state.regionlist,
+  const {data: preferenceObj} = useSelector(
+    (state: RootState) => state.preference,
   );
-  const selectedRegion: RegionType[] = [];
-  regionList.forEach(regionNum => selectedRegion.push(region[regionNum - 1]));
+  const [regionList, setRegionList] = useState<number[]>([]);
+  const [selectedRegion, setSelectedRegion] = useState<RegionType[]>([]);
+  const [currentRegion, setCurrentRegion] = useState([0, 0]);
+  const [isInitialRender, setIsInitialRender] = useState(true);
+
+  useEffect(() => {
+    if (preferenceObj) {
+      setRegionList(() => {
+        return preferenceObj.preference_workspace_regions;
+      });
+    }
+  }, [preferenceObj]);
+
+  useEffect(() => {
+    if (regionList.length) {
+      setSelectedRegion(() => {
+        const newSelectedRegion: RegionType[] = [];
+        regionList.forEach(regionNum =>
+          newSelectedRegion.push(region[regionNum - 1]),
+        );
+        return newSelectedRegion;
+      });
+    }
+  }, [regionList]);
+
+  useEffect(() => {
+    if (isInitialRender && selectedRegion.length) {
+      setIsInitialRender(false);
+      setCurrentRegion(() => {
+        return [selectedRegion[0].latitude, selectedRegion[0].longitude];
+      });
+    }
+  }, [isInitialRender, selectedRegion]);
 
   useEffect(() => {
     regionList.length && WorkSpaceListByRegionApi(regionList)(dispatch);
@@ -75,11 +106,6 @@ const Home = () => {
       ];
     });
   };
-
-  const [currentRegion, setCurrentRegion] = useState([
-    selectedRegion[0].latitude,
-    selectedRegion[0].longitude,
-  ]);
 
   const [filterObject, setFilterObject] = useState({
     obj: [0],

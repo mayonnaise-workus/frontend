@@ -3,6 +3,7 @@ import {
   NativeStackNavigationProp,
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
+import {IntroStackNavigationProps} from './introScreenPropsType';
 import {MainStackNavigationProps} from './mainScreenPropsType';
 
 export type MyScreenStackParamList = {
@@ -18,7 +19,13 @@ type MyScreenProps<T extends keyof MyScreenStackParamList = 'MyPage'> =
 
 export type MyScreenStackNavigationProps<
   T extends keyof MyScreenStackParamList = 'MyPage',
-> = CompositeNavigationProp<MyScreenProps<T>, MainStackNavigationProps<'My'>>;
+> = CompositeNavigationProp<
+  MyScreenProps<T>,
+  CompositeNavigationProp<
+    MainStackNavigationProps<'My'>,
+    IntroStackNavigationProps<'OnBoarding'>
+  >
+>;
 
 export type MyPageProps = NativeStackScreenProps<
   MyScreenStackParamList,

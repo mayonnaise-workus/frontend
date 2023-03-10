@@ -10,7 +10,7 @@ import EditNicknameReducer from '../slice/EditNicknameSlice';
 import LogoutReducer from '../slice/LogoutSlice';
 import WorkSpaceListReducer from '../slice/WorkSpaceListSlice';
 import WorkSpaceByRegionReducer from '../slice/WorkspaceListByRegionSlice';
-import RegionListReducer from '../slice/RegionListSlice';
+import PreferenceReducer from '../slice/PreferenceSlice';
 import FavoriteWorkSpacesReducer from '../slice/FavoriteWorkSpacesSlice';
 import DeleteFavoriteWorkSpacesReducer from '../slice/DeleteFavoriteWorkSpacesSlice';
 import GoogleLoginReducer from '../slice/GoogleLoginSlice';
@@ -32,7 +32,7 @@ export const store = configureStore({
     logout: LogoutReducer,
     workspacelist: WorkSpaceListReducer,
     workspacebyregionlist: WorkSpaceByRegionReducer,
-    regionlist: RegionListReducer,
+    preference: PreferenceReducer,
     favorieworkspace: FavoriteWorkSpacesReducer,
     deleteworkspace: DeleteFavoriteWorkSpacesReducer,
     deletemember: DeleteMemberReducer,
