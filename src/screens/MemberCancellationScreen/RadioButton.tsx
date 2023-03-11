@@ -4,7 +4,7 @@ import {View, Text, TouchableOpacity} from 'react-native';
 const RadioButton = ({label, checked, onPress}) => {
   return (
     <TouchableOpacity
-      style={{flexDirection: 'row', alignItems: 'center'}}
+      style={{flexDirection: 'row', alignItems: 'center', marginBottom: 10}}
       onPress={onPress}>
       <View
         style={{

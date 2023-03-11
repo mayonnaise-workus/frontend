@@ -66,7 +66,7 @@ const Home = () => {
   }, [preferenceObj]);
 
   useEffect(() => {
-    if (regionList && regionList.length >= 1) {
+    if (regionList && regionList.length) {
       setSelectedRegion(() => {
         const newSelectedRegion: RegionType[] = [];
         regionList.forEach(regionNum =>
@@ -88,6 +88,7 @@ const Home = () => {
 
   useEffect(() => {
     regionList &&
+      regionList.length &&
       regionList.length >= 1 &&
       WorkSpaceListByRegionApi(regionList)(dispatch);
   }, [dispatch, regionList]);

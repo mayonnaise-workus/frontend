@@ -1,7 +1,15 @@
-import styled from "styled-components";
+import styled from 'styled-components/native';
+
+export const Container = styled.View`
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 20px;
+  padding-left: 20px;
+  height: 44px;
+  flex-direction: row;
+`;
 
 export const PressableBlock = styled.Pressable`
-  position: absolute;
   left: 24px;
   top: 18px;
 `;

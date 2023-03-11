@@ -1,7 +1,8 @@
 import React from 'react';
-import {SafeAreaView} from 'react-native';
-import images from '../../../../assets/images';
-import {ImageBlock, PressableBlock} from './style';
+import {Pressable} from 'react-native';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faAngleLeft} from '@fortawesome/free-solid-svg-icons';
+import {Container} from './style';
 
 interface IProps {
   onPress: () => void;
@@ -11,11 +12,11 @@ function HeaderBackButton(props: IProps) {
   const {onPress} = props;
 
   return (
-    <SafeAreaView>
-      <PressableBlock onPress={onPress}>
-        <ImageBlock source={images.LEFT_ICON} />
-      </PressableBlock>
-    </SafeAreaView>
+    <Container>
+      <Pressable onPress={onPress}>
+        <FontAwesomeIcon icon={faAngleLeft} size={25} />
+      </Pressable>
+    </Container>
   );
 }
 

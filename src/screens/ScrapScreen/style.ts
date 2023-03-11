@@ -1,8 +1,13 @@
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import COLORS from '../../../packages/colors';
 
-export const Container = styled.View`
-  margin-top: 50%;
+export const Container = styled.SafeAreaView`
+  flex: 1;
+  background-color: white;
+`;
+
+export const ImageContainer = styled.View`
+  flex: 20;
   justify-content: center;
   justify-items: center;
   align-items: center;

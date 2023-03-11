@@ -5,9 +5,6 @@ import COLORS from '../../../packages/colors';
 export const Container = styled.SafeAreaView`
   flex: 1;
   background-color: white;
-  padding-right: 20px;
-  padding-left: 20px;
-  padding-bottom: 30px;
 `;
 
 export const ProfileContainer = styled.View`
@@ -21,6 +18,8 @@ export const Profile = styled.Image`
 `;
 
 export const NicknameChangeContainer = styled.View`
+  padding-right: 20px;
+  padding-left: 20px;
   flex: 2;
 `;
 
@@ -37,4 +36,8 @@ export const TextInput = styled.TextInput`
   padding: 10px;
   border-radius: 10px;
   background-color: ${COLORS.GRAY_8};
+`;
+
+export const EmptyView = styled.View`
+  flex: 1;
 `;

@@ -1,6 +1,11 @@
 import React from 'react';
-import images from '../../../../assets/images';
-import {ImageBlock, PressableBlock, Text, Wrapper} from './style';
+import {Pressable} from 'react-native';
+import {Text, Wrapper} from './style';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {
+  faAngleLeft,
+  faEllipsisVertical,
+} from '@fortawesome/free-solid-svg-icons';
 
 interface IProps {
   onPress: () => void;
@@ -9,13 +14,13 @@ interface IProps {
 function ScrapHeader({onPress}: IProps) {
   return (
     <Wrapper>
-      <PressableBlock onPress={onPress}>
-        <ImageBlock source={images.LEFT_ICON} />
-      </PressableBlock>
+      <Pressable onPress={onPress}>
+        <FontAwesomeIcon icon={faAngleLeft} size={25} />
+      </Pressable>
       <Text>스크랩</Text>
-      <PressableBlock>
-        <ImageBlock source={images.DOTSTHREEOUTLINEVERTICAL} />
-      </PressableBlock>
+      <Pressable onPress={onPress}>
+        <FontAwesomeIcon icon={faEllipsisVertical} size={25} />
+      </Pressable>
     </Wrapper>
   );
 }

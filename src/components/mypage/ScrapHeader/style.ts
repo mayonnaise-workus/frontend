@@ -1,10 +1,10 @@
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import COLORS from '../../../../packages/colors';
 
 export const Wrapper = styled.View`
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-bottom: 12px;
+  flex: 1;
+  padding-top: 10px;
+  padding-bottom: 10px;
   flex-direction: row;
   justify-content: space-between;
   border-bottom-width: 1px;
@@ -14,11 +14,5 @@ export const Wrapper = styled.View`
 export const Text = styled.Text`
   font-weight: 600;
   font-size: 18px;
-`;
-
-export const PressableBlock = styled.Pressable``;
-
-export const ImageBlock = styled.Image`
-  width: 10px;
-  height: 20px;
+  color: black;
 `;
