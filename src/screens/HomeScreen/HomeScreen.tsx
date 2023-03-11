@@ -85,7 +85,9 @@ const Home = () => {
   }, [isInitialRender, selectedRegion]);
 
   useEffect(() => {
-    regionList.length && WorkSpaceListByRegionApi(regionList)(dispatch);
+    regionList &&
+      regionList.length &&
+      WorkSpaceListByRegionApi(regionList)(dispatch);
   }, [dispatch, regionList]);
   const {data: workspaceList} = useSelector(
     (state: RootState) => state.workspacebyregionlist,
