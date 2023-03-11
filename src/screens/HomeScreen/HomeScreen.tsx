@@ -64,7 +64,7 @@ const Home = () => {
   }, [preferenceObj]);
 
   useEffect(() => {
-    if (regionList.length) {
+    if (regionList && regionList.length) {
       setSelectedRegion(() => {
         const newSelectedRegion: RegionType[] = [];
         regionList.forEach(regionNum =>

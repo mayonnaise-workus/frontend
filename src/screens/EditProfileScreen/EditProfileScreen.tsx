@@ -11,6 +11,7 @@ import {
   Title,
   ProfileContainer,
   NicknameChangeContainer,
+  EmptyView,
 } from './style';
 import {useSelector, useDispatch} from 'react-redux';
 import {MemberApi} from '../../redux/service/MemberApi';
@@ -108,6 +109,7 @@ function EditProfileScreen({navigation}: IProps) {
         backgroundColor={COLORS.TWO}
         textColor="black"
       />
+      <EmptyView />
     </Container>
   );
 }
