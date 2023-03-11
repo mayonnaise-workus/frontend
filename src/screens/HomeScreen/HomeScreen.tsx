@@ -44,9 +44,11 @@ type RegionType = {
 
 const Home = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     PreferenceApi()(dispatch);
   }, [dispatch]);
+
   const {data: preferenceObj} = useSelector(
     (state: RootState) => state.preference,
   );
@@ -87,6 +89,7 @@ const Home = () => {
   useEffect(() => {
     regionList &&
       regionList.length &&
+      regionList.length >= 1 &&
       WorkSpaceListByRegionApi(regionList)(dispatch);
   }, [dispatch, regionList]);
   const {data: workspaceList} = useSelector(
