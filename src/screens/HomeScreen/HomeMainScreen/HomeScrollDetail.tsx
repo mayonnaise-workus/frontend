@@ -64,6 +64,9 @@ interface IHomeScrollDetailProps {
   id: number;
   name: string;
   address: string;
+  image: string;
+  latitude: number;
+  longitude: number;
   workspace_type: number;
   workspace_obj: number;
   workspace_capacity: number;
@@ -74,6 +77,9 @@ const HomeScrollDetail = ({
   id,
   name,
   address,
+  image,
+  latitude,
+  longitude,
   workspace_type,
   workspace_obj,
   workspace_capacity,
@@ -90,12 +96,15 @@ const HomeScrollDetail = ({
           id,
           name,
           address,
+          image,
+          latitude,
+          longitude,
           selectedObj,
           selectedWorkspace,
           selectedCapacity,
         });
       }}>
-      <DetailImage source={images.SAMPLE_PLACE_IMAGE} />
+      <DetailImage source={image ? {uri: image} : images.SAMPLE_PLACE_IMAGE} />
       <DetailBottomContainer>
         <DetailTitle>{name}</DetailTitle>
         <DetailPlace>{address}</DetailPlace>

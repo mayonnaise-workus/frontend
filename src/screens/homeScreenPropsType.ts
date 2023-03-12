@@ -10,7 +10,10 @@ export type HomeScreenStackParamList = {
   HomeDetail: {
     id: number;
     name: string;
+    image: string;
     address: string;
+    latitude: number;
+    longitude: number;
     selectedObj: string;
     selectedWorkspace: string;
     selectedCapacity: string;

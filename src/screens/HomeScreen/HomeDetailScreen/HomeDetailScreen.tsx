@@ -23,6 +23,7 @@ import {
   DetailTagContent,
   ScrollViewContainer,
   MapContainer,
+  ImageContainer,
 } from './style';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faAngleLeft} from '@fortawesome/free-solid-svg-icons';
@@ -41,8 +42,17 @@ interface IHomeDetailProps {
 }
 
 const HomeDetail = ({navigation, route}: IHomeDetailProps) => {
-  const {id, name, address, selectedObj, selectedWorkspace, selectedCapacity} =
-    route.params;
+  const {
+    id,
+    name,
+    address,
+    image,
+    latitude,
+    longitude,
+    selectedObj,
+    selectedWorkspace,
+    selectedCapacity,
+  } = route.params;
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -50,23 +60,10 @@ const HomeDetail = ({navigation, route}: IHomeDetailProps) => {
   }, [dispatch, id]);
   const {data} = useSelector((state: RootState) => state.detailworkspace);
   const [contact, setContact] = useState('');
-  const [profileImage, setProfileImage] = useState('');
-  const [latitude, setLatitude] = useState(0);
-  const [longitude, setLongitude] = useState(0);
-
   useEffect(() => {
     if (data.name.length) {
       setContact(() => {
         return data.contact;
-      });
-      setProfileImage(() => {
-        return data.profile_img;
-      });
-      setLatitude(() => {
-        return data.latitude;
-      });
-      setLongitude(() => {
-        return data.longitude;
       });
     }
   }, [data]);
@@ -84,7 +81,9 @@ const HomeDetail = ({navigation, route}: IHomeDetailProps) => {
           <Title>{name}</Title>
           <EmptyView />
         </Header>
-        {profileImage.length >= 1 && <Image source={{uri: profileImage}} />}
+        <ImageContainer>
+          <Image source={image ? {uri: image} : images.SAMPLE_PLACE_IMAGE} />
+        </ImageContainer>
         <ContentContainer>
           <FirstLineContainer>
             <Title>{name}</Title>
