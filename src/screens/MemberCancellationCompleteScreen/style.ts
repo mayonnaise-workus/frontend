@@ -4,13 +4,12 @@ import COLORS from '../../../packages/colors';
 export const Container = styled.SafeAreaView`
   flex: 1;
   background-color: white;
-  position: relative;
 `;
 
 export const Pressable = styled.Pressable`
-  position: absolute;
-  top: 15px;
-  right: 15px;
+  margin-top: 5px;
+  align-items: flex-end;
+  margin-right: 20px;
 `;
 
 export const X = styled.Image`
