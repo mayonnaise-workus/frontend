@@ -1,11 +1,11 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 interface DataType {
-  address: string;
   id: number;
-  latitude: string;
-  longitude: string;
   name: string;
+  address: string;
+  latitude: number;
+  longitude: number;
   profile_img: string;
   workspace_capacity: number;
   workspace_obj: number;

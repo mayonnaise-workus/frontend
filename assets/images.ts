@@ -23,6 +23,8 @@ const images = {
   PERSONAL_STUDY: require('./img/personal_study.png'),
   SAMPLE_PLACE_IMAGE: require('./img/sample_place_image.png'),
   SPARKLE: require('./img/Sparkle.png'),
+  GRAY_LOGO: require('./img/grayLogo.png'),
+  BLACK_LOGO: require('./img/blackLogo.png'),
 };
 
 export default images;

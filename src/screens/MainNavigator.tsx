@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, Text} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import HomeScreen from './HomeScreen/HomeScreen';
+import HomeScreenNavigator from './HomeScreenNavigator';
 import MagazineScreen from './MagazineScreen/MagazineScreen';
 import MyScreenNavigator from './MyScreenNavigator';
 import {MainStackParamList} from './mainScreenPropsType';
@@ -17,7 +17,7 @@ function MainNavigator() {
       screenOptions={{headerShown: false}}>
       <Main.Screen
         name="Home"
-        component={HomeScreen}
+        component={HomeScreenNavigator}
         options={{
           tabBarIcon: ({focused}) => (
             <Image
