@@ -17,6 +17,7 @@ import GoogleLoginReducer from '../slice/GoogleLoginSlice';
 import AppleLoginReducer from '../slice/AppleLoginSlice';
 import DeleteMemberReducer from '../slice/DeleteMemberSlice';
 import GetDetailWorkspaceReducer from '../slice/GetDetailWorkspaceSlice';
+import OnboardingReducer from '../slice/OnboardingSlice';
 
 export const store = configureStore({
   reducer: {
@@ -38,6 +39,7 @@ export const store = configureStore({
     deleteworkspace: DeleteFavoriteWorkSpacesReducer,
     deletemember: DeleteMemberReducer,
     detailworkspace: GetDetailWorkspaceReducer,
+    onboarding: OnboardingReducer,
   },
 });
 

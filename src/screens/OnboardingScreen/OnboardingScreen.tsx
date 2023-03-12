@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {RouteProp} from '@react-navigation/native';
 import {LoginContainer, Logo, LogoContainer, Button, ButtonText} from './style';
 import {login} from '@react-native-seoul/kakao-login';
@@ -16,6 +16,7 @@ import appleAuth from '@invertase/react-native-apple-authentication';
 import {GoogleLogin} from '../../redux/service/GoogleLogin';
 import {AppleLogin} from '../../redux/service/AppleLogin';
 import {MemberApi} from '../../redux/service/MemberApi';
+import {OnboardingApi} from '../../redux/service/Onboarding';
 
 interface IProps {
   navigation: IntroStackNavigationProps<'OnBoarding'>;
@@ -24,14 +25,39 @@ interface IProps {
 
 function OnboardingScreen({navigation}: IProps) {
   const dispatch = useDispatch();
-  const {member} = useSelector((state: RootState) => state.member);
+  const {data} = useSelector((state: RootState) => state.onboarding);
+  const [onboarding, setOnboarding] = useState([]);
 
   useEffect(() => {
-    async function fetchData() {
-      await MemberApi()(dispatch);
-    }
-    fetchData();
+    MemberApi()(dispatch);
+    OnboardingApi()(dispatch);
   }, [dispatch]);
+
+  useEffect(() => {
+    setOnboarding(data);
+  }, [data]);
+
+  useEffect(() => {
+    if (onboarding && onboarding.length > 0) {
+      MemberOnboarding();
+    }
+  }, [onboarding]);
+
+  async function MemberOnboarding() {
+    if (onboarding && !onboarding.terms_of_service_status) {
+      navigation.navigate('ServiceTerm');
+    } else if (onboarding && !onboarding.nickname_status) {
+      navigation.navigate('RegisterNickname');
+    } else if (onboarding && !onboarding.member_preference_region_status) {
+      navigation.navigate('RegisterRegion');
+    } else if (onboarding && !onboarding.member_purpose_status) {
+      navigation.navigate('RegisterPurpose');
+    } else if (onboarding && !onboarding.member_preference_workspace_status) {
+      navigation.navigate('RegisterWorkspace');
+    } else {
+      navigation.navigate('MainNavigator');
+    }
+  }
 
   const handleKakaoLogin = async () => {
     const result = await login();
@@ -44,7 +70,7 @@ function OnboardingScreen({navigation}: IProps) {
         1000,
     };
     await KakaoLogin(postData)(dispatch);
-    navigation.navigate(member ? 'MainNavigator' : 'ServiceTerm');
+    await MemberOnboarding();
   };
 
   const handleGoogleLogin = async () => {
@@ -55,8 +81,7 @@ function OnboardingScreen({navigation}: IProps) {
       serverAuthCode: res.serverAuthCode,
     };
     await GoogleLogin(postData)(dispatch);
-
-    navigation.navigate(member ? 'MainNavigator' : 'ServiceTerm');
+    await MemberOnboarding();
   };
 
   async function onAppleButtonPress() {
@@ -72,8 +97,7 @@ function OnboardingScreen({navigation}: IProps) {
       user: user,
     };
     await AppleLogin(postData)(dispatch);
-
-    navigation.navigate(member ? 'MainNavigator' : 'ServiceTerm');
+    await MemberOnboarding();
   }
 
   return (
