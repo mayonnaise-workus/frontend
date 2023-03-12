@@ -109,6 +109,8 @@ const Home = () => {
     });
   };
 
+  console.log(workspaceList);
+
   const [filterObject, setFilterObject] = useState({
     obj: [0],
     num: [0],
@@ -119,7 +121,7 @@ const Home = () => {
   const [numButtonIsClicked, setNumButtonIsClicked] = useState(false);
   const [placeButtonIsClicked, setPlaceButtonIsClicked] = useState(false);
 
-  const filteredData = filterFunc(filterObject);
+  const filteredData = filterFunc(filterObject, workspaceList);
 
   const bottomSheetRef = useRef<BottomSheet>(null);
 
@@ -177,8 +179,8 @@ const Home = () => {
                 latitudeDelta: 0.00922,
                 longitudeDelta: 0.00421,
               }}>
-              {workspaceList &&
-                workspaceList.map((item, index) => (
+              {filteredData &&
+                filteredData.map((item, index) => (
                   <Marker
                     key={index}
                     coordinate={{
@@ -360,12 +362,16 @@ const Home = () => {
                 alignItems: 'center',
                 minHeight: 1800,
               }}>
-              <HomeScrollDetail />
-              <HomeScrollDetail />
-              <HomeScrollDetail />
-              <HomeScrollDetail />
-              <HomeScrollDetail />
-              <HomeScrollDetail />
+              {filteredData.map(item => (
+                <HomeScrollDetail
+                  key={item.name}
+                  name={item.name}
+                  address={item.address}
+                  workspace_obj={item.workspace_obj}
+                  workspace_type={item.workspace_type}
+                  workspace_capacity={item.workspace_capacity}
+                />
+              ))}
             </ScrollView>
           </BottomSheet>
         </Container>

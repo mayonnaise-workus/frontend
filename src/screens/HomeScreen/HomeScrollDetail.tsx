@@ -2,6 +2,7 @@ import React from 'react';
 import {Dimensions} from 'react-native';
 import styled from 'styled-components/native';
 import images from '../../../assets/images';
+import {capacity, purpose, workspace} from '../../data';
 
 const DetailWholeContainer = styled.View`
   width: ${Dimensions.get('window').width - 40}px;
@@ -59,19 +60,40 @@ const DetailTagContent = styled.Text`
   color: black;
 `;
 
-const HomeScrollDetail = () => {
+interface IHomeScrollDetailProps {
+  name: string;
+  address: string;
+  workspace_type: number;
+  workspace_obj: number;
+  workspace_capacity: number;
+}
+
+const HomeScrollDetail = ({
+  name,
+  address,
+  workspace_type,
+  workspace_obj,
+  workspace_capacity,
+}: IHomeScrollDetailProps) => {
+  const selectedObj = `${purpose[workspace_obj].icon} ${purpose[workspace_obj].title}`;
+  const selectedWorkspace = `${workspace[workspace_type].title}`;
+  const selectedCapacity = `${capacity[workspace_capacity].title}`;
+
   return (
     <DetailWholeContainer>
       <DetailImage source={images.SAMPLE_PLACE_IMAGE} />
       <DetailBottomContainer>
-        <DetailTitle>ㅇㅇ 카페</DetailTitle>
-        <DetailPlace>서울시 강남구</DetailPlace>
+        <DetailTitle>{name}</DetailTitle>
+        <DetailPlace>{address}</DetailPlace>
         <DetailTagRow>
           <DetailTag>
-            <DetailTagContent>카페</DetailTagContent>
+            <DetailTagContent>{selectedObj}</DetailTagContent>
           </DetailTag>
           <DetailTag>
-            <DetailTagContent>노트북 작업</DetailTagContent>
+            <DetailTagContent>{selectedWorkspace}</DetailTagContent>
+          </DetailTag>
+          <DetailTag>
+            <DetailTagContent>{selectedCapacity}</DetailTagContent>
           </DetailTag>
         </DetailTagRow>
       </DetailBottomContainer>
