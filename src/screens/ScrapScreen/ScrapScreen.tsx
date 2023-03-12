@@ -12,6 +12,7 @@ import {
 import {DeleteFavoriteWorkSpaces} from '../../redux/service/DeleteFavoriteWorkSpaces';
 import images from '../../../assets/images';
 import {ImageContainer, Image, Text, Container, Block} from './style';
+import {ScrollView} from 'react-native-gesture-handler';
 
 interface IProps {
   navigation: MyScreenStackNavigationProps<'Scrap'>;
@@ -57,9 +58,11 @@ function ScrapScreen({navigation}: IProps) {
       </Container>
       <Block>
         {workSpaceList && workSpaceList.length ? (
-          workSpaceList.map((item: [string, object], index: number) => (
-            <WorkSpaceList key={index} list={item} handleData={handleData} />
-          ))
+          <ScrollView>
+            {workSpaceList.map((item: [string, object], index: number) => (
+              <WorkSpaceList key={index} list={item} handleData={handleData} />
+            ))}
+          </ScrollView>
         ) : (
           <ImageContainer>
             <Image source={images.SPARKLE} />
