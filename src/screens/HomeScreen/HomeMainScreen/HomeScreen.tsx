@@ -1,4 +1,5 @@
 import React, {useEffect, useMemo, useRef, useState} from 'react';
+import {RouteProp} from '@react-navigation/native';
 import {
   Animated,
   Dimensions,
@@ -21,17 +22,26 @@ import BottomSheet, {
   BottomSheetModalProvider,
   useBottomSheetSpringConfigs,
 } from '@gorhom/bottom-sheet';
-import {region, purpose, workspace, capacity} from '../../data';
+import {region, purpose, workspace, capacity} from '../../../data';
 import {GestureHandlerRootView, ScrollView} from 'react-native-gesture-handler';
-import MainHeader from '../../components/common/MainHeader';
+import MainHeader from '../../../components/common/MainHeader';
 import HomeScrollDetail from './HomeScrollDetail';
-import filterFunc from './filter/filterFunc';
-import onClick from './filter/onClick';
-import images from '../../../assets/images';
-import {PreferenceApi} from '../../redux/service/PreferenceApi';
+import filterFunc from '../filter/filterFunc';
+import onClick from '../filter/onClick';
+import images from '../../../../assets/images';
+import {PreferenceApi} from '../../../redux/service/PreferenceApi';
 import {useDispatch, useSelector} from 'react-redux';
-import {WorkSpaceListByRegionApi} from '../../redux/service/WorkspaceListByRegionApi';
-import {RootState} from '../../redux/store/store';
+import {WorkSpaceListByRegionApi} from '../../../redux/service/WorkspaceListByRegionApi';
+import {RootState} from '../../../redux/store/store';
+import {
+  HomeScreenStackNavigationProps,
+  HomeScreenStackParamList,
+} from '../../homeScreenPropsType';
+
+interface IHomeProps {
+  navigation: HomeScreenStackNavigationProps<'HomeMain'>;
+  route: RouteProp<HomeScreenStackParamList, 'HomeMain'>;
+}
 
 type RegionType = {
   id: number;
@@ -42,7 +52,7 @@ type RegionType = {
   longitude: number;
 };
 
-const Home = () => {
+const Home = ({navigation}: IHomeProps) => {
   const dispatch = useDispatch();
   useEffect(() => {
     PreferenceApi()(dispatch);
@@ -108,8 +118,6 @@ const Home = () => {
       ];
     });
   };
-
-  console.log(workspaceList);
 
   const [filterObject, setFilterObject] = useState({
     obj: [0],
@@ -360,16 +368,18 @@ const Home = () => {
               contentContainerStyle={{
                 flex: 1,
                 alignItems: 'center',
-                minHeight: 1800,
+                minHeight: 50 + 280 * filteredData.length,
               }}>
               {filteredData.map(item => (
                 <HomeScrollDetail
                   key={item.name}
+                  id={item.id}
                   name={item.name}
                   address={item.address}
                   workspace_obj={item.workspace_obj}
                   workspace_type={item.workspace_type}
                   workspace_capacity={item.workspace_capacity}
+                  navigate={navigation.navigate}
                 />
               ))}
             </ScrollView>

@@ -1,10 +1,10 @@
 import React from 'react';
 import {Dimensions} from 'react-native';
 import styled from 'styled-components/native';
-import images from '../../../assets/images';
-import {capacity, purpose, workspace} from '../../data';
+import images from '../../../../assets/images';
+import {capacity, purpose, workspace} from '../../../data';
 
-const DetailWholeContainer = styled.View`
+const DetailWholeContainer = styled.Pressable`
   width: ${Dimensions.get('window').width - 40}px;
   height: 260px;
   margin-bottom: 20px;
@@ -61,26 +61,40 @@ const DetailTagContent = styled.Text`
 `;
 
 interface IHomeScrollDetailProps {
+  id: number;
   name: string;
   address: string;
   workspace_type: number;
   workspace_obj: number;
   workspace_capacity: number;
+  navigate: any;
 }
 
 const HomeScrollDetail = ({
+  id,
   name,
   address,
   workspace_type,
   workspace_obj,
   workspace_capacity,
+  navigate,
 }: IHomeScrollDetailProps) => {
   const selectedObj = `${purpose[workspace_obj].icon} ${purpose[workspace_obj].title}`;
   const selectedWorkspace = `${workspace[workspace_type].title}`;
   const selectedCapacity = `${capacity[workspace_capacity].title}`;
 
   return (
-    <DetailWholeContainer>
+    <DetailWholeContainer
+      onPress={() => {
+        navigate('HomeDetail', {
+          id,
+          name,
+          address,
+          selectedObj,
+          selectedWorkspace,
+          selectedCapacity,
+        });
+      }}>
       <DetailImage source={images.SAMPLE_PLACE_IMAGE} />
       <DetailBottomContainer>
         <DetailTitle>{name}</DetailTitle>
