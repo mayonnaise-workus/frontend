@@ -84,7 +84,7 @@ const HomeDetail = ({navigation, route}: IHomeDetailProps) => {
           <Title>{name}</Title>
           <EmptyView />
         </Header>
-        <Image source={{uri: profileImage}} />
+        {profileImage.length >= 1 && <Image source={{uri: profileImage}} />}
         <ContentContainer>
           <FirstLineContainer>
             <Title>{name}</Title>
