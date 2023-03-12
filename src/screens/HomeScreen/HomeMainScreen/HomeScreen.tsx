@@ -378,7 +378,10 @@ const Home = ({navigation}: IHomeProps) => {
                   key={item.name}
                   id={item.id}
                   name={item.name}
+                  image={item.profile_img}
                   address={item.address}
+                  latitude={item.latitude}
+                  longitude={item.longitude}
                   workspace_obj={item.workspace_obj}
                   workspace_type={item.workspace_type}
                   workspace_capacity={item.workspace_capacity}

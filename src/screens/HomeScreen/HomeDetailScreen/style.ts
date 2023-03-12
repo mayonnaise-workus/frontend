@@ -31,11 +31,17 @@ export const EmptyView = styled.View`
   width: 25px;
 `;
 
-export const Image = styled.Image`
+export const ImageContainer = styled.View`
   height: 200px;
   padding-right: 20px;
   padding-left: 20px;
   margin-bottom: 30px;
+`;
+
+export const Image = styled.Image`
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
 `;
 
 export const ContentContainer = styled.View`
