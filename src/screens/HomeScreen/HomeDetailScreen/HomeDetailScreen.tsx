@@ -24,6 +24,9 @@ import {
   ScrollViewContainer,
   MapContainer,
   ImageContainer,
+  BookMark,
+  LogoImage,
+  Block,
 } from './style';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faAngleLeft} from '@fortawesome/free-solid-svg-icons';
@@ -35,6 +38,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import {GetDetailWorkspaceApi} from '../../../redux/service/GetDetailWorkspaceApi';
 import {RootState} from '../../../redux/store/store';
 import MapView, {Marker} from 'react-native-maps';
+import {WorkSpaceListApi} from '../../../redux/service/WorkSpaceListApi';
+import {DeleteFavoriteWorkSpaces} from '../../../redux/service/DeleteFavoriteWorkSpaces';
+import {FavoriteWorkSpaces} from '../../../redux/service/FavoriteWorkSpaces';
 
 interface IHomeDetailProps {
   navigation: HomeScreenStackNavigationProps<'HomeDetail'>;
@@ -57,9 +63,30 @@ const HomeDetail = ({navigation, route}: IHomeDetailProps) => {
   const dispatch = useDispatch();
   useEffect(() => {
     GetDetailWorkspaceApi(id)(dispatch);
+    WorkSpaceListApi()(dispatch);
   }, [dispatch, id]);
+  const {data: scrapList} = useSelector(
+    (state: RootState) => state.workspacelist,
+  );
+  const [workSpaceList, setWorkSpaceList] = useState<Array<[string, object]>>(
+    [],
+  );
+  const [favorite, setFavorite] = useState<boolean>(false);
   const {data} = useSelector((state: RootState) => state.detailworkspace);
   const [contact, setContact] = useState('');
+
+  useEffect(() => {
+    if (scrapList) {
+      setWorkSpaceList(scrapList.list);
+    }
+  }, [scrapList, favorite]);
+
+  useEffect(() => {
+    workSpaceList &&
+      workSpaceList.length >= 1 &&
+      setFavorite(workSpaceList.some(obj => obj.id === id));
+  }, [favorite, id, workSpaceList]);
+
   useEffect(() => {
     if (data.name.length) {
       setContact(() => {
@@ -67,6 +94,25 @@ const HomeDetail = ({navigation, route}: IHomeDetailProps) => {
       });
     }
   }, [data]);
+
+  async function DeleteScrap(id: number) {
+    await DeleteFavoriteWorkSpaces(id)(dispatch);
+    setFavorite(false);
+    const newWorkSpaceList = await WorkSpaceListApi()(dispatch);
+    if (newWorkSpaceList?.scrapList?.list) {
+      setWorkSpaceList(newWorkSpaceList.scrapList.list);
+    }
+  }
+
+  async function AddScrap(id: number) {
+    await FavoriteWorkSpaces(id)(dispatch);
+    setFavorite(true);
+
+    const newWorkSpaceList = await WorkSpaceListApi()(dispatch);
+    if (newWorkSpaceList?.scrapList?.list) {
+      setWorkSpaceList(newWorkSpaceList.scrapList.list);
+    }
+  }
 
   return (
     <Container>
@@ -85,26 +131,39 @@ const HomeDetail = ({navigation, route}: IHomeDetailProps) => {
           <Image source={image ? {uri: image} : images.SAMPLE_PLACE_IMAGE} />
         </ImageContainer>
         <ContentContainer>
-          <FirstLineContainer>
-            <Title>{name}</Title>
-          </FirstLineContainer>
-          <DescriptionContainer>
-            <Description>{address}</Description>
-          </DescriptionContainer>
-          <DescriptionContainer>
-            <Description>{contact}</Description>
-          </DescriptionContainer>
-          <DetailTagRow>
-            <DetailTag>
-              <DetailTagContent>{selectedObj}</DetailTagContent>
-            </DetailTag>
-            <DetailTag>
-              <DetailTagContent>{selectedWorkspace}</DetailTagContent>
-            </DetailTag>
-            <DetailTag>
-              <DetailTagContent>{selectedCapacity}</DetailTagContent>
-            </DetailTag>
-          </DetailTagRow>
+          <Block>
+            <FirstLineContainer>
+              <Title>{name}</Title>
+            </FirstLineContainer>
+            <DescriptionContainer>
+              <Description>{address}</Description>
+            </DescriptionContainer>
+            <DescriptionContainer>
+              <Description>{contact}</Description>
+            </DescriptionContainer>
+            <DetailTagRow>
+              <DetailTag>
+                <DetailTagContent>{selectedObj}</DetailTagContent>
+              </DetailTag>
+              <DetailTag>
+                <DetailTagContent>{selectedWorkspace}</DetailTagContent>
+              </DetailTag>
+              <DetailTag>
+                <DetailTagContent>{selectedCapacity}</DetailTagContent>
+              </DetailTag>
+            </DetailTagRow>
+          </Block>
+          <BookMark>
+            {favorite ? (
+              <Pressable onPress={() => DeleteScrap(id)}>
+                <LogoImage source={images.BOOKMARK_YELLOW_ICON} />
+              </Pressable>
+            ) : (
+              <Pressable onPress={() => AddScrap(id)}>
+                <LogoImage source={images.BOOKMARK_GRAY} />
+              </Pressable>
+            )}
+          </BookMark>
         </ContentContainer>
         <URLContainer>
           <URLTitleContainer>

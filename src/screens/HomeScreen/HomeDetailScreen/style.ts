@@ -46,7 +46,20 @@ export const Image = styled.Image`
 
 export const ContentContainer = styled.View`
   height: 175px;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+export const BookMark = styled.View`
   padding-right: 20px;
+`;
+
+export const LogoImage = styled.Image`
+  width: 13.5px;
+  height: 18.75px;
+`;
+
+export const Block = styled.View`
   padding-left: 20px;
 `;
 
