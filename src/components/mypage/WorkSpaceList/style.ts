@@ -3,7 +3,7 @@ import COLORS from '../../../../packages/colors';
 
 const LogoBlock = styled.View`
   padding-top: 15px;
-  margin-left: 20px;
+  margin-right: 10px;
 `;
 const Logo = styled.Image`
   width: 13.5px;
@@ -27,6 +27,7 @@ const ImageBlock = styled.Image`
   width: 120px;
   height: 128px;
   border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
 `;
 
 const Information = styled.View`

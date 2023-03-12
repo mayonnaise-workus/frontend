@@ -2,8 +2,13 @@ import styled from 'styled-components/native';
 import COLORS from '../../../packages/colors';
 
 export const Container = styled.SafeAreaView`
-  flex: 1;
   background-color: white;
+  flex: 1;
+`;
+
+export const Block = styled.View`
+  background-color: white;
+  flex: 15;
 `;
 
 export const ImageContainer = styled.View`

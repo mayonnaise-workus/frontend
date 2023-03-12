@@ -61,6 +61,7 @@ export const LogoImage = styled.Image`
 
 export const Block = styled.View`
   padding-left: 20px;
+  padding-right: 20px;
 `;
 
 export const FirstLineContainer = styled.View`
@@ -71,6 +72,7 @@ export const FirstLineContainer = styled.View`
 
 export const DescriptionContainer = styled.View`
   margin-bottom: 10px;
+  width: 300px;
 `;
 
 export const Description = styled.Text`
