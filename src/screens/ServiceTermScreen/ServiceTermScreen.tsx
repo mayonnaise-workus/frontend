@@ -24,14 +24,13 @@ function ServiceTermScreen({navigation}: IProps) {
   const dispatch = useDispatch();
   const [agreementCheck, setAgreementCheck] = useState<string[]>([]);
   const [obligationCheck, setObligationCheck] = useState<string[]>([]);
-  const [optionCheck, setOptionCheck] = useState<string[]>([]);
-  const isAllChecked = obligationCheck.length === 5;
+  const isAllChecked = obligationCheck.length === 2;
 
   const {data} = useSelector((state: RootState) => state.serviceterm);
 
   const postData = {
-    marketing_agreement: optionCheck.includes('option1'),
-    personal_information_agreement: optionCheck.includes('option2'),
+    marketing_agreement: false,
+    personal_information_agreement: false,
   };
 
   const handleSubmit = async () => {
@@ -53,8 +52,6 @@ function ServiceTermScreen({navigation}: IProps) {
           setAgreementCheck={setAgreementCheck}
           obligationCheck={obligationCheck}
           setObligationCheck={setObligationCheck}
-          optionCheck={optionCheck}
-          setOptionCheck={setOptionCheck}
           navigate={navigation.navigate}
         />
       </ServiceTermContainer>

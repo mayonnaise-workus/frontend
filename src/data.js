@@ -74,26 +74,13 @@ export const obligations = [
     id: 1,
     text: '서비스 이용 약관 동의',
     value: 'obligation1',
+    url: 'https://buttery-neighbor-fdf.notion.site/098d7f39d1ff41b3837d4064316a9ce0',
   },
   {
     id: 2,
     text: '개인 정보 처리 방침',
     value: 'obligation2',
-  },
-  {
-    id: 3,
-    text: '위치 정보 서비스 이용 약관',
-    value: 'obligation3',
-  },
-  {
-    id: 4,
-    text: '제 3자 정보 제공',
-    value: 'obligation4',
-  },
-  {
-    id: 5,
-    text: '개인 정보 처리 방침',
-    value: 'obligation5',
+    url: 'https://buttery-neighbor-fdf.notion.site/fd503a595fa14ab19eddade0b73533a7',
   },
 ];
 
