@@ -1,20 +1,25 @@
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import COLORS from '../../../../packages/colors';
 
-const LogoBlock = styled.View`
-  padding-top: 15px;
-  margin-right: 10px;
-`;
 const Logo = styled.Image`
-  width: 13.5px;
-  height: 18.75px;
+  width: 20.25px;
+  height: 28.125px;
 `;
+
 const Address = styled.Text`
   margin-top: 5px;
   font-weight: 400;
   font-size: 14px;
   width: 180px;
 `;
+
+const FirstLineContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 10px;
+`;
+
 const Name = styled.Text`
   width: 120px;
   height: 22px;
@@ -44,4 +49,12 @@ const Wrapper = styled.View`
   background-color: ${COLORS.GRAY_8};
 `;
 
-export {Wrapper, Information, ImageBlock, Name, Address, Logo, LogoBlock};
+export {
+  Wrapper,
+  Information,
+  ImageBlock,
+  Name,
+  Address,
+  Logo,
+  FirstLineContainer,
+};

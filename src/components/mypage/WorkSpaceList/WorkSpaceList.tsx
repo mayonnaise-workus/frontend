@@ -7,9 +7,9 @@ import {
   ImageBlock,
   Information,
   Logo,
-  LogoBlock,
   Name,
   Wrapper,
+  FirstLineContainer,
 } from './style';
 
 interface Ipros {
@@ -29,18 +29,18 @@ function WorkSpaceList(props: Ipros) {
             }}
           />
           <Information>
-            <Name numberOfLines={1} ellipsizeMode="tail">
-              {list.name}
-            </Name>
+            <FirstLineContainer>
+              <Name numberOfLines={1} ellipsizeMode="tail">
+                {list.name}
+              </Name>
+              <Pressable onPress={() => handleData(list.id)}>
+                <Logo source={images.BOOKMARK_YELLOW_ICON} />
+              </Pressable>
+            </FirstLineContainer>
             <Address numberOfLines={1} ellipsizeMode="tail">
               {list.address}
             </Address>
           </Information>
-          <LogoBlock>
-            <Pressable onPress={() => handleData(list.id)}>
-              <Logo source={images.BOOKMARK_YELLOW_ICON} />
-            </Pressable>
-          </LogoBlock>
         </Wrapper>
       )}
     </>
