@@ -13,11 +13,6 @@ const LogoContainer = styled.View`
   margin-bottom: 11px;
 `;
 
-const EmptyView = styled.View`
-  width: 20px;
-  height: 20px;
-`;
-
 const Logo = styled.Image`
   width: 20px;
   height: 20px;
@@ -26,7 +21,6 @@ const Logo = styled.Image`
 function SubHeader() {
   return (
     <LogoContainer>
-      <EmptyView />
       <Logo source={images.HEADER_LOGO} />
     </LogoContainer>
   );
