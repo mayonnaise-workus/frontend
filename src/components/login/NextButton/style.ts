@@ -2,7 +2,7 @@ import {Dimensions} from 'react-native';
 import styled from 'styled-components/native';
 
 export const ButtonContainer = styled.View`
-  flex: 1;
+  margin-top: 12px;
   align-items: center;
   justify-content: flex-end;
 `;
@@ -18,10 +18,6 @@ export const PressableBlock = styled.Pressable`
 `;
 
 export const TextBlock = styled.Text`
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 50px;
-  padding-right: 50px;
   font-size: 15px;
   font-weight: bold;
   color: ${(props: {textColor: string}) => props.textColor};
