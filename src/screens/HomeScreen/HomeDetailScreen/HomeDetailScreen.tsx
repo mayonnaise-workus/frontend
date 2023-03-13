@@ -26,7 +26,6 @@ import {
   ImageContainer,
   BookMark,
   LogoImage,
-  Block,
 } from './style';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faAngleLeft} from '@fortawesome/free-solid-svg-icons';
@@ -177,39 +176,37 @@ const HomeDetail = ({navigation, route}: IHomeDetailProps) => {
           <Image source={image ? {uri: image} : images.SAMPLE_PLACE_IMAGE} />
         </ImageContainer>
         <ContentContainer>
-          <Block>
-            <FirstLineContainer>
-              <Title>{name}</Title>
-              <BookMark>
-                {favorite ? (
-                  <Pressable onPress={() => DeleteScrap(id)}>
-                    <LogoImage source={images.BOOKMARK_YELLOW_ICON} />
-                  </Pressable>
-                ) : (
-                  <Pressable onPress={() => AddScrap(id)}>
-                    <LogoImage source={images.BOOKMARK_GRAY} />
-                  </Pressable>
-                )}
-              </BookMark>
-            </FirstLineContainer>
-            <DescriptionContainer>
-              <Description>{address}</Description>
-            </DescriptionContainer>
-            <DescriptionContainer>
-              <Description>{contact}</Description>
-            </DescriptionContainer>
-            <DetailTagRow>
-              <DetailTag>
-                <DetailTagContent>{selectedObj}</DetailTagContent>
-              </DetailTag>
-              <DetailTag>
-                <DetailTagContent>{selectedWorkspace}</DetailTagContent>
-              </DetailTag>
-              <DetailTag>
-                <DetailTagContent>{selectedCapacity}</DetailTagContent>
-              </DetailTag>
-            </DetailTagRow>
-          </Block>
+          <FirstLineContainer>
+            <Title>{name}</Title>
+            <BookMark>
+              {favorite ? (
+                <Pressable onPress={() => DeleteScrap(id)}>
+                  <LogoImage source={images.BOOKMARK_YELLOW_ICON} />
+                </Pressable>
+              ) : (
+                <Pressable onPress={() => AddScrap(id)}>
+                  <LogoImage source={images.BOOKMARK_GRAY} />
+                </Pressable>
+              )}
+            </BookMark>
+          </FirstLineContainer>
+          <DescriptionContainer>
+            <Description>{address}</Description>
+          </DescriptionContainer>
+          <DescriptionContainer>
+            <Description>{contact}</Description>
+          </DescriptionContainer>
+          <DetailTagRow>
+            <DetailTag>
+              <DetailTagContent>{selectedObj}</DetailTagContent>
+            </DetailTag>
+            <DetailTag>
+              <DetailTagContent>{selectedWorkspace}</DetailTagContent>
+            </DetailTag>
+            <DetailTag>
+              <DetailTagContent>{selectedCapacity}</DetailTagContent>
+            </DetailTag>
+          </DetailTagRow>
         </ContentContainer>
         <URLContainer>
           <URLTitleContainer>
