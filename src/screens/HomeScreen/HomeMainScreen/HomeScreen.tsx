@@ -97,17 +97,14 @@ const Home = ({navigation}: IHomeProps) => {
   }, [isInitialRender, selectedRegion]);
 
   const getWorkspaceListFunc = async (regionId: number) => {
-    await WorkSpaceListByRegionApi([regionId])(dispatch);
+    await WorkSpaceListByRegionApi(regionId)(dispatch);
   };
 
-  // useEffect(() => {
-  //   regionList &&
-  //     regionList.length &&
-  //     WorkSpaceListByRegionApi(regionList)(dispatch);
-  // }, [dispatch, regionList]);
-  // const {data: workspaceList} = useSelector(
-  //   (state: RootState) => state.workspacebyregionlist,
-  // );
+  useEffect(() => {
+    regionList &&
+      regionList.length &&
+      WorkSpaceListByRegionApi(regionList[0])(dispatch);
+  }, [dispatch, regionList]);
 
   const handleCurrentChange = async (
     e: NativeSyntheticEvent<NativeScrollEvent>,
@@ -125,7 +122,6 @@ const Home = ({navigation}: IHomeProps) => {
         selectedRegion[nextCurrent].longitude,
       ];
     });
-
     const currentRegionId = selectedRegion[nextCurrent].id;
     await getWorkspaceListFunc(currentRegionId);
   };
@@ -172,9 +168,7 @@ const Home = ({navigation}: IHomeProps) => {
               pagingEnabled
               showsHorizontalScrollIndicator={false}
               scrollEventThrottle={16}
-              onScroll={async e => {
-                await handleCurrentChange(e);
-              }}
+              onScroll={handleCurrentChange}
               contentContainerStyle={{
                 paddingLeft: 28,
                 paddingRight: 28,
