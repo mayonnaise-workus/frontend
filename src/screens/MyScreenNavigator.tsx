@@ -6,6 +6,7 @@ import ScrapScreen from './ScrapScreen/ScrapScreen';
 import EditProfileScreen from './EditProfileScreen/EditProfileScreen';
 import MemberCancellationScreen from './MemberCancellationScreen/MemberCancellationScreen';
 import MemberCancellationCompleteScreen from './MemberCancellationCompleteScreen/MemberCancellationCompleteScreen';
+import MyServiceTermScreen from './MyServiceTermScreen/MyServiceTermScreen';
 
 const MyScreenStack = createNativeStackNavigator<MyScreenStackParamList>();
 
@@ -16,6 +17,11 @@ const MyScreenNavigator = () => {
       screenOptions={{headerShown: false}}>
       <MyScreenStack.Screen name="MyPage" component={MyPageScreen} />
       <MyScreenStack.Screen name="Scrap" component={ScrapScreen} />
+      <MyScreenStack.Screen
+        name="MyServiceTerm"
+        component={MyServiceTermScreen}
+      />
+
       <MyScreenStack.Screen name="EditProfile" component={EditProfileScreen} />
       <MyScreenStack.Screen
         name="MemberCancellation"

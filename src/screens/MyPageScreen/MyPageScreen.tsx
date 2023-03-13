@@ -1,6 +1,5 @@
 import React from 'react';
 import {RouteProp} from '@react-navigation/native';
-import Button from '../../components/mypage/Button/Button';
 import NickName from '../../components/mypage/Nickname/NickName';
 import ScrapButton from '../../components/mypage/ScrapButton/ScrapButton';
 import {
@@ -13,7 +12,11 @@ import {
   ContentContainer,
   ButtonContainer,
   EmptyContainer,
+  Wrapper,
+  Logo,
+  Text,
 } from './style';
+import images from '../../../assets/images';
 
 interface IProps {
   navigation: MyScreenStackNavigationProps<'MyPage'>;
@@ -29,6 +32,10 @@ function MyPageScreen({navigation}: IProps) {
     navigation.navigate('Scrap');
   };
 
+  const serviceTermPress = () => {
+    navigation.navigate('MyServiceTerm');
+  };
+
   return (
     <Container>
       <MainHeader />
@@ -36,9 +43,10 @@ function MyPageScreen({navigation}: IProps) {
         <NickName onPress={nicknamePress} />
         <ScrapButton onPress={scrapPress} />
         <ButtonContainer>
-          <Button title="알림 설정" />
-          <Button title="이용 약관" />
-          <Button title="이용 방법" />
+          <Wrapper onPress={serviceTermPress}>
+            <Text>이용 약관</Text>
+            <Logo source={images.RIGHT_ICON} />
+          </Wrapper>
         </ButtonContainer>
         <EmptyContainer />
       </ContentContainer>
