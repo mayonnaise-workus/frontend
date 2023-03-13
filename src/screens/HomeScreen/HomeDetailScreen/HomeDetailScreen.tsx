@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {RouteProp} from '@react-navigation/native';
 import {
   HomeScreenStackNavigationProps,
@@ -30,7 +30,7 @@ import {
 } from './style';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faAngleLeft} from '@fortawesome/free-solid-svg-icons';
-import {Pressable} from 'react-native';
+import {Alert, Linking, Pressable} from 'react-native';
 import images from '../../../../assets/images';
 import Button from '../../../components/login/NextButton/NextButton';
 import COLORS from '../../../../packages/colors';
@@ -74,6 +74,8 @@ const HomeDetail = ({navigation, route}: IHomeDetailProps) => {
   const [favorite, setFavorite] = useState<boolean>(false);
   const {data} = useSelector((state: RootState) => state.detailworkspace);
   const [contact, setContact] = useState('');
+  const [kakaomap, setKakaomap] = useState('');
+  const [navermap, setNavermap] = useState('');
 
   useEffect(() => {
     if (scrapList) {
@@ -91,6 +93,12 @@ const HomeDetail = ({navigation, route}: IHomeDetailProps) => {
     if (data.name.length) {
       setContact(() => {
         return data.contact;
+      });
+      setKakaomap(() => {
+        return data.kakao_url;
+      });
+      setNavermap(() => {
+        return data.naver_url;
       });
     }
   }, [data]);
@@ -113,6 +121,28 @@ const HomeDetail = ({navigation, route}: IHomeDetailProps) => {
       setWorkSpaceList(newWorkSpaceList.scrapList.list);
     }
   }
+
+  const onNaverPress = useCallback(async () => {
+    const supported = await Linking.canOpenURL(navermap);
+
+    if (supported) {
+      await Linking.openURL(navermap);
+    } else {
+      Alert.alert(`이 url을 열 수가 없어요!
+(${navermap})`);
+    }
+  }, [navermap]);
+
+  const onKakaoPress = useCallback(async () => {
+    const supported = await Linking.canOpenURL(kakaomap);
+
+    if (supported) {
+      await Linking.openURL(kakaomap);
+    } else {
+      Alert.alert(`이 url을 열 수가 없어요!
+(${kakaomap})`);
+    }
+  }, [kakaomap]);
 
   return (
     <Container>
@@ -174,13 +204,13 @@ const HomeDetail = ({navigation, route}: IHomeDetailProps) => {
             text="네이버 지도 바로가기"
             backgroundColor={COLORS.FOUR}
             textColor="black"
-            onPress={() => {}}
+            onPress={onNaverPress}
           />
           <Button
             text="카카오 지도 바로가기"
             backgroundColor={COLORS.FOUR}
             textColor="black"
-            onPress={() => {}}
+            onPress={onKakaoPress}
           />
         </URLContainer>
         <MapContainer>

@@ -96,17 +96,22 @@ const Home = ({navigation}: IHomeProps) => {
     }
   }, [isInitialRender, selectedRegion]);
 
-  useEffect(() => {
-    regionList &&
-      regionList.length &&
-      regionList.length >= 1 &&
-      WorkSpaceListByRegionApi(regionList)(dispatch);
-  }, [dispatch, regionList]);
-  const {data: workspaceList} = useSelector(
-    (state: RootState) => state.workspacebyregionlist,
-  );
+  const getWorkspaceListFunc = async (regionId: number) => {
+    await WorkSpaceListByRegionApi([regionId])(dispatch);
+  };
 
-  const handleCurrentChange = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
+  // useEffect(() => {
+  //   regionList &&
+  //     regionList.length &&
+  //     WorkSpaceListByRegionApi(regionList)(dispatch);
+  // }, [dispatch, regionList]);
+  // const {data: workspaceList} = useSelector(
+  //   (state: RootState) => state.workspacebyregionlist,
+  // );
+
+  const handleCurrentChange = async (
+    e: NativeSyntheticEvent<NativeScrollEvent>,
+  ) => {
     const contentWidth = Dimensions.get('window').width - 72;
     const nextCurrent: number = Math.round(
       e.nativeEvent.contentOffset.x / contentWidth,
@@ -120,7 +125,14 @@ const Home = ({navigation}: IHomeProps) => {
         selectedRegion[nextCurrent].longitude,
       ];
     });
+
+    const currentRegionId = selectedRegion[nextCurrent].id;
+    await getWorkspaceListFunc(currentRegionId);
   };
+
+  const {data: workspaceList} = useSelector(
+    (state: RootState) => state.workspacebyregionlist,
+  );
 
   const [filterObject, setFilterObject] = useState({
     obj: [0],
@@ -160,7 +172,9 @@ const Home = ({navigation}: IHomeProps) => {
               pagingEnabled
               showsHorizontalScrollIndicator={false}
               scrollEventThrottle={16}
-              onScroll={handleCurrentChange}
+              onScroll={async e => {
+                await handleCurrentChange(e);
+              }}
               contentContainerStyle={{
                 paddingLeft: 28,
                 paddingRight: 28,
@@ -375,7 +389,7 @@ const Home = ({navigation}: IHomeProps) => {
               }}>
               {filteredData.map(item => (
                 <HomeScrollDetail
-                  key={item.name}
+                  key={item.id}
                   id={item.id}
                   name={item.name}
                   image={item.profile_img}

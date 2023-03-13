@@ -13,6 +13,9 @@ interface DataType {
   workspace_images: string[];
   workspace_homepage: string;
   workspace_info: string;
+  naver_url: string;
+  kakao_url: string;
+  sponsor: boolean;
 }
 
 interface ApiState {
@@ -37,6 +40,9 @@ const initialState: ApiState = {
     workspace_images: [],
     workspace_homepage: '',
     workspace_info: '',
+    naver_url: '',
+    kakao_url: '',
+    sponsor: false,
   },
 };
 
