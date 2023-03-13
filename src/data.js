@@ -80,21 +80,6 @@ export const obligations = [
     text: '개인 정보 처리 방침',
     value: 'obligation2',
   },
-  {
-    id: 3,
-    text: '위치 정보 서비스 이용 약관',
-    value: 'obligation3',
-  },
-  {
-    id: 4,
-    text: '제 3자 정보 제공',
-    value: 'obligation4',
-  },
-  {
-    id: 5,
-    text: '개인 정보 처리 방침',
-    value: 'obligation5',
-  },
 ];
 
 export const options = [
