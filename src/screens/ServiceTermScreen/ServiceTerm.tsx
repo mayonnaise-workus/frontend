@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Pressable} from 'react-native';
+import {View, Pressable, Linking} from 'react-native';
 import {Row, AllAgreeRow, Text, Group} from './style';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faAngleRight} from '@fortawesome/free-solid-svg-icons';
@@ -19,8 +19,11 @@ const Agreement = ({
   setAgreementCheck,
   obligationCheck,
   setObligationCheck,
-  navigate,
 }: IObligationProps) => {
+  const handlePress = (url: string) => {
+    Linking.openURL(`${url}`);
+  };
+
   return (
     <View>
       <AllAgreeRow>
@@ -77,11 +80,7 @@ const Agreement = ({
           </Group>
           <Pressable
             onPress={() => {
-              navigate('ServiceTermDetail', {
-                property: 'obligation',
-                number: obligation.id,
-                title: obligation.text,
-              });
+              handlePress(obligation.url);
             }}>
             <FontAwesomeIcon icon={faAngleRight} />
           </Pressable>
