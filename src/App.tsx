@@ -11,6 +11,7 @@ import {store} from './redux/store/store';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {GOOGLE_WEB_CLIENT_ID, GOOGLE_IOS_CLIENT_ID} from '@env';
+import SplashScreen from 'react-native-splash-screen';
 
 export type RootStackParamList = {
   default: undefined;
@@ -25,6 +26,12 @@ export type RootStackNavigationProps<
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const App: React.FunctionComponent = () => {
+  useEffect(() => {
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, 1000);
+  }, []);
+
   const googleSigninConfigure = () => {
     GoogleSignin.configure({
       iosClientId: `${GOOGLE_IOS_CLIENT_ID}`,
