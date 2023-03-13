@@ -24,14 +24,14 @@ const MagazineScreen = () => {
   return (
     <Container>
       <SubHeader />
-      {magazine &&
-        magazine.map(item => (
-          <ScrollView>
-            <ImageBlock>
-              <Image source={{uri: `${item.title_image}`}} />
+      <ScrollView>
+        {magazine &&
+          magazine.map((item: string, index: number) => (
+            <ImageBlock key={index}>
+              <Image source={{uri: item.title_image}} />
             </ImageBlock>
-          </ScrollView>
-        ))}
+          ))}
+      </ScrollView>
     </Container>
   );
 };
