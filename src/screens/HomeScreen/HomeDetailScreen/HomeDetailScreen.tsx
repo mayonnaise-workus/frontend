@@ -30,7 +30,7 @@ import {
 } from './style';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faAngleLeft} from '@fortawesome/free-solid-svg-icons';
-import {Alert, Linking, Pressable} from 'react-native';
+import {Linking, Platform, Pressable} from 'react-native';
 import images from '../../../../assets/images';
 import Button from '../../../components/login/NextButton/NextButton';
 import COLORS from '../../../../packages/colors';
@@ -122,16 +122,25 @@ const HomeDetail = ({navigation, route}: IHomeDetailProps) => {
     }
   }
 
+  const isIOS = Platform.OS === 'ios';
+
   const onNaverPress = useCallback(async () => {
     const supported = await Linking.canOpenURL(navermap);
 
     if (supported) {
       await Linking.openURL(navermap);
     } else {
-      Alert.alert(`이 url을 열 수가 없어요!
-(${navermap})`);
+      if (isIOS) {
+        await Linking.openURL(
+          'https://apps.apple.com/us/app/naver-map-navigation/id311867728',
+        );
+      } else {
+        await Linking.openURL(
+          'https://play.google.com/store/apps/details?id=com.nhn.android.nmap&hl=ko&gl=US',
+        );
+      }
     }
-  }, [navermap]);
+  }, [isIOS, navermap]);
 
   const onKakaoPress = useCallback(async () => {
     const supported = await Linking.canOpenURL(kakaomap);
@@ -139,10 +148,17 @@ const HomeDetail = ({navigation, route}: IHomeDetailProps) => {
     if (supported) {
       await Linking.openURL(kakaomap);
     } else {
-      Alert.alert(`이 url을 열 수가 없어요!
-(${kakaomap})`);
+      if (isIOS) {
+        await Linking.openURL(
+          'https://apps.apple.com/kr/app/%EC%B9%B4%EC%B9%B4%EC%98%A4%EB%A7%B5-%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD-no-1-%EC%A7%80%EB%8F%84%EC%95%B1/id304608425',
+        );
+      } else {
+        await Linking.openURL(
+          'https://play.google.com/store/apps/details?id=net.daum.android.map&hl=ko&gl=US&pli=1',
+        );
+      }
     }
-  }, [kakaomap]);
+  }, [isIOS, kakaomap]);
 
   return (
     <Container>

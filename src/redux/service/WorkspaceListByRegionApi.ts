@@ -8,13 +8,13 @@ import {
 import {WORKSPACE} from '../../config/config';
 import {authHeader} from './auth-header';
 
-export const WorkSpaceListByRegionApi = (regionList: number[]) => {
+export const WorkSpaceListByRegionApi = (regionId: number) => {
   return async (dispatch: Dispatch) => {
     dispatch(setLoading(true));
     const header = await authHeader();
     try {
       const response = await axios.get(
-        `${WORKSPACE.WORKSPACE_LIST}?region=${regionList.join(',')}`,
+        `${WORKSPACE.WORKSPACE_LIST}?region=${regionId}`,
         {
           headers: {Authorization: `Bearer ${header}`},
         },
