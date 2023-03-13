@@ -7,7 +7,8 @@ export const Container = styled.View`
 `;
 
 export const Pressable = styled.Pressable`
-  margin-top: 15px;
+  margin-top: 5px;
+  padding-bottom: 10px;
 `;
 
 interface ITextProps {

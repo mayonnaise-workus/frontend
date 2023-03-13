@@ -20,7 +20,6 @@ export const Profile = styled.Image`
 export const NicknameChangeContainer = styled.View`
   padding-right: 20px;
   padding-left: 20px;
-  margin-bottom: 20px;
   flex: 2;
 `;
 
