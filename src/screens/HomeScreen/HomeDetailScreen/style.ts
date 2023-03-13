@@ -50,15 +50,6 @@ export const ContentContainer = styled.View`
   justify-content: space-between;
 `;
 
-export const BookMark = styled.View`
-  padding-right: 20px;
-`;
-
-export const LogoImage = styled.Image`
-  width: 13.5px;
-  height: 18.75px;
-`;
-
 export const Block = styled.View`
   padding-left: 20px;
   padding-right: 20px;
@@ -67,7 +58,15 @@ export const Block = styled.View`
 export const FirstLineContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 10px;
+`;
+
+export const BookMark = styled.View``;
+
+export const LogoImage = styled.Image`
+  width: 20.25px;
+  height: 28.125px;
 `;
 
 export const DescriptionContainer = styled.View`

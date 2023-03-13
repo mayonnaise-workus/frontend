@@ -180,6 +180,17 @@ const HomeDetail = ({navigation, route}: IHomeDetailProps) => {
           <Block>
             <FirstLineContainer>
               <Title>{name}</Title>
+              <BookMark>
+                {favorite ? (
+                  <Pressable onPress={() => DeleteScrap(id)}>
+                    <LogoImage source={images.BOOKMARK_YELLOW_ICON} />
+                  </Pressable>
+                ) : (
+                  <Pressable onPress={() => AddScrap(id)}>
+                    <LogoImage source={images.BOOKMARK_GRAY} />
+                  </Pressable>
+                )}
+              </BookMark>
             </FirstLineContainer>
             <DescriptionContainer>
               <Description>{address}</Description>
@@ -199,17 +210,6 @@ const HomeDetail = ({navigation, route}: IHomeDetailProps) => {
               </DetailTag>
             </DetailTagRow>
           </Block>
-          <BookMark>
-            {favorite ? (
-              <Pressable onPress={() => DeleteScrap(id)}>
-                <LogoImage source={images.BOOKMARK_YELLOW_ICON} />
-              </Pressable>
-            ) : (
-              <Pressable onPress={() => AddScrap(id)}>
-                <LogoImage source={images.BOOKMARK_GRAY} />
-              </Pressable>
-            )}
-          </BookMark>
         </ContentContainer>
         <URLContainer>
           <URLTitleContainer>
