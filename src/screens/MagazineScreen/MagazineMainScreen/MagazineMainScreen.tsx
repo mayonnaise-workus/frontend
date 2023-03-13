@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {RootState} from '../../redux/store/store';
-import {Magazine} from '../../redux/service/Magazine';
+import {RootState} from '../../../redux/store/store';
+import {Magazine} from '../../../redux/service/Magazine';
 import styled from 'styled-components/native';
 import {ScrollView} from 'react-native-gesture-handler';
-import SubHeader from '../../components/common/SubHeader';
+import SubHeader from '../../../components/common/SubHeader';
 
-const MagazineScreen = () => {
+const MagazineMainScreen = () => {
   const {data} = useSelector((state: RootState) => state.magazine);
   const [magazine, setMagazine] = useState<string[]>([]);
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ const MagazineScreen = () => {
   );
 };
 
-export default MagazineScreen;
+export default MagazineMainScreen;
 
 export const Container = styled.SafeAreaView`
   flex: 1;
