@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScrollView} from 'react-native-gesture-handler';
+import {ScrollView} from 'react-native';
 import images from '../../../../assets/images';
 import {
   Container,
@@ -7,14 +7,28 @@ import {
   ContentContainer,
   Image,
   SubTitle,
+  SubTitleContainer,
   Title,
+  TitleContainer,
 } from './style';
+import {RouteProp} from '@react-navigation/native';
+import {
+  MagazineScreenStackNavigationProps,
+  MagazineScreenStackParamList,
+} from '../../magazineScreenPropsType';
 
-const MagazineDetailScreen = () => {
+interface IProps {
+  navigation: MagazineScreenStackNavigationProps<'MagazineDetail'>;
+  route: RouteProp<MagazineScreenStackParamList, 'MagazineDetail'>;
+}
+
+const MagazineDetailScreen = ({}: IProps) => {
   return (
     <Container>
       <ScrollView>
-        <Title>어떤 공간을 좋아하세요?</Title>
+        <TitleContainer>
+          <Title>어떤 공간을 좋아하세요?</Title>
+        </TitleContainer>
         <ContentContainer>
           <Content>
             사람들은 각자마다 선호하는 공간이 있다. 공간이라는 건 사람의 다양한
@@ -47,9 +61,9 @@ const MagazineDetailScreen = () => {
             이 글을 읽으면서 공간에 대한 이해와 의견을 공유해보기를 바란다.
           </Content>
         </ContentContainer>
-
-        <SubTitle>넓은 책상과 1인용 좌석</SubTitle>
-
+        <SubTitleContainer>
+          <SubTitle>넓은 책상과 1인용 좌석</SubTitle>
+        </SubTitleContainer>
         <ContentContainer>
           <Image source={images.MAGAZINE_1} />
           <Image source={images.MAGAZINE_2} />
@@ -63,7 +77,9 @@ const MagazineDetailScreen = () => {
             불가능하기 때문에 나는 1인용 좌석을 자주 이용한다.
           </Content>
         </ContentContainer>
-        <SubTitle>창의적인 분위기와 편안한 분위기</SubTitle>
+        <SubTitleContainer>
+          <SubTitle>창의적인 분위기와 편안한 분위기</SubTitle>
+        </SubTitleContainer>
         <ContentContainer>
           <Image source={images.MAGAZINE_3} />
           <Image source={images.MAGAZINE_4} />
@@ -79,7 +95,9 @@ const MagazineDetailScreen = () => {
             자연스럽게 원래의 페이스를 되찾을 수 있다.
           </Content>
         </ContentContainer>
-        <SubTitle>익숙한 곳과 새로운 곳</SubTitle>
+        <SubTitleContainer>
+          <SubTitle>익숙한 곳과 새로운 곳</SubTitle>
+        </SubTitleContainer>
         <ContentContainer>
           <Image source={images.MAGAZINE_5} />
           <Image source={images.MAGAZINE_6} />

@@ -1,19 +1,18 @@
-import styled from 'styled-components';
-
-export const Block = styled.View`
-  justify-content: center;
-  align-items: center;
-`;
+import styled from 'styled-components/native';
 
 export const Container = styled.SafeAreaView`
   flex: 1;
   background-color: white;
 `;
-export const ImageBlock = styled.Pressable``;
+
+export const Block = styled.Pressable`
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
+`;
 
 export const Image = styled.Image`
   height: 350px;
   width: 350px;
   border-radius: 10px;
-  margin-bottom: 12px;
 `;

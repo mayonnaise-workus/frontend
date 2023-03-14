@@ -13,11 +13,9 @@ export const Magazine = () => {
       const response = await axios.get(MAGAZINE, {
         headers: {Authorization: `Bearer ${header}`},
       });
-      console.log('data', response.data);
       dispatch(setData(response.data));
       dispatch(setError(null));
     } catch (error) {
-      console.log('error', error);
       dispatch(setError('An error occurred'));
     }
     dispatch(setLoading(false));

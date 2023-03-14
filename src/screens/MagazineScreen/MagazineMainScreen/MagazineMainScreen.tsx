@@ -2,22 +2,28 @@ import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../../../redux/store/store';
 import {Magazine} from '../../../redux/service/Magazine';
-import {ScrollView} from 'react-native-gesture-handler';
+import {ScrollView} from 'react-native';
 import SubHeader from '../../../components/common/SubHeader';
 import {RouteProp} from '@react-navigation/native';
 import {
   MagazineScreenStackNavigationProps,
   MagazineScreenStackParamList,
 } from '../../magazineScreenPropsType';
-import {Block, Container, Image, ImageBlock} from './style';
+import {Block, Container, Image} from './style';
 
 interface IProps {
   navigation: MagazineScreenStackNavigationProps<'MagazineMain'>;
   route: RouteProp<MagazineScreenStackParamList, 'MagazineMain'>;
 }
+
+interface IMagazineListProps {
+  content_image: string;
+  title_image: string;
+}
+
 const MagazineMainScreen = ({navigation}: IProps) => {
   const {data} = useSelector((state: RootState) => state.magazine);
-  const [magazine, setMagazine] = useState<string[]>([]);
+  const [magazine, setMagazine] = useState<IMagazineListProps[]>([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -36,14 +42,12 @@ const MagazineMainScreen = ({navigation}: IProps) => {
 
   return (
     <Container>
-      <SubHeader />
       <ScrollView>
-        {magazine &&
-          magazine.map((item: string, index: number) => (
-            <Block key={index}>
-              <ImageBlock onPress={handlePress}>
-                <Image source={{uri: item.title_image}} />
-              </ImageBlock>
+        <SubHeader />
+        {magazine.length >= 1 &&
+          magazine.map((item, index) => (
+            <Block key={index} onPress={handlePress}>
+              <Image source={{uri: item.title_image}} />
             </Block>
           ))}
       </ScrollView>
