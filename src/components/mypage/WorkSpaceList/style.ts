@@ -4,6 +4,7 @@ import COLORS from '../../../../packages/colors';
 const Logo = styled.Image`
   width: 18.25px;
   height: 23.125px;
+  margin-left: 60px;
 `;
 
 const Address = styled.Text`
