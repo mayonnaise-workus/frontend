@@ -9,6 +9,17 @@ import {MainStackNavigationProps} from './mainScreenPropsType';
 export type MyScreenStackParamList = {
   MyPage: undefined;
   Scrap: undefined;
+  ScrapDetail: {
+    id: number;
+    name: string;
+    image: string;
+    address: string;
+    latitude: number;
+    longitude: number;
+    selectedObj: string;
+    selectedWorkspace: string;
+    selectedCapacity: string;
+  };
   EditProfile: undefined;
   MemberCancellation: undefined;
   MemberCancellationComplete: undefined;
@@ -36,6 +47,11 @@ export type MyPageProps = NativeStackScreenProps<
 export type ScrapProps = NativeStackScreenProps<
   MyScreenStackParamList,
   'Scrap'
+>;
+
+export type ScrapDetailProps = NativeStackScreenProps<
+  MyScreenStackParamList,
+  'ScrapDetail'
 >;
 
 export type MyServiceTermProps = NativeStackScreenProps<

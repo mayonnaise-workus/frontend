@@ -19,12 +19,23 @@ interface IProps {
   route: RouteProp<MyScreenStackParamList, 'Scrap'>;
 }
 
+interface DataType {
+  address: string;
+  id: number;
+  latitude: number;
+  longitude: number;
+  name: string;
+  profile_img: string;
+  workspace_capacity: number;
+  workspace_obj: number;
+  workspace_region: number;
+  workspace_type: number;
+}
+
 function ScrapScreen({navigation}: IProps) {
   const dispatch = useDispatch();
   const {data} = useSelector((state: RootState) => state.workspacelist);
-  const [workSpaceList, setWorkSpaceList] = useState<Array<[string, object]>>(
-    [],
-  );
+  const [workSpaceList, setWorkSpaceList] = useState<DataType[]>([]);
 
   const onPress = () => {
     navigation.goBack();
@@ -59,8 +70,15 @@ function ScrapScreen({navigation}: IProps) {
       <Block>
         {workSpaceList && workSpaceList.length ? (
           <ScrollView>
-            {workSpaceList.map((item: [string, object], index: number) => (
-              <WorkSpaceList key={index} list={item} handleData={handleData} />
+            {workSpaceList.map((item, index) => (
+              <WorkSpaceList
+                key={index}
+                list={item}
+                handleData={async () => {
+                  await handleData(item.id);
+                }}
+                navigation={navigation}
+              />
             ))}
           </ScrollView>
         ) : (
