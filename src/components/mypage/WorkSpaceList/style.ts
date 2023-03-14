@@ -22,8 +22,6 @@ const FirstLineContainer = styled.View`
 `;
 
 const Name = styled.Text`
-  width: 120px;
-  height: 22px;
   font-weight: 600;
   font-size: 16px;
   color: ${COLORS.GRAY_1};
