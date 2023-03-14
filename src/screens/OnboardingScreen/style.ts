@@ -1,6 +1,11 @@
 import {Dimensions} from 'react-native';
 import styled from 'styled-components/native';
+import COLORS from '../../../packages/colors';
 
+export const Text = styled.Text`
+  color: ${COLORS.GRAY_5};
+  margin-bottom: 10px;
+`;
 export const LogoContainer = styled.View`
   flex: 1;
   justify-content: center;

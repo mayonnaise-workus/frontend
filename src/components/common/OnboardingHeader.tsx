@@ -21,7 +21,7 @@ function OnboardingHeader({text, goback}: {text: string; goback: () => void}) {
 
 const HeaderContainer = styled.View`
   flex: 1;
-  margin-bottom: 35px;
+  margin-bottom: 5px;
 `;
 
 const HeaderText = styled.Text`

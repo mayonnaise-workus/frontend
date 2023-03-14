@@ -20,6 +20,7 @@ const DetailImage = styled.Image`
 const DetailBottomContainer = styled.View`
   flex: 3;
   width: 100%;
+  padding-top: 15px;
   padding-left: 15px;
   padding-right: 15px;
   background-color: #f4f5f7;
@@ -34,7 +35,7 @@ const DetailTitle = styled.Text`
 
 const DetailPlace = styled.Text`
   padding-top: 5px;
-  padding-bottom: 5px;
+  padding-bottom: 10px;
   color: black;
 `;
 

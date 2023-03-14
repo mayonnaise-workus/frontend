@@ -1,6 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {RouteProp} from '@react-navigation/native';
-import {LoginContainer, Logo, LogoContainer, Button, ButtonText} from './style';
+import {
+  LoginContainer,
+  Logo,
+  LogoContainer,
+  Button,
+  ButtonText,
+  Text,
+} from './style';
 import {login} from '@react-native-seoul/kakao-login';
 import {useDispatch, useSelector} from 'react-redux';
 import {KakaoLogin} from '../../redux/service/KakaoLogin';
@@ -106,6 +113,7 @@ function OnboardingScreen({navigation}: IProps) {
         <Logo source={images.LOGO_BLACK} />
       </LogoContainer>
       <LoginContainer>
+        <Text>SNS 계정으로 간편 가입 하기</Text>
         <Button
           onPress={() => {
             handleKakaoLogin();

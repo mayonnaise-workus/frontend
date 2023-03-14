@@ -4,6 +4,8 @@ import COLORS from '../../../../packages/colors';
 export const Wrapper = styled.View`
   height: 44px;
   padding-top: 10px;
+  padding-right: 20px;
+  padding-left: 20px;
   padding-bottom: 10px;
   margin-bottom: 30px;
   flex-direction: row;

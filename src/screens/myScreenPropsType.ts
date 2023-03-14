@@ -23,6 +23,7 @@ export type MyScreenStackParamList = {
   EditProfile: undefined;
   MemberCancellation: undefined;
   MemberCancellationComplete: undefined;
+  MyServiceTerm: undefined;
 };
 
 type MyScreenProps<T extends keyof MyScreenStackParamList = 'MyPage'> =
@@ -51,6 +52,11 @@ export type ScrapProps = NativeStackScreenProps<
 export type ScrapDetailProps = NativeStackScreenProps<
   MyScreenStackParamList,
   'ScrapDetail'
+>;
+
+export type MyServiceTermProps = NativeStackScreenProps<
+  MyScreenStackParamList,
+  'MyServiceTerm'
 >;
 
 export type EditProfileProps = NativeStackScreenProps<
