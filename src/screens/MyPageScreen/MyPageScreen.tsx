@@ -6,7 +6,6 @@ import {
   MyScreenStackNavigationProps,
   MyScreenStackParamList,
 } from '../myScreenPropsType';
-import MainHeader from '../../components/common/MainHeader';
 import {
   Container,
   ContentContainer,
@@ -16,6 +15,7 @@ import {
 import Button from '../../components/mypage/Button/Button';
 import {Linking} from 'react-native';
 import {manualUrl} from '../../data';
+import SubHeader from '../../components/common/SubHeader';
 
 interface IProps {
   navigation: MyScreenStackNavigationProps<'MyPage'>;
@@ -41,7 +41,7 @@ function MyPageScreen({navigation}: IProps) {
 
   return (
     <Container>
-      <MainHeader />
+      <SubHeader />
       <ContentContainer>
         <NickName onPress={nicknamePress} />
         <ScrapButton onPress={scrapPress} />
