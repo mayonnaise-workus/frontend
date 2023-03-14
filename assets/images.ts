@@ -25,6 +25,12 @@ const images = {
   SPARKLE: require('./img/Sparkle.png'),
   GRAY_LOGO: require('./img/grayLogo.png'),
   BLACK_LOGO: require('./img/blackLogo.png'),
+  MAGAZINE_1: require('./img/magazine_1.png'),
+  MAGAZINE_2: require('./img/magazine_2.png'),
+  MAGAZINE_3: require('./img/magazine_3.png'),
+  MAGAZINE_4: require('./img/magazine_4.png'),
+  MAGAZINE_5: require('./img/magazine_5.png'),
+  MAGAZINE_6: require('./img/magazine_6.png'),
 };
 
 export default images;
