@@ -155,3 +155,6 @@ export const optionsDetails = [
   {id: 1, option: optionAgreement1},
   {id: 2, option: optionAgreement2},
 ];
+
+export const manualUrl =
+  'https://www.notion.so/Work-Us-1dcdf8c98da4422a94fb2654d823dcd0?pvs=4';

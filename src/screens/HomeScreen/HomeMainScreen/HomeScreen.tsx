@@ -24,7 +24,6 @@ import BottomSheet, {
 } from '@gorhom/bottom-sheet';
 import {region, purpose, workspace, capacity} from '../../../data';
 import {GestureHandlerRootView, ScrollView} from 'react-native-gesture-handler';
-import MainHeader from '../../../components/common/MainHeader';
 import HomeScrollDetail from './HomeScrollDetail';
 import filterFunc from '../filter/filterFunc';
 import onClick from '../filter/onClick';
@@ -33,6 +32,7 @@ import {PreferenceApi} from '../../../redux/service/PreferenceApi';
 import {useDispatch, useSelector} from 'react-redux';
 import {WorkSpaceListByRegionApi} from '../../../redux/service/WorkspaceListByRegionApi';
 import {RootState} from '../../../redux/store/store';
+import SubHeader from '../../../components/common/SubHeader';
 import {
   HomeScreenStackNavigationProps,
   HomeScreenStackParamList,
@@ -158,7 +158,7 @@ const Home = ({navigation}: IHomeProps) => {
     <GestureHandlerRootView style={{flex: 1, backgroundColor: 'white'}}>
       <BottomSheetModalProvider>
         <Container>
-          <MainHeader />
+          <SubHeader />
           <SliderButtonContainer>
             <Animated.ScrollView
               horizontal
