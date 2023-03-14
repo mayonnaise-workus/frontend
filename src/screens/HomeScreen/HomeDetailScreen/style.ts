@@ -49,6 +49,7 @@ export const ContentContainer = styled.View`
   padding-left: 20px;
   padding-right: 20px;
 `;
+
 export const FirstLineContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
@@ -56,9 +57,7 @@ export const FirstLineContainer = styled.View`
   margin-bottom: 10px;
 `;
 
-export const BookMark = styled.View`
-  padding-right: 20px;
-`;
+export const BookMark = styled.View``;
 
 export const LogoImage = styled.Image`
   width: 20.25px;
@@ -73,14 +72,12 @@ export const DescriptionContainer = styled.View`
 export const Description = styled.Text`
   font-size: 16px;
   color: black;
-  margin-top: 10px;
 `;
 
 export const DetailTagRow = styled.View`
   flex-direction: row;
   align-items: center;
   gap: 10px;
-  margin-top: 10px;
 `;
 
 export const DetailTag = styled.View`
@@ -102,7 +99,6 @@ export const URLContainer = styled.View`
   height: 200px;
   padding-right: 20px;
   padding-left: 20px;
-  margin-top: 20px;
   margin-bottom: 30px;
 `;
 
@@ -110,7 +106,6 @@ export const URLTitleContainer = styled.View`
   flex-direction: row;
   align-items: center;
   gap: 5px;
-  margin-bottom: 10px;
 `;
 
 export const GrayLogo = styled.Image`
