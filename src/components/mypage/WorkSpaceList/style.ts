@@ -4,8 +4,7 @@ import COLORS from '../../../../packages/colors';
 const Logo = styled.Image`
   width: 18.25px;
   height: 23.125px;
-  padding-left: 20px;
-  margin-left: 20px;
+  margin-left: 60px;
 `;
 
 const Address = styled.Text`
@@ -18,7 +17,6 @@ const Address = styled.Text`
 
 const FirstLineContainer = styled.View`
   flex-direction: row;
-  width: 200px;
   justify-content: space-between;
   align-items: center;
 `;

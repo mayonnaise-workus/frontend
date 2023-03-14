@@ -41,8 +41,10 @@ export const TextInputContainer = styled.View`
 
 export const TextInput = styled.TextInput`
   width: ${Dimensions.get('window').width - 40}px;
+  height: 50px;
   padding-left: 10px;
   padding-right: 10px;
+
   border-radius: 10px;
   border-width: 1px;
   border-color: ${COLORS.GRAY_6};
