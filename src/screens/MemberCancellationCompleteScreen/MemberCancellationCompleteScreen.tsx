@@ -10,10 +10,13 @@ import {
   Text,
   X,
 } from './style';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import {
   MyScreenStackNavigationProps,
   MyScreenStackParamList,
 } from '../myScreenPropsType';
+import RNRestart from 'react-native-restart';
 
 interface IProps {
   navigation: MyScreenStackNavigationProps<'MemberCancellationComplete'>;
@@ -21,7 +24,20 @@ interface IProps {
 }
 
 function MemberCancellationCompleteScreen({navigation}: IProps) {
-  function handlePress() {
+  async function clearAsyncStorage() {
+    try {
+      await AsyncStorage.clear();
+    } catch (error) {}
+  }
+  async function initAsyncStorage() {
+    try {
+      await AsyncStorage.getAllKeys();
+    } catch (error) {}
+  }
+  async function handlePress() {
+    await initAsyncStorage();
+    await clearAsyncStorage();
+    RNRestart.restart();
     navigation.navigate('OnBoarding');
   }
 

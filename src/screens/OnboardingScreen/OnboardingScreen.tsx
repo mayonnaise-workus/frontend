@@ -22,8 +22,8 @@ import Wrapper from '../../components/common/Wrapper';
 import appleAuth from '@invertase/react-native-apple-authentication';
 import {GoogleLogin} from '../../redux/service/GoogleLogin';
 import {AppleLogin} from '../../redux/service/AppleLogin';
-import {MemberApi} from '../../redux/service/MemberApi';
 import {OnboardingApi} from '../../redux/service/Onboarding';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface IProps {
   navigation: IntroStackNavigationProps<'OnBoarding'>;
@@ -33,36 +33,59 @@ interface IProps {
 function OnboardingScreen({navigation}: IProps) {
   const dispatch = useDispatch();
   const {data} = useSelector((state: RootState) => state.onboarding);
+  const {kakao} = useSelector((state: RootState) => state.kakaologin);
+  const {google} = useSelector((state: RootState) => state.googlelogin);
+  const {apple} = useSelector((state: RootState) => state.applelogin);
   const [onboarding, setOnboarding] = useState([]);
 
+  console.log('kakao', kakao);
+
+  async function dd() {
+    const value = await AsyncStorage.getItem('user');
+    console.log('value2', value);
+  }
+  dd();
+
   useEffect(() => {
-    MemberApi()(dispatch);
     OnboardingApi()(dispatch);
-  }, [dispatch]);
+  }, [dispatch, kakao, google, apple]);
+
+  console.log('data', data);
 
   useEffect(() => {
     setOnboarding(data);
   }, [data]);
 
   useEffect(() => {
-    if (onboarding && onboarding.length > 0) {
+    if (onboarding) {
       MemberOnboarding();
     }
   }, [onboarding]);
 
+  console.log(onboarding);
+
   async function MemberOnboarding() {
-    if (onboarding && !onboarding.terms_of_service_status) {
-      navigation.navigate('ServiceTerm');
-    } else if (onboarding && !onboarding.nickname_status) {
-      navigation.navigate('RegisterNickname');
-    } else if (onboarding && !onboarding.member_preference_region_status) {
-      navigation.navigate('RegisterRegion');
-    } else if (onboarding && !onboarding.member_purpose_status) {
-      navigation.navigate('RegisterPurpose');
-    } else if (onboarding && !onboarding.member_preference_workspace_status) {
-      navigation.navigate('RegisterWorkspace');
-    } else {
+    if ((kakao || google || apple) && onboarding) {
+      if (!onboarding.terms_of_service_status) {
+        navigation.navigate('ServiceTerm');
+      } else if (!onboarding.nickname_status) {
+        navigation.navigate('RegisterNickname');
+      } else if (!onboarding.member_preference_region_status) {
+        navigation.navigate('RegisterRegion');
+      } else if (!onboarding.member_purpose_status) {
+        navigation.navigate('RegisterPurpose');
+      } else if (!onboarding.member_preference_workspace_status) {
+        navigation.navigate('RegisterWorkspace');
+      } else {
+        navigation.navigate('MainNavigator');
+      }
+    } else if (
+      kakao ||
+      google ||
+      (apple && !Object.keys(onboarding).includes('false'))
+    ) {
       navigation.navigate('MainNavigator');
+    } else {
     }
   }
 
