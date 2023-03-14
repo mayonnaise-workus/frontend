@@ -4,13 +4,14 @@ import {Logo, Text, Wrapper} from './style';
 
 interface IProps {
   title: string;
+  onPress: () => void;
 }
 
 function Button(props: IProps) {
-  const {title} = props;
+  const {title, onPress} = props;
 
   return (
-    <Wrapper>
+    <Wrapper onPress={onPress}>
       <Text>{title}</Text>
       <Logo source={images.RIGHT_ICON} />
     </Wrapper>

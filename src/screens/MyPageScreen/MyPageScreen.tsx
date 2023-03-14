@@ -12,11 +12,10 @@ import {
   ContentContainer,
   ButtonContainer,
   EmptyContainer,
-  Wrapper,
-  Logo,
-  Text,
 } from './style';
-import images from '../../../assets/images';
+import Button from '../../components/mypage/Button/Button';
+import {Linking} from 'react-native';
+import {manualUrl} from '../../data';
 
 interface IProps {
   navigation: MyScreenStackNavigationProps<'MyPage'>;
@@ -36,6 +35,10 @@ function MyPageScreen({navigation}: IProps) {
     navigation.navigate('MyServiceTerm');
   };
 
+  const manualPress = () => {
+    Linking.openURL(`${manualUrl}`);
+  };
+
   return (
     <Container>
       <MainHeader />
@@ -43,10 +46,8 @@ function MyPageScreen({navigation}: IProps) {
         <NickName onPress={nicknamePress} />
         <ScrapButton onPress={scrapPress} />
         <ButtonContainer>
-          <Wrapper onPress={serviceTermPress}>
-            <Text>이용 약관</Text>
-            <Logo source={images.RIGHT_ICON} />
-          </Wrapper>
+          <Button onPress={serviceTermPress} title="이용 약관" />
+          <Button onPress={manualPress} title="이용 방법" />
         </ButtonContainer>
         <EmptyContainer />
       </ContentContainer>
