@@ -1,9 +1,9 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {RouteProp} from '@react-navigation/native';
 import {
-  HomeScreenStackNavigationProps,
-  HomeScreenStackParamList,
-} from '../../homeScreenPropsType';
+  MyScreenStackNavigationProps,
+  MyScreenStackParamList,
+} from '../myScreenPropsType';
 import {
   Container,
   EmptyView,
@@ -30,23 +30,23 @@ import {
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faAngleLeft} from '@fortawesome/free-solid-svg-icons';
 import {Linking, Platform, Pressable} from 'react-native';
-import images from '../../../../assets/images';
-import Button from '../../../components/login/NextButton/NextButton';
-import COLORS from '../../../../packages/colors';
+import images from '../../../assets/images';
+import Button from '../../components/login/NextButton/NextButton';
+import COLORS from '../../../packages/colors';
 import {useDispatch, useSelector} from 'react-redux';
-import {GetDetailWorkspaceApi} from '../../../redux/service/GetDetailWorkspaceApi';
-import {RootState} from '../../../redux/store/store';
+import {GetDetailWorkspaceApi} from '../../redux/service/GetDetailWorkspaceApi';
+import {RootState} from '../../redux/store/store';
 import MapView, {Marker} from 'react-native-maps';
-import {WorkSpaceListApi} from '../../../redux/service/WorkSpaceListApi';
-import {DeleteFavoriteWorkSpaces} from '../../../redux/service/DeleteFavoriteWorkSpaces';
-import {FavoriteWorkSpaces} from '../../../redux/service/FavoriteWorkSpaces';
+import {WorkSpaceListApi} from '../../redux/service/WorkSpaceListApi';
+import {DeleteFavoriteWorkSpaces} from '../../redux/service/DeleteFavoriteWorkSpaces';
+import {FavoriteWorkSpaces} from '../../redux/service/FavoriteWorkSpaces';
 
-interface IHomeDetailProps {
-  navigation: HomeScreenStackNavigationProps<'HomeDetail'>;
-  route: RouteProp<HomeScreenStackParamList, 'HomeDetail'>;
+interface IScrapDetailProps {
+  navigation: MyScreenStackNavigationProps<'ScrapDetail'>;
+  route: RouteProp<MyScreenStackParamList, 'ScrapDetail'>;
 }
 
-const HomeDetail = ({navigation, route}: IHomeDetailProps) => {
+const ScrapDetailScreen = ({navigation, route}: IScrapDetailProps) => {
   const {
     id,
     name,
@@ -253,4 +253,4 @@ const HomeDetail = ({navigation, route}: IHomeDetailProps) => {
   );
 };
 
-export default HomeDetail;
+export default ScrapDetailScreen;

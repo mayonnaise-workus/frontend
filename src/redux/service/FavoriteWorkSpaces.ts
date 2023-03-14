@@ -18,7 +18,7 @@ export const FavoriteWorkSpaces = (params: number) => {
       );
       dispatch(setData(response.data));
       dispatch(setError(null));
-    } catch (error) {
+    } catch (error: any) {
       dispatch(setError(error.response.data.message));
     }
 

@@ -8,6 +8,7 @@ const Logo = styled.Image`
 
 const Address = styled.Text`
   margin-top: 5px;
+  margin-bottom: 10px;
   font-weight: 400;
   font-size: 14px;
   width: 180px;
@@ -17,7 +18,6 @@ const FirstLineContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-right: 10px;
 `;
 
 const Name = styled.Text`
@@ -40,13 +40,35 @@ const Information = styled.View`
   padding-left: 15px;
 `;
 
-const Wrapper = styled.View`
+const Wrapper = styled.Pressable`
   margin-top: 10px;
   border-radius: 10px;
   margin-left: 20px;
   margin-right: 20px;
   flex-direction: row;
   background-color: ${COLORS.GRAY_8};
+`;
+
+const DetailTagRow = styled.View`
+  padding-top: 5px;
+  padding-bottom: 5px;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+`;
+
+const DetailTag = styled.View`
+  height: 20px;
+  background-color: #e4e6eb;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+`;
+
+const DetailTagContent = styled.Text`
+  padding-left: 10px;
+  padding-right: 10px;
+  color: black;
 `;
 
 export {
@@ -57,4 +79,7 @@ export {
   Address,
   Logo,
   FirstLineContainer,
+  DetailTagRow,
+  DetailTag,
+  DetailTagContent,
 };
