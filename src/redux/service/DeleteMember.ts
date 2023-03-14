@@ -3,7 +3,6 @@ import {Dispatch} from 'redux';
 import {setLoading, setError} from '../slice/DeleteMemberSlice';
 import {MEMBER} from '../../config/config';
 import {authHeader} from './auth-header';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const DeleteMember = (data: string) => {
   return async (dispatch: Dispatch) => {
@@ -14,7 +13,6 @@ export const DeleteMember = (data: string) => {
         headers: {Authorization: `Bearer ${header}`},
         params: {data: data},
       });
-      AsyncStorage.removeItem('user');
       dispatch(setError(null));
     } catch (error) {
       dispatch(setError(error.response.data.message));
