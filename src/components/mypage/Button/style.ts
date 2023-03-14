@@ -2,7 +2,7 @@ import {Dimensions} from 'react-native';
 import styled from 'styled-components/native';
 import COLORS from '../../../../packages/colors';
 
-const Wrapper = styled.View`
+const Wrapper = styled.Pressable`
   padding: 10px;
   flex-direction: row;
   justify-content: space-between;
