@@ -17,19 +17,27 @@ import {
   DetailTagRow,
   DetailTag,
   URLContainer,
-  URLTitleContainer,
+  TitleContainer,
   GrayLogo,
-  URLTitle,
+  TitleContainerText,
   DetailTagContent,
   ScrollViewContainer,
   MapContainer,
   ImageContainer,
   BookMark,
   LogoImage,
+  AspectContainer,
+  DetailContainer,
+  EachDetail,
+  DetailTitle,
+  DetailContent,
+  SponsorImageContainer,
+  SponsorImage,
+  SponsorDetail,
 } from './style';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faAngleLeft} from '@fortawesome/free-solid-svg-icons';
-import {Linking, Platform, Pressable} from 'react-native';
+import {Linking, Platform, Pressable, ScrollView} from 'react-native';
 import images from '../../../../assets/images';
 import Button from '../../../components/login/NextButton/NextButton';
 import COLORS from '../../../../packages/colors';
@@ -75,6 +83,7 @@ const HomeDetail = ({navigation, route}: IHomeDetailProps) => {
   const [contact, setContact] = useState('');
   const [kakaomap, setKakaomap] = useState('');
   const [navermap, setNavermap] = useState('');
+  const [sponsor, setSponsor] = useState(false);
 
   useEffect(() => {
     if (scrapList) {
@@ -99,6 +108,9 @@ const HomeDetail = ({navigation, route}: IHomeDetailProps) => {
       setNavermap(() => {
         return data.naver_url;
       });
+      if (data.sponsor) {
+        setSponsor(() => true);
+      }
     }
   }, [data]);
 
@@ -208,11 +220,78 @@ const HomeDetail = ({navigation, route}: IHomeDetailProps) => {
             </DetailTag>
           </DetailTagRow>
         </ContentContainer>
+        {sponsor && (
+          <AspectContainer>
+            <TitleContainer>
+              <GrayLogo source={images.GRAY_LOGO} />
+              <TitleContainerText>스페이스 특징</TitleContainerText>
+            </TitleContainer>
+            <ScrollView
+              horizontal
+              contentContainerStyle={{alignItems: 'center', gap: 10}}>
+              <DetailContainer>
+                <EachDetail>
+                  <DetailTitle>운영 시간</DetailTitle>
+                  <DetailContent>월 ~ 금: 11:00 ~ 20:00</DetailContent>
+                  <DetailContent>토, 일, 공휴일:</DetailContent>
+                  <DetailContent>11:00 ~ 20:00</DetailContent>
+                </EachDetail>
+                <EachDetail>
+                  <DetailTitle>주차</DetailTitle>
+                  <DetailContent>건물 1층 주차장 이용</DetailContent>
+                </EachDetail>
+                <EachDetail>
+                  <DetailTitle>화장실</DetailTitle>
+                  <DetailContent>남자 화장실, 여자 화장실</DetailContent>
+                  <DetailContent>건물 2층</DetailContent>
+                </EachDetail>
+              </DetailContainer>
+              <SponsorImageContainer>
+                <SponsorImage source={images.SPONSOR_1} />
+                <SponsorDetail>
+                  <DetailTitle>지하 1층 라운지 좌석</DetailTitle>
+                  <DetailTagRow>
+                    <DetailTag>
+                      <DetailContent>좌석이 넓어요</DetailContent>
+                    </DetailTag>
+                    <DetailTag>
+                      <DetailContent>자리가 편해요</DetailContent>
+                    </DetailTag>
+                  </DetailTagRow>
+                  <DetailTagRow>
+                    <DetailTag>
+                      <DetailContent>편안한 분위기에요</DetailContent>
+                    </DetailTag>
+                  </DetailTagRow>
+                </SponsorDetail>
+              </SponsorImageContainer>
+              <SponsorImageContainer>
+                <SponsorImage source={images.SPONSOR_2} />
+                <SponsorDetail>
+                  <DetailTitle>지하 1층</DetailTitle>
+                  <DetailTagRow>
+                    <DetailTag>
+                      <DetailContent>좌석이 넓어요</DetailContent>
+                    </DetailTag>
+                    <DetailTag>
+                      <DetailContent>콘센트가 많아요</DetailContent>
+                    </DetailTag>
+                  </DetailTagRow>
+                  <DetailTagRow>
+                    <DetailTag>
+                      <DetailContent>집중하기 좋아요</DetailContent>
+                    </DetailTag>
+                  </DetailTagRow>
+                </SponsorDetail>
+              </SponsorImageContainer>
+            </ScrollView>
+          </AspectContainer>
+        )}
         <URLContainer>
-          <URLTitleContainer>
+          <TitleContainer>
             <GrayLogo source={images.GRAY_LOGO} />
-            <URLTitle>스페이스 바로가기</URLTitle>
-          </URLTitleContainer>
+            <TitleContainerText>스페이스 바로가기</TitleContainerText>
+          </TitleContainer>
           <Button
             text="네이버 지도 바로가기"
             backgroundColor={COLORS.FOUR}

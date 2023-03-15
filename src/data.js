@@ -36,8 +36,8 @@ export const region = [
     value: "Yangjae Citizen's Forest station",
     title: '양재시민의숲역',
     enTitle: "Yangjae Citizen's Forest station",
-    latitude: 37.4705206,
-    longitude: 127.038447,
+    latitude: 37.4700859,
+    longitude: 127.0447996,
   },
 ];
 
