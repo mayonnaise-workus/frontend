@@ -22,6 +22,8 @@ function MainNavigator() {
           tabBarIcon: ({focused}) => (
             <Image
               style={{
+                width: 25,
+                height: 25,
                 tintColor: focused ? COLORS.ONE : COLORS.GRAY_5,
               }}
               source={images.LOGO_HOME}
@@ -45,6 +47,8 @@ function MainNavigator() {
           tabBarIcon: ({focused}) => (
             <Image
               style={{
+                width: 25,
+                height: 25,
                 tintColor: focused ? COLORS.ONE : COLORS.GRAY_5,
               }}
               source={images.LOGO_MAGAZINE}
