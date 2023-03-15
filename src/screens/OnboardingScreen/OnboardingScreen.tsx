@@ -38,19 +38,9 @@ function OnboardingScreen({navigation}: IProps) {
   const {apple} = useSelector((state: RootState) => state.applelogin);
   const [onboarding, setOnboarding] = useState([]);
 
-  console.log('kakao', kakao);
-
-  async function dd() {
-    const value = await AsyncStorage.getItem('user');
-    console.log('value2', value);
-  }
-  dd();
-
   useEffect(() => {
     OnboardingApi()(dispatch);
   }, [dispatch, kakao, google, apple]);
-
-  console.log('data', data);
 
   useEffect(() => {
     setOnboarding(data);
@@ -61,8 +51,6 @@ function OnboardingScreen({navigation}: IProps) {
       MemberOnboarding();
     }
   }, [onboarding]);
-
-  console.log(onboarding);
 
   async function MemberOnboarding() {
     if ((kakao || google || apple) && onboarding) {

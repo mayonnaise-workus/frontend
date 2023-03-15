@@ -25,7 +25,6 @@ export const EditNicknameApi = (data: IEditNickNamProps) => {
       Alert.alert('저장 완료', '수정한 계정 정보를 저장했어요');
       dispatch(setUserError(null));
     } catch (error) {
-      console.log(error.response.data.message);
       dispatch(setUserError(error.response.data.message));
     }
     dispatch(setUserLoading(false));
