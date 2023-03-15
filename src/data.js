@@ -3,7 +3,7 @@ export const region = [
     id: 1,
     value: 'Gangnam',
     title: '강남역',
-    enTitle: 'gannam',
+    enTitle: 'Gangnam',
     latitude: 37.498617,
     longitude: 127.0279213,
   },
@@ -11,7 +11,7 @@ export const region = [
     id: 2,
     value: 'Seolleung',
     title: '선릉역',
-    enTitle: 'seolleung',
+    enTitle: 'Seolleung',
     latitude: 37.5044577,
     longitude: 127.0490046,
   },
@@ -19,7 +19,7 @@ export const region = [
     id: 3,
     value: 'Samsung',
     title: '삼성역',
-    enTitle: 'samsung',
+    enTitle: 'Samsung',
     latitude: 37.5114831,
     longitude: 127.0603371,
   },
@@ -27,17 +27,17 @@ export const region = [
     id: 4,
     value: 'Yeoksam',
     title: '역삼역',
-    enTitle: 'yeoksam',
+    enTitle: 'Yeoksam',
     latitude: 37.5012427,
     longitude: 127.027775,
   },
   {
     id: 5,
-    value: 'Nonhyeon',
-    title: '논현역',
-    enTitle: 'nonhyeon',
-    latitude: 37.5111305,
-    longitude: 127.0215847,
+    value: "Yangjae Citizen's Forest station",
+    title: '양재시민의숲역',
+    enTitle: "Yangjae Citizen's Forest station",
+    latitude: 37.4705206,
+    longitude: 127.038447,
   },
 ];
 
@@ -118,42 +118,6 @@ export const memberCancellation = [
     id: 5,
     text: '기타',
   },
-];
-
-const obligationAgreement1 = ['제 1항 샘플입니다.'];
-const obligationAgreement2 = ['제 1항 샘플입니다.', '제 2항 샘플입니다.'];
-const obligationAgreement3 = [
-  '제 1항 샘플입니다.',
-  '제 2항 샘플입니다.',
-  '제 3항 샘플입니다.',
-];
-const obligationAgreement4 = [
-  '제 1항 샘플입니다.',
-  '제 2항 샘플입니다.',
-  '제 3항 샘플입니다.',
-  '제 4항 샘플입니다.',
-];
-const obligationAgreement5 = [
-  '제 1항 샘플입니다.',
-  '제 2항 샘플입니다.',
-  '제 3항 샘플입니다.',
-  '제 4항 샘플입니다.',
-  '제 5항 샘플입니다.',
-];
-const optionAgreement1 = ['제 1항 샘플입니다.'];
-const optionAgreement2 = ['제 1항 샘플입니다.', '제 2항 샘플입니다.'];
-
-export const obligationsDetails = [
-  {id: 1, obligation: obligationAgreement1},
-  {id: 2, obligation: obligationAgreement2},
-  {id: 3, obligation: obligationAgreement3},
-  {id: 4, obligation: obligationAgreement4},
-  {id: 5, obligation: obligationAgreement5},
-];
-
-export const optionsDetails = [
-  {id: 1, option: optionAgreement1},
-  {id: 2, option: optionAgreement2},
 ];
 
 export const manualUrl =
