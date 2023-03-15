@@ -78,11 +78,12 @@ export const DetailTagRow = styled.View`
   flex-direction: row;
   align-items: center;
   gap: 10px;
+  margin-bottom: 10px;
 `;
 
 export const DetailTag = styled.View`
-  height: 30px;
-  padding: 5px;
+  height: 35px;
+  padding: 5px 10px;
   background-color: ${COLORS.GRAY_7};
   justify-content: center;
   align-items: center;
@@ -95,6 +96,56 @@ export const DetailTagContent = styled.Text`
   color: black;
 `;
 
+export const AspectContainer = styled.View`
+  height: 350px;
+  padding-right: 20px;
+  padding-left: 20px;
+  margin-bottom: 30px;
+`;
+
+export const DetailContainer = styled.View`
+  width: 200px;
+  height: 350px;
+  padding: 20px;
+  padding-top: 30px;
+  background-color: ${COLORS.FOUR};
+  border-radius: 30px;
+`;
+
+export const EachDetail = styled.View`
+  margin-bottom: 15px;
+`;
+
+export const DetailTitle = styled.Text`
+  font-weight: bold;
+  color: black;
+  margin-bottom: 10px;
+`;
+
+export const DetailContent = styled.Text`
+  color: black;
+  margin-bottom: 5px;
+`;
+
+export const SponsorImageContainer = styled.View`
+  width: 254px;
+  height: 350px;
+  border-radius: 30px;
+  overflow: hidden;
+`;
+
+export const SponsorImage = styled.Image`
+  width: 254px;
+  height: 175px;
+`;
+
+export const SponsorDetail = styled.View`
+  padding: 20px;
+  width: 254px;
+  height: 170px;
+  background-color: ${COLORS.GRAY_8};
+`;
+
 export const URLContainer = styled.View`
   height: 200px;
   padding-right: 20px;
@@ -102,10 +153,11 @@ export const URLContainer = styled.View`
   margin-bottom: 30px;
 `;
 
-export const URLTitleContainer = styled.View`
+export const TitleContainer = styled.View`
   flex-direction: row;
   align-items: center;
   gap: 5px;
+  margin-bottom: 10px;
 `;
 
 export const GrayLogo = styled.Image`
@@ -113,7 +165,7 @@ export const GrayLogo = styled.Image`
   height: 21.1px;
 `;
 
-export const URLTitle = styled.Text`
+export const TitleContainerText = styled.Text`
   font-weight: 600;
   font-size: 18px;
   color: black;

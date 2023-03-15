@@ -31,6 +31,8 @@ const images = {
   MAGAZINE_4: require('./img/magazine_4.png'),
   MAGAZINE_5: require('./img/magazine_5.png'),
   MAGAZINE_6: require('./img/magazine_6.png'),
+  SPONSOR_1: require('./img/sponsor_1st_image.png'),
+  SPONSOR_2: require('./img/sponsor_2nd_image.png'),
 };
 
 export default images;
