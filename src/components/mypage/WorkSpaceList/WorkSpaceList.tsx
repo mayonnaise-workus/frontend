@@ -1,7 +1,6 @@
 import React from 'react';
 import images from '../../../../assets/images';
 import {Pressable} from 'react-native';
-
 import {
   Address,
   ImageBlock,
@@ -9,14 +8,13 @@ import {
   Logo,
   Name,
   Wrapper,
-  FirstLineContainer,
   DetailTagRow,
   DetailTag,
   DetailTagContent,
+  LogoContainer,
 } from './style';
 import {MyScreenStackNavigationProps} from '../../../screens/myScreenPropsType';
 import {capacity, purpose, workspace} from '../../../data';
-
 interface Iprops {
   list: {
     address: string;
@@ -40,10 +38,9 @@ function WorkSpaceList(props: Iprops) {
   }`;
   const selectedWorkspace = `${workspace[list.workspace_type].title}`;
   const selectedCapacity = `${capacity[list.workspace_capacity].title}`;
-
   return (
     <>
-      {list && (
+      {list && list.profile_img !== 'string' && (
         <Wrapper
           onPress={() => {
             navigation.navigate('ScrapDetail', {
@@ -64,14 +61,9 @@ function WorkSpaceList(props: Iprops) {
             }}
           />
           <Information>
-            <FirstLineContainer>
-              <Name numberOfLines={1} ellipsizeMode="tail">
-                {list.name}
-              </Name>
-              <Pressable onPress={handleData}>
-                <Logo source={images.BOOKMARK_YELLOW_ICON} />
-              </Pressable>
-            </FirstLineContainer>
+            <Name numberOfLines={1} ellipsizeMode="tail">
+              {list.name}
+            </Name>
             <Address numberOfLines={1} ellipsizeMode="tail">
               {list.address}
             </Address>
@@ -84,6 +76,11 @@ function WorkSpaceList(props: Iprops) {
               </DetailTag>
             </DetailTagRow>
           </Information>
+          <LogoContainer>
+            <Pressable onPress={handleData}>
+              <Logo source={images.BOOKMARK_YELLOW_ICON} />
+            </Pressable>
+          </LogoContainer>
         </Wrapper>
       )}
     </>

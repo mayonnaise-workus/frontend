@@ -379,7 +379,7 @@ const Home = ({navigation}: IHomeProps) => {
               contentContainerStyle={{
                 flex: 1,
                 alignItems: 'center',
-                minHeight: 50 + 280 * filteredData.length,
+                minHeight: 50 + 300 * filteredData.length,
               }}>
               {filteredData.map(item => (
                 <HomeScrollDetail

@@ -65,7 +65,7 @@ export const LogoImage = styled.Image`
 `;
 
 export const DescriptionContainer = styled.View`
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   width: 300px;
 `;
 
@@ -77,13 +77,13 @@ export const Description = styled.Text`
 export const DetailTagRow = styled.View`
   flex-direction: row;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
+  gap: 8px;
+  margin-bottom: 8px;
 `;
 
 export const DetailTag = styled.View`
   height: 35px;
-  padding: 5px 10px;
+  padding: 4px 16px;
   background-color: ${COLORS.GRAY_7};
   justify-content: center;
   align-items: center;
@@ -100,13 +100,13 @@ export const AspectContainer = styled.View`
   height: 350px;
   padding-right: 20px;
   padding-left: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 36px;
 `;
 
 export const DetailContainer = styled.View`
-  width: 200px;
+  width: 210px;
   height: 350px;
-  padding: 20px;
+  padding: 16px;
   padding-top: 30px;
   background-color: ${COLORS.FOUR};
   border-radius: 30px;
@@ -157,7 +157,7 @@ export const TitleContainer = styled.View`
   flex-direction: row;
   align-items: center;
   gap: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 `;
 
 export const GrayLogo = styled.Image`

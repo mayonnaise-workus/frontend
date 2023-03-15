@@ -6,7 +6,7 @@ import {capacity, purpose, workspace} from '../../../data';
 
 const DetailWholeContainer = styled.Pressable`
   width: ${Dimensions.get('window').width - 40}px;
-  height: 260px;
+  height: 280px;
   margin-bottom: 20px;
   border-radius: 10px;
   overflow: hidden;
