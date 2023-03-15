@@ -47,7 +47,7 @@ function EditProfileScreen({navigation}: IProps) {
   };
 
   const onPressLogout = () => {
-    navigation.navigate('IntroNavigator');
+    navigation.navigate('OnBoarding');
   };
 
   async function handlePostEditName() {
