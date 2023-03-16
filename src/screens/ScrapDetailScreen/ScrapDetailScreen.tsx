@@ -215,6 +215,8 @@ const ScrapDetailScreen = ({navigation, route}: IScrapDetailProps) => {
             <DetailTag>
               <DetailTagContent>{selectedWorkspace}</DetailTagContent>
             </DetailTag>
+          </DetailTagRow>
+          <DetailTagRow>
             <DetailTag>
               <DetailTagContent>{selectedCapacity}</DetailTagContent>
             </DetailTag>
