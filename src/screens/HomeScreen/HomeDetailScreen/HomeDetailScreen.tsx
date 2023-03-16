@@ -215,6 +215,8 @@ const HomeDetail = ({navigation, route}: IHomeDetailProps) => {
             <DetailTag>
               <DetailTagContent>{selectedWorkspace}</DetailTagContent>
             </DetailTag>
+          </DetailTagRow>
+          <DetailTagRow>
             <DetailTag>
               <DetailTagContent>{selectedCapacity}</DetailTagContent>
             </DetailTag>

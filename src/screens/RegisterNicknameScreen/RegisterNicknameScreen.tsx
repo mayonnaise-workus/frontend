@@ -43,6 +43,7 @@ function RegisterNicknameScreen({navigation}: IProps) {
   }, [dispatch, navigation]);
 
   useEffect(() => {
+    console.log(data);
     data && navigation.navigate('RegisterRegion');
   }, [data, navigation]);
 

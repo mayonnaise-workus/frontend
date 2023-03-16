@@ -48,6 +48,7 @@ export const ContentContainer = styled.View`
   height: 175px;
   padding-left: 20px;
   padding-right: 20px;
+  margin-bottom: 30px;
 `;
 
 export const FirstLineContainer = styled.View`

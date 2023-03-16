@@ -9,12 +9,14 @@ export const DeleteMember = (data: string) => {
     dispatch(setLoading(true));
     const header = await authHeader();
     try {
-      await axios.delete(MEMBER.MEMBER, {
+      const response = await axios.delete(MEMBER.MEMBER, {
         headers: {Authorization: `Bearer ${header}`},
         params: {data: data},
       });
+      console.log(response.data);
       dispatch(setError(null));
     } catch (error) {
+      console.log(error);
       dispatch(setError(error.response.data.message));
     }
     dispatch(setLoading(false));
