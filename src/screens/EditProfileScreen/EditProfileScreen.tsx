@@ -1,17 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {RouteProp} from '@react-navigation/native';
 import Header from '../../components/mypage/Header/Header';
-import images from '../../../assets/images';
 import Button from '../../components/login/NextButton/NextButton';
 import EditProfileFeature from '../../components/mypage/EditProfileFeature/EditProfileFeature';
 import {
   TextInput,
   Container,
-  Profile,
   Title,
-  ProfileContainer,
   NicknameChangeContainer,
   EmptyView,
+  Block,
 } from './style';
 import {useSelector, useDispatch} from 'react-redux';
 import {MemberApi} from '../../redux/service/MemberApi';
@@ -87,9 +85,6 @@ function EditProfileScreen({navigation}: IProps) {
   return (
     <Container>
       <Header onPress={onPressGoBack} title="계정 정보 수정" />
-      <ProfileContainer>
-        <Profile source={images.PROFILE_GRAY} />
-      </ProfileContainer>
       <NicknameChangeContainer>
         <Title>닉네임 수정</Title>
         <TextInput
@@ -103,12 +98,14 @@ function EditProfileScreen({navigation}: IProps) {
         onPressMemberCancellation={onPressMemberCancellation}
         onPressLogout={onPressLogout}
       />
-      <Button
-        text="저장하기"
-        onPress={handlePostEditName}
-        backgroundColor={COLORS.TWO}
-        textColor="black"
-      />
+      <Block>
+        <Button
+          text="저장하기"
+          onPress={handlePostEditName}
+          backgroundColor={COLORS.TWO}
+          textColor="black"
+        />
+      </Block>
       <EmptyView />
     </Container>
   );
