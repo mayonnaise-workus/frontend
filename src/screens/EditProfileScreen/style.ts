@@ -7,21 +7,11 @@ export const Container = styled.SafeAreaView`
   background-color: white;
 `;
 
-export const ProfileContainer = styled.View`
-  flex: 3;
-  align-items: center;
-`;
-
-export const Profile = styled.Image`
-  width: 106px;
-  height: 106px;
-`;
-
 export const NicknameChangeContainer = styled.View`
   padding-right: 20px;
   padding-left: 20px;
   margin-bottom: 40px;
-  flex: 2;
+  flex: 1;
 `;
 
 export const Title = styled.Text`
@@ -39,6 +29,7 @@ export const TextInput = styled.TextInput`
   background-color: ${COLORS.GRAY_8};
 `;
 
-export const EmptyView = styled.View`
-  flex: 1;
+export const EmptyView = styled.View``;
+export const Block = styled.View`
+  margin-bottom: 25px;
 `;
