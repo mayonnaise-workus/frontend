@@ -93,9 +93,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.frontend"
+    namespace "workus_mayonnaise.application"
     defaultConfig {
-        applicationId "com.frontend"
+        applicationId "workus_mayonnaise.application"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
