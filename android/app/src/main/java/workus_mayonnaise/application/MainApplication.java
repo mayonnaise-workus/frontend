@@ -1,4 +1,4 @@
-package com.frontend;
+package workus_mayonnaise.application;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

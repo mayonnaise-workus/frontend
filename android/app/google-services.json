@@ -7,17 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:362919940500:android:b1d1472d3c4d2e1452ff81",
+        "mobilesdk_app_id": "1:362919940500:android:62600ec878b9b05452ff81",
         "android_client_info": {
-          "package_name": "com.frontend"
+          "package_name": "workus_mayonnaise.application"
         }
       },
       "oauth_client": [
         {
-          "client_id": "362919940500-m7boft9upc183ifvm9upe8e16qb9eg0i.apps.googleusercontent.com",
+          "client_id": "362919940500-5a6a1ueeohan2upbahvime7ndqup9dcc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.frontend",
+            "package_name": "workus_mayonnaise.application",
             "certificate_hash": "4a09aca8bae7dc29f1d01303ddd65f43e34448a3"
           }
         },
@@ -37,6 +37,13 @@
             {
               "client_id": "362919940500-h7muvhhlsjeadrr75gl4vi8l5d6730bu.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "362919940500-7pi02h99g7ilpvjqc9gvm9dstrot2l15.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.workus.app"
+              }
             }
           ]
         }

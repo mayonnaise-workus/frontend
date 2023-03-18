@@ -1,4 +1,4 @@
-package com.frontend;
+package workus_mayonnaise.application;
 import android.os.Bundle;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
