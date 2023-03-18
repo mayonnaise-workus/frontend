@@ -8,7 +8,7 @@ export const Container = styled.SafeAreaView`
 `;
 
 export const TitleContainer = styled.View`
-  padding-top: 30px;
+  padding-top: 50px;
   padding-left: 30px;
   padding-right: 30px;
 `;
