@@ -1,12 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {RouteProp} from '@react-navigation/native';
 import COLORS from '../../../packages/colors';
 import RegisterButton from '../../components/login/RegisterButton/RegisterButton';
 import {purpose} from '../../data';
 import {FilterList} from './style';
-import {useDispatch, useSelector} from 'react-redux';
-import {PostPurposeApi} from '../../redux/service/PostPurposeApi';
-import {RootState} from '../../redux/store/store';
+import {connect, useDispatch} from 'react-redux';
 import {
   IntroStackNavigationProps,
   IntroStackParamList,
@@ -14,6 +12,7 @@ import {
 import Wrapper from '../../components/common/Wrapper';
 import OnboardingHeader from '../../components/common/OnboardingHeader';
 import Button from '../../components/login/NextButton/NextButton';
+import {setPurpose_ids} from '../../redux/slice/SignUpDataSlice';
 
 interface IProps {
   navigation: IntroStackNavigationProps<'RegisterPurpose'>;
@@ -24,7 +23,6 @@ function RegisterPurposeScreen({navigation}: IProps) {
   const [checkList, setCheckList] = useState<number[]>([]);
   const check = checkList.length >= 1;
   const dispatch = useDispatch();
-  const {data} = useSelector((state: RootState) => state.purpose);
 
   const [containerWidth, setContainerWidth] = useState(0);
   const sideMargins = 20 * 2;
@@ -32,12 +30,9 @@ function RegisterPurposeScreen({navigation}: IProps) {
   const numColumns = 2;
 
   const handleSubmit = async () => {
-    PostPurposeApi(checkList)(dispatch);
+    dispatch(setPurpose_ids(checkList));
+    navigation.navigate('RegisterWorkspace');
   };
-
-  useEffect(() => {
-    data === '200' && navigation.navigate('RegisterWorkspace');
-  }, [data, navigation]);
 
   return (
     <Wrapper>
@@ -73,4 +68,15 @@ function RegisterPurposeScreen({navigation}: IProps) {
   );
 }
 
-export default RegisterPurposeScreen;
+const mapStateToProps = (state: {signUp: {purpose_ids: array}}) => ({
+  purpose_ids: state.signUp.purpose_ids,
+});
+
+const mapDispatchToProps = {
+  setPurpose_ids,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(RegisterPurposeScreen);
