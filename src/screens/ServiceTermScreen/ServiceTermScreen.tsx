@@ -1,10 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {RouteProp} from '@react-navigation/native';
 import {Alert} from 'react-native';
 import {ServiceTermContainer} from './style';
-import {useDispatch, useSelector} from 'react-redux';
-import {ServiceTermApi} from '../../redux/service/ServiceTermApi';
-import {RootState} from '../../redux/store/store';
+import {connect, useDispatch} from 'react-redux';
 import Button from '../../components/login/NextButton/NextButton';
 import {
   IntroStackNavigationProps,
@@ -14,6 +12,10 @@ import Wrapper from '../../components/common/Wrapper';
 import OnboardingHeader from '../../components/common/OnboardingHeader';
 import ServiceTerm from './ServiceTerm';
 import COLORS from '../../../packages/colors';
+import {
+  setMarketing_agreement,
+  setPersonal_information_agreement,
+} from '../../redux/slice/SignUpDataSlice';
 
 interface IProps {
   navigation: IntroStackNavigationProps<'ServiceTerm'>;
@@ -26,22 +28,15 @@ function ServiceTermScreen({navigation}: IProps) {
   const [obligationCheck, setObligationCheck] = useState<string[]>([]);
   const isAllChecked = obligationCheck.length === 2;
 
-  const {data} = useSelector((state: RootState) => state.serviceterm);
-
-  const postData = {
-    marketing_agreement: false,
-    personal_information_agreement: false,
-  };
-
   const handleSubmit = async () => {
-    isAllChecked
-      ? ServiceTermApi(postData)(dispatch)
-      : Alert.alert('필수 약관을 체크해주세요!');
+    if (isAllChecked) {
+      dispatch(setMarketing_agreement(false));
+      dispatch(setPersonal_information_agreement(false));
+      navigation.navigate('RegisterNickname');
+    } else {
+      Alert.alert('필수 약관을 체크해주세요!');
+    }
   };
-
-  useEffect(() => {
-    data && navigation.navigate('RegisterNickname');
-  }, [data, navigation]);
 
   return (
     <Wrapper>
@@ -65,4 +60,19 @@ function ServiceTermScreen({navigation}: IProps) {
   );
 }
 
-export default ServiceTermScreen;
+const mapStateToProps = (state: {
+  signUp: {
+    marketing_agreement: boolean;
+    personal_information_agreement: boolean;
+  };
+}) => ({
+  marketing_agreement: state.signUp.marketing_agreement,
+  personal_information_agreement: state.signUp.personal_information_agreement,
+});
+
+const mapDispatchToProps = {
+  setMarketing_agreement,
+  setPersonal_information_agreement,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ServiceTermScreen);

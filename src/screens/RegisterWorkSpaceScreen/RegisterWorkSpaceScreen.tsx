@@ -7,7 +7,6 @@ import {workspace} from '../../data';
 import RegisterButton from '../../components/login/RegisterButton/RegisterButton';
 import {EmptyView, ScrollView} from './style';
 import {useDispatch, useSelector} from 'react-redux';
-import {PostWorkSpaceApi} from '../../redux/service/PostWorkSpaceApi';
 import {RootState} from '../../redux/store/store';
 import {
   IntroStackNavigationProps,
@@ -16,6 +15,11 @@ import {
 import Wrapper from '../../components/common/Wrapper';
 import OnboardingHeader from '../../components/common/OnboardingHeader';
 import Button from '../../components/login/NextButton/NextButton';
+
+import {KakaoSignUp} from '../../redux/service/KakaoSignUp';
+import {setWorkspace_purpose_ids} from '../../redux/slice/SignUpDataSlice';
+import {GoogleSignUp} from '../../redux/service/GoogleSignUp';
+import {AppleSignUp} from '../../redux/service/AppleSignUp';
 
 interface IProps {
   navigation: IntroStackNavigationProps<'RegisterWorkspace'>;
@@ -26,17 +30,34 @@ function RegisterWorkSpaceScreen({navigation}: IProps) {
   const [checkList, setCheckList] = useState<number[]>([]);
   const check = checkList.length >= 1 && checkList.length <= 3;
   const dispatch = useDispatch();
-  const {data} = useSelector((state: RootState) => state.workspace);
 
-  const handleSubmit = async () => {
-    check
-      ? PostWorkSpaceApi(checkList)(dispatch)
-      : Alert.alert('최대 3개까지 선택할 수 있습니다');
+  const signUpData = useSelector((state: RootState) => state.signUp);
+
+  const workspaceCheck = async () => {
+    if (check) {
+      dispatch(setWorkspace_purpose_ids(checkList));
+    } else {
+      Alert.alert('최대 3개까지 선택할 수 있습니다');
+    }
   };
-
+  const handleSubmit = async () => {
+    workspaceCheck();
+    signUpData.kakao && (await KakaoSignUp(signUpData))(dispatch);
+    signUpData.google && (await GoogleSignUp(signUpData))(dispatch);
+    signUpData.apple && (await AppleSignUp(signUpData))(dispatch);
+  };
+  console.log(signUpData.kakaoValue);
   useEffect(() => {
-    data === '200' && navigation.navigate('MainNavigator');
-  }, [data, navigation]);
+    (signUpData.kakaoValue === 200 ||
+      signUpData.appleValue === 200 ||
+      signUpData.googleValue === 200) &&
+      navigation.navigate('MainNavigator');
+  }, [
+    navigation,
+    signUpData.appleValue,
+    signUpData.googleValue,
+    signUpData.kakaoValue,
+  ]);
 
   return (
     <Wrapper>

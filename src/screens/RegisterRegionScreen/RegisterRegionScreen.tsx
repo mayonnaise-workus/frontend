@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Dimensions} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
 import Description from '../../components/login/Description/Description';
@@ -6,9 +6,7 @@ import {region} from '../../data';
 import RegisterButton from '../../components/login/RegisterButton/RegisterButton';
 import COLORS from '../../../packages/colors';
 import {FilterList} from './style';
-import {useDispatch, useSelector} from 'react-redux';
-import {PostRegionApi} from '../../redux/service/PostRegionApi';
-import {RootState} from '../../redux/store/store';
+import {connect, useDispatch} from 'react-redux';
 import {
   IntroStackNavigationProps,
   IntroStackParamList,
@@ -16,6 +14,7 @@ import {
 import Wrapper from '../../components/common/Wrapper';
 import OnboardingHeader from '../../components/common/OnboardingHeader';
 import Button from '../../components/login/NextButton/NextButton';
+import {setLocation_ids} from '../../redux/slice/SignUpDataSlice';
 
 interface IProps {
   navigation: IntroStackNavigationProps<'RegisterRegion'>;
@@ -26,15 +25,11 @@ function RegisterRegionScreen({navigation}: IProps) {
   const [checkList, setCheckList] = useState<number[]>([]);
   const check = checkList.length >= 1;
   const dispatch = useDispatch();
-  const {data} = useSelector((state: RootState) => state.region);
 
   const handleSubmit = async () => {
-    PostRegionApi(checkList)(dispatch);
+    dispatch(setLocation_ids(checkList));
+    navigation.navigate('RegisterPurpose');
   };
-
-  useEffect(() => {
-    data === '200' && navigation.navigate('RegisterPurpose');
-  }, [data, navigation]);
 
   return (
     <Wrapper>
@@ -72,4 +67,15 @@ function RegisterRegionScreen({navigation}: IProps) {
   );
 }
 
-export default RegisterRegionScreen;
+const mapStateToProps = state => ({
+  location_ids: state.signUp.location_ids,
+});
+
+const mapDispatchToProps = {
+  setLocation_ids,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(RegisterRegionScreen);

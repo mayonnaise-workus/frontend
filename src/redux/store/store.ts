@@ -19,6 +19,7 @@ import DeleteMemberReducer from '../slice/DeleteMemberSlice';
 import GetDetailWorkspaceReducer from '../slice/GetDetailWorkspaceSlice';
 import OnboardingReducer from '../slice/OnboardingSlice';
 import MagazineReducer from '../slice/MagazineSlice';
+import SignUpDataReducer from '../slice/SignUpDataSlice';
 
 export const store = configureStore({
   reducer: {
@@ -42,6 +43,7 @@ export const store = configureStore({
     detailworkspace: GetDetailWorkspaceReducer,
     onboarding: OnboardingReducer,
     magazine: MagazineReducer,
+    signUp: SignUpDataReducer,
   },
 });
 

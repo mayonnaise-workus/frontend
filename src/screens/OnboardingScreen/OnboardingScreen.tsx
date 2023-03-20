@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {RouteProp} from '@react-navigation/native';
 import {
   LoginContainer,
@@ -9,10 +9,8 @@ import {
   Text,
 } from './style';
 import {login} from '@react-native-seoul/kakao-login';
-import {useDispatch, useSelector} from 'react-redux';
-import {KakaoLogin} from '../../redux/service/KakaoLogin';
+import {useDispatch} from 'react-redux';
 import images from '../../../assets/images';
-import {RootState} from '../../redux/store/store';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {
   IntroStackNavigationProps,
@@ -20,10 +18,19 @@ import {
 } from '../introScreenPropsType';
 import Wrapper from '../../components/common/Wrapper';
 import appleAuth from '@invertase/react-native-apple-authentication';
-import {GoogleLogin} from '../../redux/service/GoogleLogin';
-import {AppleLogin} from '../../redux/service/AppleLogin';
-import {OnboardingApi} from '../../redux/service/Onboarding';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import {
+  setAccess_token,
+  setApple,
+  setAuthorizationCode,
+  setExpires_in,
+  setGoogle,
+  setId,
+  setKakao,
+  setRefresh_token,
+  setServerAuthCode,
+  setUser,
+} from '../../redux/slice/SignUpDataSlice';
 
 interface IProps {
   navigation: IntroStackNavigationProps<'OnBoarding'>;
@@ -32,74 +39,29 @@ interface IProps {
 
 function OnboardingScreen({navigation}: IProps) {
   const dispatch = useDispatch();
-  const {data} = useSelector((state: RootState) => state.onboarding);
-  const {kakao} = useSelector((state: RootState) => state.kakaologin);
-  const {google} = useSelector((state: RootState) => state.googlelogin);
-  const {apple} = useSelector((state: RootState) => state.applelogin);
-  const [onboarding, setOnboarding] = useState([]);
-
-  useEffect(() => {
-    OnboardingApi()(dispatch);
-  }, [dispatch, kakao, google, apple]);
-
-  useEffect(() => {
-    setOnboarding(data);
-  }, [data]);
-
-  useEffect(() => {
-    if (onboarding) {
-      MemberOnboarding();
-    }
-  }, [onboarding]);
-
-  async function MemberOnboarding() {
-    if ((kakao || google || apple) && onboarding) {
-      if (!onboarding.terms_of_service_status) {
-        navigation.navigate('ServiceTerm');
-      } else if (!onboarding.nickname_status) {
-        navigation.navigate('RegisterNickname');
-      } else if (!onboarding.member_preference_region_status) {
-        navigation.navigate('RegisterRegion');
-      } else if (!onboarding.member_purpose_status) {
-        navigation.navigate('RegisterPurpose');
-      } else if (!onboarding.member_preference_workspace_status) {
-        navigation.navigate('RegisterWorkspace');
-      } else {
-        navigation.navigate('MainNavigator');
-      }
-    } else if (
-      kakao ||
-      google ||
-      (apple && !Object.keys(onboarding).includes('false'))
-    ) {
-      navigation.navigate('MainNavigator');
-    } else {
-    }
-  }
 
   const handleKakaoLogin = async () => {
     const result = await login();
 
-    const postData = {
-      access_token: result.accessToken,
-      refresh_token: result.refreshToken,
-      expires_in:
+    dispatch(setKakao(true));
+    dispatch(setAccess_token(result.accessToken));
+    dispatch(setRefresh_token(result.refreshToken));
+    dispatch(
+      setExpires_in(
         new Date(Date.parse(`${result.refreshTokenExpiresAt}`)).getTime() /
-        1000,
-    };
-    await KakaoLogin(postData)(dispatch);
-    await MemberOnboarding();
+          1000,
+      ),
+    );
+    navigation.navigate('ServiceTerm');
   };
 
   const handleGoogleLogin = async () => {
     const res = await GoogleSignin.signIn();
 
-    const postData = {
-      id: res.user.id,
-      serverAuthCode: res.serverAuthCode,
-    };
-    await GoogleLogin(postData)(dispatch);
-    await MemberOnboarding();
+    dispatch(setGoogle(true));
+    dispatch(setId(res.user.id));
+    dispatch(setServerAuthCode(res.serverAuthCode));
+    navigation.navigate('ServiceTerm');
   };
 
   async function onAppleButtonPress() {
@@ -110,12 +72,10 @@ function OnboardingScreen({navigation}: IProps) {
 
     const {authorizationCode, user} = appleAuthRequestResponse;
 
-    const postData = {
-      authorizationCode: authorizationCode,
-      user: user,
-    };
-    await AppleLogin(postData)(dispatch);
-    await MemberOnboarding();
+    dispatch(setApple(true));
+    dispatch(setAuthorizationCode(authorizationCode));
+    dispatch(setUser(user));
+    navigation.navigate('ServiceTerm');
   }
 
   return (
