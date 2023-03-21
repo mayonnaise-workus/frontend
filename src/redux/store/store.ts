@@ -20,6 +20,7 @@ import GetDetailWorkspaceReducer from '../slice/GetDetailWorkspaceSlice';
 import OnboardingReducer from '../slice/OnboardingSlice';
 import MagazineReducer from '../slice/MagazineSlice';
 import SignUpDataReducer from '../slice/SignUpDataSlice';
+import ValidationNameReducer from '../slice/ValidationNameSlice';
 
 export const store = configureStore({
   reducer: {
@@ -44,6 +45,7 @@ export const store = configureStore({
     onboarding: OnboardingReducer,
     magazine: MagazineReducer,
     signUp: SignUpDataReducer,
+    validationname: ValidationNameReducer,
   },
 });
 
