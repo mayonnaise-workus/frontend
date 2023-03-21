@@ -5,6 +5,7 @@ import {
   Dimensions,
   NativeSyntheticEvent,
   NativeScrollEvent,
+  Image,
 } from 'react-native';
 import {
   Container,
@@ -206,17 +207,20 @@ const Home = ({navigation}: IHomeProps) => {
                       latitude: +item.latitude,
                       longitude: +item.longitude,
                     }}
-                    title={item.name}
-                    image={
-                      item.workspace_obj === 1
-                        ? images.PERSONAL_STUDY
-                        : item.workspace_obj === 2
-                        ? images.LAPTOP_WORK
-                        : item.workspace_obj === 3
-                        ? images.CONTACT_FREE_MEETING
-                        : images.CONTACT_MEETING
-                    }
-                  />
+                    title={item.name}>
+                    <Image
+                      source={
+                        item.workspace_obj === 1
+                          ? images.PERSONAL_STUDY
+                          : item.workspace_obj === 2
+                          ? images.LAPTOP_WORK
+                          : item.workspace_obj === 3
+                          ? images.CONTACT_FREE_MEETING
+                          : images.CONTACT_MEETING
+                      }
+                      style={{width: 40, height: 50}}
+                    />
+                  </Marker>
                 ))}
             </MapView>
             <CategoryRow>
