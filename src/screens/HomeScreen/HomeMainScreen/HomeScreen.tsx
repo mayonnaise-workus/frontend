@@ -145,7 +145,7 @@ const Home = ({navigation}: IHomeProps) => {
 
   const bottomSheetRef = useRef<BottomSheet>(null);
 
-  const snapPoints = useMemo(() => ['37.5%', '100%'], []);
+  const snapPoints = useMemo(() => ['37.5%', '90%'], []);
 
   const animationConfigs = useBottomSheetSpringConfigs({
     damping: 80,
