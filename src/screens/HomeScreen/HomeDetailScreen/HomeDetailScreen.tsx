@@ -37,7 +37,7 @@ import {
 } from './style';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faAngleLeft} from '@fortawesome/free-solid-svg-icons';
-import {Linking, Platform, Pressable, ScrollView} from 'react-native';
+import {Alert, Linking, Platform, Pressable, ScrollView} from 'react-native';
 import images from '../../../../assets/images';
 import Button from '../../../components/login/NextButton/NextButton';
 import COLORS from '../../../../packages/colors';
@@ -48,6 +48,7 @@ import MapView, {Marker} from 'react-native-maps';
 import {WorkSpaceListApi} from '../../../redux/service/WorkSpaceListApi';
 import {DeleteFavoriteWorkSpaces} from '../../../redux/service/DeleteFavoriteWorkSpaces';
 import {FavoriteWorkSpaces} from '../../../redux/service/FavoriteWorkSpaces';
+import {authHeader} from '../../../redux/service/auth-header';
 
 interface IHomeDetailProps {
   navigation: HomeScreenStackNavigationProps<'HomeDetail'>;
@@ -124,7 +125,10 @@ const HomeDetail = ({navigation, route}: IHomeDetailProps) => {
   }
 
   async function AddScrap(id: number) {
-    await FavoriteWorkSpaces(id)(dispatch);
+    const header = await authHeader();
+    header
+      ? await FavoriteWorkSpaces(id)(dispatch)
+      : Alert.alert('로그인 후 이용해주세요!');
     setFavorite(true);
 
     const newWorkSpaceList = await WorkSpaceListApi()(dispatch);
