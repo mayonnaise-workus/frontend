@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "362919940500-0vhsv1mi1hn477bobe672oeumtt0kr9l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "workus_mayonnaise.application",
+            "certificate_hash": "8a9ccc1cdad3ad65a9b9c63dcc75c7622f940524"
+          }
+        },
+        {
           "client_id": "362919940500-5a6a1ueeohan2upbahvime7ndqup9dcc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
