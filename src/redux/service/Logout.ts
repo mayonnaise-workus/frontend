@@ -6,8 +6,7 @@ export const Logout = () => {
   return async (dispatch: Dispatch) => {
     dispatch(setLoading(true));
     try {
-      await AsyncStorage.getAllKeys();
-      await AsyncStorage.clear();
+      AsyncStorage.removeItem('user');
     } catch (error) {
       dispatch(setError('An error occurred'));
     }
