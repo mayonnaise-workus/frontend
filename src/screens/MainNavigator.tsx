@@ -19,6 +19,7 @@ function MainNavigator() {
         name="Home"
         component={HomeScreenNavigator}
         options={{
+          unmountOnBlur: true,
           tabBarIcon: ({focused}) => (
             <Image
               style={{
