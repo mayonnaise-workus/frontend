@@ -24,6 +24,7 @@ export type MyScreenStackParamList = {
   MemberCancellation: undefined;
   MemberCancellationComplete: undefined;
   MyServiceTerm: undefined;
+  RegionSetting: undefined;
 };
 
 type MyScreenProps<T extends keyof MyScreenStackParamList = 'MyPage'> =
@@ -52,6 +53,11 @@ export type ScrapProps = NativeStackScreenProps<
 export type ScrapDetailProps = NativeStackScreenProps<
   MyScreenStackParamList,
   'ScrapDetail'
+>;
+
+export type RegionSettingProps = NativeStackScreenProps<
+  MyScreenStackParamList,
+  'RegionSetting'
 >;
 
 export type MyServiceTermProps = NativeStackScreenProps<
