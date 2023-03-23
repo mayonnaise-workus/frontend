@@ -21,6 +21,8 @@ import {
 } from '../myScreenPropsType';
 import AlertMessage from '../../components/login/AlertMessage/AlertMessage';
 import COLORS from '../../../packages/colors';
+import RNRestart from 'react-native-restart';
+import {Logout} from '../../redux/service/Logout';
 
 interface IProps {
   navigation: MyScreenStackNavigationProps<'EditProfile'>;
@@ -44,8 +46,10 @@ function EditProfileScreen({navigation}: IProps) {
     navigation.navigate('MemberCancellation');
   };
 
-  const onPressLogout = () => {
-    navigation.navigate('OnBoarding');
+  const onPressLogout = async () => {
+    await Logout()(dispatch);
+    RNRestart.restart();
+    navigation.navigate('IntroNavigator');
   };
 
   async function handlePostEditName() {
