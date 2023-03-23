@@ -23,6 +23,7 @@ import appleAuth from '@invertase/react-native-apple-authentication';
 import {GoogleLogin} from '../../redux/service/GoogleLogin';
 import {AppleLogin} from '../../redux/service/AppleLogin';
 import {PreferenceApi} from '../../redux/service/PreferenceApi';
+import {Pressable} from 'react-native';
 
 interface IProps {
   navigation: IntroStackNavigationProps<'OnBoarding'>;
@@ -88,6 +89,9 @@ function OnboardingScreen({navigation}: IProps) {
     await GoogleLogin(postData)(dispatch);
     await MemberOnboarding();
   };
+  const guestPress = async () => {
+    navigation.navigate('MainNavigator');
+  };
 
   async function onAppleButtonPress() {
     const appleAuthRequestResponse = await appleAuth.performRequest({
@@ -111,6 +115,12 @@ function OnboardingScreen({navigation}: IProps) {
         <Logo source={images.LOGO_BLACK} />
       </LogoContainer>
       <LoginContainer>
+        <Pressable
+          onPress={() => {
+            guestPress();
+          }}>
+          <Text>로그인없이 이용하기</Text>
+        </Pressable>
         <Text>SNS 계정으로 간편 가입 하기</Text>
         <Button
           onPress={() => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {RouteProp} from '@react-navigation/native';
 import NickName from '../../components/mypage/Nickname/NickName';
 import ScrapButton from '../../components/mypage/ScrapButton/ScrapButton';
@@ -13,9 +13,10 @@ import {
   EmptyContainer,
 } from './style';
 import Button from '../../components/mypage/Button/Button';
-import {Linking} from 'react-native';
+import {Alert, Linking} from 'react-native';
 import {manualUrl} from '../../data';
 import SubHeader from '../../components/common/SubHeader';
+import {authHeader} from '../../redux/service/auth-header';
 
 interface IProps {
   navigation: MyScreenStackNavigationProps<'MyPage'>;
@@ -23,6 +24,31 @@ interface IProps {
 }
 
 function MyPageScreen({navigation}: IProps) {
+  useEffect(() => {
+    const checkLogin = async () => {
+      const header = await authHeader();
+      header === undefined &&
+        Alert.alert(
+          '',
+          '로그인 후 이용해주세요!',
+          [
+            {
+              text: '예',
+              onPress: () => {
+                navigation.navigate('OnBoarding');
+              },
+              style: 'destructive',
+            },
+          ],
+          {
+            cancelable: true,
+            onDismiss: () => {},
+          },
+        );
+    };
+    checkLogin();
+  }, [navigation]);
+
   const nicknamePress = () => {
     navigation.navigate('EditProfile');
   };
@@ -33,6 +59,10 @@ function MyPageScreen({navigation}: IProps) {
 
   const serviceTermPress = () => {
     navigation.navigate('MyServiceTerm');
+  };
+
+  const regionPress = () => {
+    navigation.navigate('RegionSetting');
   };
 
   const manualPress = () => {
@@ -46,6 +76,7 @@ function MyPageScreen({navigation}: IProps) {
         <NickName onPress={nicknamePress} />
         <ScrapButton onPress={scrapPress} />
         <ButtonContainer>
+          <Button onPress={regionPress} title="지역 설정" />
           <Button onPress={serviceTermPress} title="이용 약관" />
           <Button onPress={manualPress} title="이용 방법" />
         </ButtonContainer>

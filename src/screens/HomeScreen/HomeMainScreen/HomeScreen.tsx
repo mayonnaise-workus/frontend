@@ -55,7 +55,6 @@ type RegionType = {
 
 const Home = ({navigation}: IHomeProps) => {
   const dispatch = useDispatch();
-
   useEffect(() => {
     PreferenceApi()(dispatch);
   }, [dispatch]);
@@ -63,18 +62,23 @@ const Home = ({navigation}: IHomeProps) => {
   const {data: preferenceObj} = useSelector(
     (state: RootState) => state.preference,
   );
-  const [regionList, setRegionList] = useState<number[]>([]);
+  const [regionList, setRegionList] = useState<number[]>();
   const [selectedRegion, setSelectedRegion] = useState<RegionType[]>([]);
   const [currentRegion, setCurrentRegion] = useState([0, 0]);
   const [isInitialRender, setIsInitialRender] = useState(true);
 
   useEffect(() => {
-    if (preferenceObj) {
+    if (
+      preferenceObj &&
+      preferenceObj.preference_workspace_regions.length !== 0
+    ) {
       setRegionList(() => {
         return preferenceObj.preference_workspace_regions;
       });
+    } else {
+      setRegionList(() => [1, 2, 3, 4, 5]);
     }
-  }, [preferenceObj]);
+  }, [preferenceObj, preferenceObj.preference_workspace_regions]);
 
   useEffect(() => {
     if (regionList && regionList.length) {
