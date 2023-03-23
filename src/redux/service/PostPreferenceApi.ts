@@ -1,5 +1,4 @@
 import {RootState} from '../store/store';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import {Dispatch} from 'redux';
 import {MEMBER} from '../../config/config';
@@ -27,12 +26,8 @@ export const PostPreferenceApi = (signUpData: RootState) => {
           headers: {Authorization: `Bearer ${header}`},
         },
       );
-      const jsonValue = JSON.stringify(response.data);
       dispatch(setData(response.status));
 
-      if (response.data) {
-        AsyncStorage.setItem('user', jsonValue);
-      }
       dispatch(setError(null));
     } catch (error) {
       dispatch(setError('An error occurred'));
