@@ -12,7 +12,7 @@ import {
   MyScreenStackParamList,
 } from './myScreenPropsType';
 import {RouteProp} from '@react-navigation/native';
-import {Dimensions} from 'react-native';
+import {Alert, Dimensions} from 'react-native';
 import COLORS from '../../packages/colors';
 import Description from '../components/login/Description/Description';
 import {PostRegionApi} from '../redux/service/PostRegionApi';
@@ -47,7 +47,9 @@ function RegionSettingScreen({navigation}: IProps) {
   }, [data, checkList]);
 
   const handleSubmit = async () => {
-    PostRegionApi(checkList)(dispatch);
+    check && checkSame
+      ? PostRegionApi(checkList)(dispatch)
+      : Alert.alert('기존 설정한 지역과 동일합니다! ');
   };
 
   return (
