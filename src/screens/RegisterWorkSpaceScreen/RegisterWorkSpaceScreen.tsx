@@ -43,10 +43,15 @@ function RegisterWorkSpaceScreen({navigation}: IProps) {
     workspaceCheck();
   }, [check, checkList, dispatch]);
 
+  console.log('data', postpreference.data);
+
   const handleSubmit = async () => {
     PostPreferenceApi(postpreference)(dispatch);
-    postpreference.data === 200 && navigation.navigate('MainNavigator');
   };
+
+  useEffect(() => {
+    postpreference.data === 200 && navigation.navigate('MainNavigator');
+  }, [navigation, postpreference.data]);
 
   return (
     <Wrapper>
