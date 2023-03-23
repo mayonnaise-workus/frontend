@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Icon, PressableWrapper, Text} from './style';
 
 interface IRegisterButtonProps {
@@ -26,6 +26,10 @@ function RegisterButton(props: IRegisterButtonProps) {
       setCheckList(checkList.filter(item => item !== id));
     }
   }
+
+  useEffect(() => {
+    checkList && checkList.includes(id) && setPress(true);
+  }, [checkList, id]);
 
   return (
     <PressableWrapper
