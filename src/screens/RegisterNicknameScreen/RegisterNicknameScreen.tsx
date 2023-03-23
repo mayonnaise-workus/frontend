@@ -10,7 +10,7 @@ import {
 } from '../introScreenPropsType';
 import Wrapper from '../../components/common/Wrapper';
 import OnboardingHeader from '../../components/common/OnboardingHeader';
-import {setName} from '../../redux/slice/SignUpDataSlice';
+import {setName} from '../../redux/slice/PostPreferenceSlice';
 import {ValidationName} from '../../redux/service/ValidationName';
 import {RootState} from '../../redux/store/store';
 import AlertMessage from '../../components/login/AlertMessage/AlertMessage';
@@ -46,7 +46,6 @@ function RegisterNicknameScreen({navigation}: IProps) {
       dispatch(setName(nickname));
       navigation.navigate('RegisterRegion');
     }
-    dispatch(setName(''));
   }, [data, dispatch, navigation]);
 
   useEffect(() => {
@@ -74,8 +73,8 @@ function RegisterNicknameScreen({navigation}: IProps) {
   );
 }
 
-const mapStateToProps = (state: {signUp: {name: string}}) => ({
-  name: state.signUp.name,
+const mapStateToProps = (state: {postpreference: {name: string}}) => ({
+  name: state.postpreference.name,
 });
 
 const mapDispatchToProps = {

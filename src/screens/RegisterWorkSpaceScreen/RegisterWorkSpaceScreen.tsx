@@ -6,7 +6,7 @@ import COLORS from '../../../packages/colors';
 import {workspace} from '../../data';
 import RegisterButton from '../../components/login/RegisterButton/RegisterButton';
 import {EmptyView, ScrollView} from './style';
-import {useDispatch, useSelector} from 'react-redux';
+import {connect, useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../redux/store/store';
 import {
   IntroStackNavigationProps,
@@ -15,11 +15,8 @@ import {
 import Wrapper from '../../components/common/Wrapper';
 import OnboardingHeader from '../../components/common/OnboardingHeader';
 import Button from '../../components/login/NextButton/NextButton';
-
-import {KakaoSignUp} from '../../redux/service/KakaoSignUp';
-import {setWorkspace_purpose_ids} from '../../redux/slice/SignUpDataSlice';
-import {GoogleSignUp} from '../../redux/service/GoogleSignUp';
-import {AppleSignUp} from '../../redux/service/AppleSignUp';
+import {setWorkspace_purpose_ids} from '../../redux/slice/PostPreferenceSlice';
+import {PostPreferenceApi} from '../../redux/service/PostPreferenceApi';
 
 interface IProps {
   navigation: IntroStackNavigationProps<'RegisterWorkspace'>;
@@ -31,33 +28,25 @@ function RegisterWorkSpaceScreen({navigation}: IProps) {
   const check = checkList.length >= 1 && checkList.length <= 3;
   const dispatch = useDispatch();
 
-  const signUpData = useSelector((state: RootState) => state.signUp);
+  const postpreference = useSelector(
+    (state: RootState) => state.postpreference,
+  );
 
-  const workspaceCheck = async () => {
-    if (check) {
-      dispatch(setWorkspace_purpose_ids(checkList));
-    } else {
-      Alert.alert('최대 3개까지 선택할 수 있습니다');
-    }
-  };
-  const handleSubmit = async () => {
-    workspaceCheck();
-    signUpData.kakao && (await KakaoSignUp(signUpData))(dispatch);
-    signUpData.google && (await GoogleSignUp(signUpData))(dispatch);
-    signUpData.apple && (await AppleSignUp(signUpData))(dispatch);
-  };
-  console.log(signUpData.kakaoValue);
   useEffect(() => {
-    (signUpData.kakaoValue === 200 ||
-      signUpData.appleValue === 200 ||
-      signUpData.googleValue === 200) &&
-      navigation.navigate('MainNavigator');
-  }, [
-    navigation,
-    signUpData.appleValue,
-    signUpData.googleValue,
-    signUpData.kakaoValue,
-  ]);
+    const workspaceCheck = async () => {
+      if (check) {
+        dispatch(setWorkspace_purpose_ids(checkList));
+      } else if (checkList.length > 3) {
+        Alert.alert('최대 3개까지 선택할 수 있습니다');
+      }
+    };
+    workspaceCheck();
+  }, [check, checkList, dispatch]);
+
+  const handleSubmit = async () => {
+    PostPreferenceApi(postpreference)(dispatch);
+    postpreference.data === 200 && navigation.navigate('MainNavigator');
+  };
 
   return (
     <Wrapper>
@@ -94,4 +83,17 @@ function RegisterWorkSpaceScreen({navigation}: IProps) {
   );
 }
 
-export default RegisterWorkSpaceScreen;
+const mapStateToProps = (state: {
+  postpreference: {workspace_purpose_ids: array};
+}) => ({
+  workspace_purpose_ids: state.postpreference.workspace_purpose_ids,
+});
+
+const mapDispatchToProps = {
+  setWorkspace_purpose_ids,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(RegisterWorkSpaceScreen);
