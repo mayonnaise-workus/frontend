@@ -12,7 +12,7 @@ import {
 import Wrapper from '../../components/common/Wrapper';
 import OnboardingHeader from '../../components/common/OnboardingHeader';
 import Button from '../../components/login/NextButton/NextButton';
-import {setPurpose_ids} from '../../redux/slice/SignUpDataSlice';
+import {setPurpose_ids} from '../../redux/slice/PostPreferenceSlice';
 
 interface IProps {
   navigation: IntroStackNavigationProps<'RegisterPurpose'>;
@@ -33,7 +33,6 @@ function RegisterPurposeScreen({navigation}: IProps) {
     dispatch(setPurpose_ids(checkList));
     navigation.navigate('RegisterWorkspace');
   };
-
   return (
     <Wrapper>
       <OnboardingHeader text="업무 목적 설정" goback={navigation.goBack} />
@@ -68,8 +67,8 @@ function RegisterPurposeScreen({navigation}: IProps) {
   );
 }
 
-const mapStateToProps = (state: {signUp: {purpose_ids: array}}) => ({
-  purpose_ids: state.signUp.purpose_ids,
+const mapStateToProps = (state: {postpreference: {purpose_ids: array}}) => ({
+  purpose_ids: state.postpreference.purpose_ids,
 });
 
 const mapDispatchToProps = {

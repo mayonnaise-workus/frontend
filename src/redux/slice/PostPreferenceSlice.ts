@@ -23,8 +23,8 @@ const initialState: ApiState = {
   workspace_purpose_ids: [],
 };
 
-const SignUpDataSlice = createSlice({
-  name: 'signUp',
+const PostPreferenceSlice = createSlice({
+  name: 'postpreference',
   initialState,
   reducers: {
     setLoading(state, action) {
@@ -67,5 +67,5 @@ export const {
   setPurpose_ids,
   setLocation_ids,
   setWorkspace_purpose_ids,
-} = SignUpDataSlice.actions;
-export default SignUpDataSlice.reducer;
+} = PostPreferenceSlice.actions;
+export default PostPreferenceSlice.reducer;

@@ -21,6 +21,7 @@ import OnboardingReducer from '../slice/OnboardingSlice';
 import MagazineReducer from '../slice/MagazineSlice';
 import SignUpDataReducer from '../slice/SignUpDataSlice';
 import ValidationNameReducer from '../slice/ValidationNameSlice';
+import PostPreferencReducer from '../slice/PostPreferenceSlice';
 
 export const store = configureStore({
   reducer: {
@@ -45,6 +46,7 @@ export const store = configureStore({
     onboarding: OnboardingReducer,
     magazine: MagazineReducer,
     signUp: SignUpDataReducer,
+    postpreference: PostPreferencReducer,
     validationname: ValidationNameReducer,
   },
 });

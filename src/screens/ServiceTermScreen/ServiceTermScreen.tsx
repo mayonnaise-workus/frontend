@@ -15,7 +15,7 @@ import COLORS from '../../../packages/colors';
 import {
   setMarketing_agreement,
   setPersonal_information_agreement,
-} from '../../redux/slice/SignUpDataSlice';
+} from '../../redux/slice/PostPreferenceSlice';
 
 interface IProps {
   navigation: IntroStackNavigationProps<'ServiceTerm'>;
@@ -61,13 +61,14 @@ function ServiceTermScreen({navigation}: IProps) {
 }
 
 const mapStateToProps = (state: {
-  signUp: {
+  postpreference: {
     marketing_agreement: boolean;
     personal_information_agreement: boolean;
   };
 }) => ({
-  marketing_agreement: state.signUp.marketing_agreement,
-  personal_information_agreement: state.signUp.personal_information_agreement,
+  marketing_agreement: state.postpreference.marketing_agreement,
+  personal_information_agreement:
+    state.postpreference.personal_information_agreement,
 });
 
 const mapDispatchToProps = {

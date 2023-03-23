@@ -14,8 +14,7 @@ import {
 import Wrapper from '../../components/common/Wrapper';
 import OnboardingHeader from '../../components/common/OnboardingHeader';
 import Button from '../../components/login/NextButton/NextButton';
-import {setLocation_ids} from '../../redux/slice/SignUpDataSlice';
-
+import {setLocation_ids} from '../../redux/slice/PostPreferenceSlice';
 interface IProps {
   navigation: IntroStackNavigationProps<'RegisterRegion'>;
   route: RouteProp<IntroStackParamList, 'RegisterRegion'>;
@@ -68,7 +67,7 @@ function RegisterRegionScreen({navigation}: IProps) {
 }
 
 const mapStateToProps = state => ({
-  location_ids: state.signUp.location_ids,
+  location_ids: state.postpreference.location_ids,
 });
 
 const mapDispatchToProps = {
