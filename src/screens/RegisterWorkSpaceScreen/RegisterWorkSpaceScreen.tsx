@@ -43,8 +43,6 @@ function RegisterWorkSpaceScreen({navigation}: IProps) {
     workspaceCheck();
   }, [check, checkList, dispatch]);
 
-  console.log('data', postpreference.data);
-
   const handleSubmit = async () => {
     PostPreferenceApi(postpreference)(dispatch);
   };
