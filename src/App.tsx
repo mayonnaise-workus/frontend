@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {
   createNativeStackNavigator,
@@ -12,6 +12,7 @@ import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {GOOGLE_WEB_CLIENT_ID, GOOGLE_IOS_CLIENT_ID} from '@env';
 import SplashScreen from 'react-native-splash-screen';
+import {authHeader} from './redux/service/auth-header';
 
 export type RootStackParamList = {
   default: undefined;
@@ -26,6 +27,16 @@ export type RootStackNavigationProps<
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const App: React.FunctionComponent = () => {
+  const [user, setUser] = useState<string>('');
+
+  useEffect(() => {
+    const getHeader = async () => {
+      const header = await authHeader();
+      setUser(header);
+    };
+    getHeader();
+  });
+  console.log('user', user);
   useEffect(() => {
     setTimeout(() => {
       SplashScreen.hide();
@@ -48,7 +59,10 @@ const App: React.FunctionComponent = () => {
     <Provider store={store}>
       <SafeAreaProvider>
         <NavigationContainer>
-          <Stack.Navigator>
+          <Stack.Navigator
+            initialRouteName={
+              user === undefined ? 'IntroNavigator' : 'MainNavigator'
+            }>
             <Stack.Screen
               name="IntroNavigator"
               component={IntroNavigator}
