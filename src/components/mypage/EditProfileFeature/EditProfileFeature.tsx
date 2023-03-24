@@ -45,7 +45,6 @@ function EditProfileFeature({
         {
           text: '예',
           onPress: () => {
-            Logout()(dispatch);
             onPressLogout();
           },
           style: 'destructive',
