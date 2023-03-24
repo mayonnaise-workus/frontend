@@ -36,7 +36,6 @@ const App: React.FunctionComponent = () => {
     };
     getHeader();
   });
-  console.log('user', user);
   useEffect(() => {
     setTimeout(() => {
       SplashScreen.hide();

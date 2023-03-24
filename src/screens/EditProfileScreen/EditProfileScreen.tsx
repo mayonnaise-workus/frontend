@@ -49,7 +49,7 @@ function EditProfileScreen({navigation}: IProps) {
   const onPressLogout = async () => {
     await Logout()(dispatch);
     RNRestart.restart();
-    navigation.navigate('IntroNavigator');
+    navigation.navigate('OnBoarding');
   };
 
   async function handlePostEditName() {
