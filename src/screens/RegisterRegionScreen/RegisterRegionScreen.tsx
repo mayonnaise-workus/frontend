@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Dimensions} from 'react-native';
+import {Alert, Dimensions} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
 import Description from '../../components/login/Description/Description';
 import {region} from '../../data';
@@ -27,7 +27,9 @@ function RegisterRegionScreen({navigation}: IProps) {
 
   const handleSubmit = async () => {
     dispatch(setLocation_ids(checkList));
-    navigation.navigate('RegisterPurpose');
+    check
+      ? navigation.navigate('RegisterPurpose')
+      : Alert.alert('지역을 1개 이상 선택해주세요');
   };
 
   return (

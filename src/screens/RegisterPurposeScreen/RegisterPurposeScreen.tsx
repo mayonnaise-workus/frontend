@@ -13,6 +13,7 @@ import Wrapper from '../../components/common/Wrapper';
 import OnboardingHeader from '../../components/common/OnboardingHeader';
 import Button from '../../components/login/NextButton/NextButton';
 import {setPurpose_ids} from '../../redux/slice/PostPreferenceSlice';
+import {Alert} from 'react-native';
 
 interface IProps {
   navigation: IntroStackNavigationProps<'RegisterPurpose'>;
@@ -31,7 +32,9 @@ function RegisterPurposeScreen({navigation}: IProps) {
 
   const handleSubmit = async () => {
     dispatch(setPurpose_ids(checkList));
-    navigation.navigate('RegisterWorkspace');
+    check
+      ? navigation.navigate('RegisterWorkspace')
+      : Alert.alert('업무 목적을 1개 이상 선택해주세요');
   };
   return (
     <Wrapper>
