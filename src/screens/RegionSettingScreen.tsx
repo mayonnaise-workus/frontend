@@ -24,6 +24,7 @@ interface IProps {
 }
 function RegionSettingScreen({navigation}: IProps) {
   const {data} = useSelector((state: RootState) => state.preference);
+  const {data: editRegion} = useSelector((state: RootState) => state.region);
   const [checkList, setCheckList] = useState<number[]>([]);
   const [checkSame, setCheckSame] = useState<boolean>(false);
   const check = checkList && checkList.length >= 1;
@@ -51,16 +52,28 @@ function RegionSettingScreen({navigation}: IProps) {
       ? PostRegionApi(checkList)(dispatch)
       : Alert.alert('기존 설정한 지역과 동일합니다! ');
   };
+  useEffect(() => {
+    let timerId: number;
 
+    const navigateToMyPage = () => {
+      editRegion === 200 && navigation.navigate('MyPage');
+    };
+
+    timerId = setTimeout(navigateToMyPage, 1500);
+
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [editRegion, navigation]);
   return (
     <Wrapper>
       <OnboardingHeader text="지역 설정" goback={navigation.goBack} />
       <Description
         description={`TUNE은 특정 지하철역
-  (강남,역삼,선릉,삼성,양재시민의숲) 
-  주변의 워크 스페이스 정보를 우선 제공합니다.
+(강남,역삼,선릉,삼성,양재시민의숲) 
+주변의 워크 스페이스 정보를 우선 제공합니다.
   
-  추후 더 멋지고 다양한 정보가 제공될 예정입니다!`}
+추후 더 멋지고 다양한 정보가 제공될 예정입니다!`}
       />
       <FilterList>
         {region.map(item => {
