@@ -328,9 +328,12 @@ const HomeDetail = ({navigation, route}: IHomeDetailProps) => {
                 latitude,
                 longitude,
               }}
-              title={name}
-              image={images.BLACK_LOGO}
-            />
+              title={name}>
+              <Image
+                source={images.BLACK_LOGO}
+                style={{width: 30, height: 30}}
+              />
+            </Marker>
           </MapView>
         </MapContainer>
       </ScrollViewContainer>
